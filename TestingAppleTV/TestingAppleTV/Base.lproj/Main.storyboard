@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="16096" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+    <device id="appleTV" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Galeria-->
+        <scene sceneID="fbN-I9-ENr">
+            <objects>
+                <viewController id="gDP-7f-vjY" customClass="FirstViewController" customModule="TestingAppleTV" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="nLv-pV-bdy"/>
+                        <viewControllerLayoutGuide type="bottom" id="HFV-dK-TzK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ZHd-bY-fbE">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="HaE-6j-GlJ"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Galeria" id="HmV-fN-AVy"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hDT-Fh-5OM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2179" y="864"/>
+        </scene>
+        <!--Memórias-->
+        <scene sceneID="wg7-f3-ORb">
+            <objects>
+                <viewController id="8rJ-Kc-sve" customClass="MemoryViewController" customModule="TestingAppleTV" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="L7p-HK-0SC"/>
+                        <viewControllerLayoutGuide type="bottom" id="Djb-ko-YwX"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="QS5-Rx-YEW">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="I2Y-y1-wjt">
+                                <rect key="frame" x="90" y="157" width="1740" height="863"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="50" minimumInteritemSpacing="0.0" sectionInsetReference="safeArea" id="A14-9v-Djp">
+                                    <size key="itemSize" width="500" height="500"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" reuseIdentifier="MemoriaCell" id="Ktg-27-4ay" customClass="MemoryCell" customModule="TestingAppleTV" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="500" height="500"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="SHu-dd-FuY">
+                                            <rect key="frame" x="0.0" y="0.0" width="500" height="500"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Fundo1" translatesAutoresizingMaskIntoConstraints="NO" id="UAk-7h-feD">
+                                                    <rect key="frame" x="50" y="50" width="400" height="400"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                            </subviews>
+                                        </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="memoryImg" destination="UAk-7h-feD" id="Y3m-bR-R9s"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Tzs-WY-Qt2" firstAttribute="trailing" secondItem="I2Y-y1-wjt" secondAttribute="trailing" id="Ccd-L4-1kd"/>
+                            <constraint firstItem="Djb-ko-YwX" firstAttribute="top" secondItem="I2Y-y1-wjt" secondAttribute="bottom" id="NOQ-mE-niE"/>
+                            <constraint firstItem="I2Y-y1-wjt" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" id="RDG-SH-wL7"/>
+                            <constraint firstItem="I2Y-y1-wjt" firstAttribute="leading" secondItem="Tzs-WY-Qt2" secondAttribute="leading" id="cxo-UV-nCL"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Tzs-WY-Qt2"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Memórias" id="cPa-gy-q4n"/>
+                    <connections>
+                        <outlet property="collectionView" destination="I2Y-y1-wjt" id="PCB-MM-Kdt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2179" y="-996"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="yl2-sM-qoP">
+            <objects>
+                <tabBarController id="49e-Tb-3d3" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="W28-zg-YXA">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="120"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
+                        <segue destination="gDP-7f-vjY" kind="relationship" relationship="viewControllers" id="KqF-qE-vzQ"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="0.0" y="0.0"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Fundo1" width="907" height="806"/>
+    </resources>
+</document>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="16096" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="16097" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Ooq-0t-s9Q">
     <device id="appleTV" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -25,7 +25,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hDT-Fh-5OM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2179" y="864"/>
+            <point key="canvasLocation" x="2179" y="860"/>
         </scene>
         <!--Memórias-->
         <scene sceneID="wg7-f3-ORb">
@@ -87,6 +87,68 @@
             </objects>
             <point key="canvasLocation" x="2179" y="-996"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="tfg-wQ-5bk">
+            <objects>
+                <viewController id="Ooq-0t-s9Q" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="RFJ-Ju-V66"/>
+                        <viewControllerLayoutGuide type="bottom" id="E3R-FQ-jwh"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2d1-bl-1JW">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tree" translatesAutoresizingMaskIntoConstraints="NO" id="seL-f0-GXA">
+                                <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nome do app" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oGr-ky-0vU">
+                                <rect key="frame" x="85" y="100" width="908" height="192"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="192" id="2sz-AC-WhH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="140"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gere arte a partir da ciência" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="voG-Pb-Xpb">
+                                <rect key="frame" x="85" y="258" width="1004" height="110"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="110" id="oHZ-on-8v7"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="80"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Toque para iniciar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fB7-2F-oJe">
+                                <rect key="frame" x="563.5" y="883" width="793" height="137"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="137" id="y17-he-dod"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="100"/>
+                                <color key="textColor" red="0.76862745098039209" green="0.76862745098039209" blue="0.76862745098039209" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="seL-f0-GXA" secondAttribute="trailing" id="8bZ-Tz-eRp"/>
+                            <constraint firstItem="seL-f0-GXA" firstAttribute="top" secondItem="2d1-bl-1JW" secondAttribute="top" id="Bqj-i4-kzA"/>
+                            <constraint firstItem="fB7-2F-oJe" firstAttribute="centerX" secondItem="2d1-bl-1JW" secondAttribute="centerX" id="SBg-fC-x7d"/>
+                            <constraint firstItem="voG-Pb-Xpb" firstAttribute="top" secondItem="oGr-ky-0vU" secondAttribute="bottom" constant="-34" id="Ucs-fV-0Ed"/>
+                            <constraint firstItem="voG-Pb-Xpb" firstAttribute="leading" secondItem="2d1-bl-1JW" secondAttribute="leading" constant="85" id="daS-Ck-xnz"/>
+                            <constraint firstItem="E3R-FQ-jwh" firstAttribute="top" secondItem="fB7-2F-oJe" secondAttribute="bottom" id="gjK-jM-eCN"/>
+                            <constraint firstItem="seL-f0-GXA" firstAttribute="leading" secondItem="2d1-bl-1JW" secondAttribute="leading" id="hY6-dD-oXB"/>
+                            <constraint firstAttribute="bottom" secondItem="seL-f0-GXA" secondAttribute="bottom" id="nV5-Q3-5X0"/>
+                            <constraint firstItem="oGr-ky-0vU" firstAttribute="top" secondItem="RFJ-Ju-V66" secondAttribute="bottom" constant="40" id="rdJ-CH-IPy"/>
+                            <constraint firstItem="oGr-ky-0vU" firstAttribute="leading" secondItem="2d1-bl-1JW" secondAttribute="leading" constant="85" id="tlp-bB-7jl"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="mNn-ka-2zl"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="chK-49-RXU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="0.0" y="-1697"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
@@ -108,5 +170,6 @@
     </scenes>
     <resources>
         <image name="Fundo1" width="907" height="806"/>
+        <image name="tree" width="1406" height="766"/>
     </resources>
 </document>

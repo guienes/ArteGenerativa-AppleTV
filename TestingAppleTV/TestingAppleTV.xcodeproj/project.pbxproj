@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		952C5C6924B6388E00E3122D /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952C5C6824B6388E00E3122D /* OnboardingViewController.swift */; };
+		952C5C6D24B63E5600E3122D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952C5C6C24B63E5600E3122D /* SceneDelegate.swift */; };
 		BC6B2EE324B4E32B00545364 /* GaleryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6B2EE224B4E32B00545364 /* GaleryCell.swift */; };
 		BC9FC04124B38FD60087A7F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9FC04024B38FD60087A7F6 /* AppDelegate.swift */; };
 		BC9FC04324B38FD60087A7F6 /* GaleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9FC04224B38FD60087A7F6 /* GaleryViewController.swift */; };
@@ -18,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		952C5C6824B6388E00E3122D /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		952C5C6C24B63E5600E3122D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		BC6B2EE224B4E32B00545364 /* GaleryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaleryCell.swift; sourceTree = "<group>"; };
 		BC9FC03D24B38FD60087A7F6 /* TestingAppleTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestingAppleTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC9FC04024B38FD60087A7F6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -61,6 +65,8 @@
 			isa = PBXGroup;
 			children = (
 				BC9FC04024B38FD60087A7F6 /* AppDelegate.swift */,
+				952C5C6C24B63E5600E3122D /* SceneDelegate.swift */,
+				952C5C6824B6388E00E3122D /* OnboardingViewController.swift */,
 				BC9FC05724B39B730087A7F6 /* Controllers */,
 				BC9FC05624B39B5E0087A7F6 /* Cells */,
 				BC9FC04624B38FD60087A7F6 /* Main.storyboard */,
@@ -161,7 +167,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC9FC05524B39B550087A7F6 /* MemoryCell.swift in Sources */,
+				952C5C6D24B63E5600E3122D /* SceneDelegate.swift in Sources */,
 				BC9FC04524B38FD60087A7F6 /* MemoryViewController.swift in Sources */,
+				952C5C6924B6388E00E3122D /* OnboardingViewController.swift in Sources */,
 				BC9FC04124B38FD60087A7F6 /* AppDelegate.swift in Sources */,
 				BC9FC04324B38FD60087A7F6 /* GaleryViewController.swift in Sources */,
 				BC6B2EE324B4E32B00545364 /* GaleryCell.swift in Sources */,
@@ -309,7 +317,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = V894BS73ZJ;
+				DEVELOPMENT_TEAM = 56RTBWDLYU;
 				INFOPLIST_FILE = TestingAppleTV/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -327,7 +335,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = V894BS73ZJ;
+				DEVELOPMENT_TEAM = 56RTBWDLYU;
 				INFOPLIST_FILE = TestingAppleTV/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

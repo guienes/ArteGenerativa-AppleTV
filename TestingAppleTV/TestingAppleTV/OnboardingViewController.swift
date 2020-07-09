@@ -14,9 +14,18 @@ class OnboardingViewController: UIViewController {
         super.viewDidLoad()
     }
 
-    @IBAction func goToMainScreenBtn(_ sender: AnyObject) {
-        let defaults = UserDefaults.standard
-                defaults.set(true, forKey: "hasViewedWalkthrough")
-                dismiss(animated: true, completion: nil)
+    func setupTap() {
+        let touchDown = UILongPressGestureRecognizer(target:self, action: #selector(didTouchDown))
+        touchDown.minimumPressDuration = 0
+        view.addGestureRecognizer(touchDown)
     }
+
+    @objc func didTouchDown(gesture: UILongPressGestureRecognizer) {
+        if gesture.state == .began {
+             let defaults = UserDefaults.standard
+                          defaults.set(true, forKey: "hasViewedWalkthrough")
+                          dismiss(animated: true, completion: nil)
+        }
+    }
+
 }

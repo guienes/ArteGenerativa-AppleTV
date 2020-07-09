@@ -135,7 +135,6 @@
                                 <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                                 <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
                                 <connections>
-                                    <action selector="goToMainScreenBtn:" destination="Ooq-0t-s9Q" eventType="primaryActionTriggered" id="g6B-QW-O7A"/>
                                     <segue destination="49e-Tb-3d3" kind="presentation" id="RZu-zc-IJ8"/>
                                 </connections>
                             </button>

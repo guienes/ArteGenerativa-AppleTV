@@ -98,7 +98,7 @@ class Renderer: NSObject, MTKViewDelegate {
             shiftX = 0
             shiftXConstant = 0
             zoomConstant = 0
-            angleConstant = 0.4
+            angleConstant = 0.01
             oldZoom = 0.4
         default:
             shiftX = 0.5

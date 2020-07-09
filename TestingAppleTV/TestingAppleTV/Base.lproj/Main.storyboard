@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="16096" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="16097" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="MAe-vi-24b">
     <device id="appleTV" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -125,6 +125,71 @@
             </objects>
             <point key="canvasLocation" x="2278" y="-994"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="EaH-i7-PRC">
+            <objects>
+                <viewController id="MAe-vi-24b" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="0xC-aZ-5B2"/>
+                        <viewControllerLayoutGuide type="bottom" id="Io6-bv-9Om"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="aO9-91-u40">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tree" translatesAutoresizingMaskIntoConstraints="NO" id="0jz-LH-Sp3">
+                                <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nome do app" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C8X-or-VrD">
+                                <rect key="frame" x="106" y="118" width="817" height="178"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="178" id="517-YF-5Ec"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="130"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Toque para iniciar " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u67-gZ-iXX">
+                                <rect key="frame" x="468" y="787" width="985" height="164"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="164" id="Xn5-9l-yrL"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="120"/>
+                                <color key="textColor" red="0.76862745099999996" green="0.76862745099999996" blue="0.76862745099999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gere arte a partir da ciência" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cfc-Ed-6fc">
+                                <rect key="frame" x="106" y="304" width="1119" height="73"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="73" id="V5j-ky-ilr"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="90"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="2OQ-rx-ECK" firstAttribute="trailing" secondItem="cfc-Ed-6fc" secondAttribute="trailing" constant="605" id="4HT-II-Zgc"/>
+                            <constraint firstAttribute="bottom" secondItem="0jz-LH-Sp3" secondAttribute="bottom" id="BPk-nk-bx3"/>
+                            <constraint firstItem="2OQ-rx-ECK" firstAttribute="trailing" secondItem="C8X-or-VrD" secondAttribute="trailing" constant="907" id="BrG-rJ-Hx0"/>
+                            <constraint firstItem="2OQ-rx-ECK" firstAttribute="trailing" secondItem="u67-gZ-iXX" secondAttribute="trailing" constant="377" id="K9i-5J-Mun"/>
+                            <constraint firstItem="C8X-or-VrD" firstAttribute="leading" secondItem="2OQ-rx-ECK" secondAttribute="leading" constant="16" id="KUf-hW-xCv"/>
+                            <constraint firstAttribute="trailing" secondItem="0jz-LH-Sp3" secondAttribute="trailing" id="KeM-ZP-RTq"/>
+                            <constraint firstItem="cfc-Ed-6fc" firstAttribute="top" secondItem="C8X-or-VrD" secondAttribute="bottom" constant="8" id="Mzc-Ax-BPc"/>
+                            <constraint firstItem="0jz-LH-Sp3" firstAttribute="leading" secondItem="aO9-91-u40" secondAttribute="leading" id="Nta-nz-Uq9"/>
+                            <constraint firstItem="0jz-LH-Sp3" firstAttribute="top" secondItem="aO9-91-u40" secondAttribute="top" id="PLW-u2-kiO"/>
+                            <constraint firstItem="cfc-Ed-6fc" firstAttribute="leading" secondItem="2OQ-rx-ECK" secondAttribute="leading" constant="16" id="S7Q-VM-cZm"/>
+                            <constraint firstItem="u67-gZ-iXX" firstAttribute="leading" secondItem="2OQ-rx-ECK" secondAttribute="leading" constant="378" id="Zic-qf-xpV"/>
+                            <constraint firstItem="Io6-bv-9Om" firstAttribute="top" secondItem="u67-gZ-iXX" secondAttribute="bottom" constant="69" id="biq-dO-URZ"/>
+                            <constraint firstItem="C8X-or-VrD" firstAttribute="top" secondItem="0xC-aZ-5B2" secondAttribute="bottom" constant="58" id="f2U-jB-uot"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="2OQ-rx-ECK"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="881-W5-ZCj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-433" y="-1776"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
@@ -147,5 +212,6 @@
     <resources>
         <image name="Foto2" width="341" height="256"/>
         <image name="Fundo1" width="907" height="806"/>
+        <image name="tree" width="1406" height="766"/>
     </resources>
 </document>

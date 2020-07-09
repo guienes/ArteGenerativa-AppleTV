@@ -22,6 +22,7 @@
                         <viewLayoutGuide key="safeArea" id="HaE-6j-GlJ"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Galeria" id="HmV-fN-AVy"/>
+                    <navigationItem key="navigationItem" id="rpR-nv-Vxl"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hDT-Fh-5OM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -79,6 +80,7 @@
                         <viewLayoutGuide key="safeArea" id="Tzs-WY-Qt2"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Memórias" id="cPa-gy-q4n"/>
+                    <navigationItem key="navigationItem" id="s37-gj-wa5"/>
                     <connections>
                         <outlet property="collectionView" destination="I2Y-y1-wjt" id="PCB-MM-Kdt"/>
                     </connections>
@@ -87,10 +89,10 @@
             </objects>
             <point key="canvasLocation" x="2179" y="-996"/>
         </scene>
-        <!--View Controller-->
+        <!--Onboarding View Controller-->
         <scene sceneID="tfg-wQ-5bk">
             <objects>
-                <viewController id="Ooq-0t-s9Q" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OnboardingViewController" id="Ooq-0t-s9Q" customClass="OnboardingViewController" customModule="TestingAppleTV" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="RFJ-Ju-V66"/>
                         <viewControllerLayoutGuide type="bottom" id="E3R-FQ-jwh"/>
@@ -99,7 +101,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tree" translatesAutoresizingMaskIntoConstraints="NO" id="seL-f0-GXA">
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tree" translatesAutoresizingMaskIntoConstraints="NO" id="seL-f0-GXA">
                                 <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nome do app" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oGr-ky-0vU">
@@ -129,13 +131,27 @@
                                 <color key="textColor" red="0.76862745098039209" green="0.76862745098039209" blue="0.76862745098039209" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" alpha="0.10000000000000001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OaY-GQ-aEL">
+                                <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <connections>
+                                    <action selector="goToMainScreenBtn:" destination="Ooq-0t-s9Q" eventType="primaryActionTriggered" id="g6B-QW-O7A"/>
+                                    <segue destination="49e-Tb-3d3" kind="presentation" id="RZu-zc-IJ8"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="seL-f0-GXA" secondAttribute="trailing" id="8bZ-Tz-eRp"/>
                             <constraint firstItem="seL-f0-GXA" firstAttribute="top" secondItem="2d1-bl-1JW" secondAttribute="top" id="Bqj-i4-kzA"/>
+                            <constraint firstItem="mNn-ka-2zl" firstAttribute="trailing" secondItem="voG-Pb-Xpb" secondAttribute="trailing" constant="741" id="C3K-0o-yuh"/>
                             <constraint firstItem="fB7-2F-oJe" firstAttribute="centerX" secondItem="2d1-bl-1JW" secondAttribute="centerX" id="SBg-fC-x7d"/>
+                            <constraint firstItem="OaY-GQ-aEL" firstAttribute="top" secondItem="2d1-bl-1JW" secondAttribute="top" id="T08-f4-xwl"/>
                             <constraint firstItem="voG-Pb-Xpb" firstAttribute="top" secondItem="oGr-ky-0vU" secondAttribute="bottom" constant="-34" id="Ucs-fV-0Ed"/>
+                            <constraint firstAttribute="trailing" secondItem="OaY-GQ-aEL" secondAttribute="trailing" id="aM3-ah-kOQ"/>
+                            <constraint firstItem="mNn-ka-2zl" firstAttribute="trailing" secondItem="oGr-ky-0vU" secondAttribute="trailing" constant="837" id="cV0-lH-wA5"/>
                             <constraint firstItem="voG-Pb-Xpb" firstAttribute="leading" secondItem="2d1-bl-1JW" secondAttribute="leading" constant="85" id="daS-Ck-xnz"/>
+                            <constraint firstAttribute="bottom" secondItem="OaY-GQ-aEL" secondAttribute="bottom" id="e0e-cZ-HgD"/>
+                            <constraint firstItem="OaY-GQ-aEL" firstAttribute="leading" secondItem="2d1-bl-1JW" secondAttribute="leading" id="g77-5z-joH"/>
                             <constraint firstItem="E3R-FQ-jwh" firstAttribute="top" secondItem="fB7-2F-oJe" secondAttribute="bottom" id="gjK-jM-eCN"/>
                             <constraint firstItem="seL-f0-GXA" firstAttribute="leading" secondItem="2d1-bl-1JW" secondAttribute="leading" id="hY6-dD-oXB"/>
                             <constraint firstAttribute="bottom" secondItem="seL-f0-GXA" secondAttribute="bottom" id="nV5-Q3-5X0"/>
@@ -153,6 +169,7 @@
         <scene sceneID="yl2-sM-qoP">
             <objects>
                 <tabBarController id="49e-Tb-3d3" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="IEv-fB-afX"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="W28-zg-YXA">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="120"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>

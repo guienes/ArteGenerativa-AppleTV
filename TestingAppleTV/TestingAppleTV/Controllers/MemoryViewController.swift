@@ -8,15 +8,16 @@
 
 import UIKit
 
-class MemoryViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class MemoryViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     let defaultSize = CGSize(width: 400, height: 400)
     
     let focusSize = CGSize(width: 440, height: 440)
     
+    
     @IBOutlet weak var collectionView: UICollectionView!
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,6 +41,7 @@ class MemoryViewController: UIViewController, UICollectionViewDelegate, UICollec
             return MemoryCell()
         }
     }
+    
     
     func tapped(gesture: UITapGestureRecognizer) {
         if let cell = gesture.view as? MemoryCell {

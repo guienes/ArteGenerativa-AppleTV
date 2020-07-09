@@ -11,7 +11,7 @@
         <!--Galeria-->
         <scene sceneID="fbN-I9-ENr">
             <objects>
-                <viewController id="gDP-7f-vjY" customClass="FirstViewController" customModule="TestingAppleTV" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="gDP-7f-vjY" customClass="GaleryViewController" customModule="TestingAppleTV" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nLv-pV-bdy"/>
                         <viewControllerLayoutGuide type="bottom" id="HFV-dK-TzK"/>
@@ -19,6 +19,42 @@
                     <view key="view" contentMode="scaleToFill" id="ZHd-bY-fbE">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="spn-Zf-JTq">
+                                <rect key="frame" x="90" y="157" width="1740" height="863"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="100" minimumInteritemSpacing="0.0" id="mxi-Sh-SzQ">
+                                    <size key="itemSize" width="700" height="700"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="550" minY="0.0" maxX="550" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GaleriaCell" id="ec4-Nz-DVe" customClass="GaleryCell" customModule="TestingAppleTV" customModuleProvider="target">
+                                        <rect key="frame" x="550" y="81.5" width="700" height="700"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="6Hh-aq-YNF">
+                                            <rect key="frame" x="0.0" y="0.0" width="700" height="700"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Foto2" translatesAutoresizingMaskIntoConstraints="NO" id="77e-yi-K6q">
+                                                    <rect key="frame" x="121" y="121" width="458" height="458"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                            </subviews>
+                                        </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="galleryImg" destination="77e-yi-K6q" id="1CP-en-DmP"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="HaE-6j-GlJ" firstAttribute="trailing" secondItem="spn-Zf-JTq" secondAttribute="trailing" id="2Ya-SC-S1e"/>
+                            <constraint firstItem="spn-Zf-JTq" firstAttribute="leading" secondItem="HaE-6j-GlJ" secondAttribute="leading" id="83s-nb-NKw"/>
+                            <constraint firstItem="HFV-dK-TzK" firstAttribute="top" secondItem="spn-Zf-JTq" secondAttribute="bottom" id="XPG-ww-eh9"/>
+                            <constraint firstItem="spn-Zf-JTq" firstAttribute="top" secondItem="nLv-pV-bdy" secondAttribute="bottom" id="qTw-JF-YxQ"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="HaE-6j-GlJ"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Galeria" id="HmV-fN-AVy"/>
@@ -27,6 +63,13 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hDT-Fh-5OM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2179" y="860"/>
+                    <connections>
+                        <outlet property="collectionView" destination="spn-Zf-JTq" id="O4D-OR-ZGt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hDT-Fh-5OM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2278" y="862"/>
         </scene>
         <!--Memórias-->
         <scene sceneID="wg7-f3-ORb">
@@ -42,7 +85,6 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="I2Y-y1-wjt">
                                 <rect key="frame" x="90" y="157" width="1740" height="863"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="50" minimumInteritemSpacing="0.0" sectionInsetReference="safeArea" id="A14-9v-Djp">
                                     <size key="itemSize" width="500" height="500"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -82,12 +124,12 @@
                     <tabBarItem key="tabBarItem" title="Memórias" id="cPa-gy-q4n"/>
                     <navigationItem key="navigationItem" id="s37-gj-wa5"/>
                     <connections>
-                        <outlet property="collectionView" destination="I2Y-y1-wjt" id="PCB-MM-Kdt"/>
+                        <outlet property="CollectionView" destination="I2Y-y1-wjt" id="GtM-GR-Egb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2179" y="-996"/>
+            <point key="canvasLocation" x="2278" y="-994"/>
         </scene>
         <!--Onboarding View Controller-->
         <scene sceneID="tfg-wQ-5bk">
@@ -185,6 +227,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Foto2" width="341" height="256"/>
         <image name="Fundo1" width="907" height="806"/>
         <image name="tree" width="1406" height="766"/>
     </resources>

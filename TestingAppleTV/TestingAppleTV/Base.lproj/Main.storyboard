@@ -125,10 +125,10 @@
             </objects>
             <point key="canvasLocation" x="2278" y="-994"/>
         </scene>
-        <!--View Controller-->
+        <!--Initial View Controller-->
         <scene sceneID="EaH-i7-PRC">
             <objects>
-                <viewController id="MAe-vi-24b" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="InitialViewController" id="MAe-vi-24b" customClass="InitialViewController" customModule="TestingAppleTV" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0xC-aZ-5B2"/>
                         <viewControllerLayoutGuide type="bottom" id="Io6-bv-9Om"/>
@@ -185,6 +185,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="2OQ-rx-ECK"/>
                     </view>
+                    <connections>
+                        <segue destination="49e-Tb-3d3" kind="show" identifier="goToMainScreen" id="ieh-si-hDJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="881-W5-ZCj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -194,6 +197,7 @@
         <scene sceneID="yl2-sM-qoP">
             <objects>
                 <tabBarController id="49e-Tb-3d3" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="E1J-y7-RK1"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="W28-zg-YXA">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="120"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>

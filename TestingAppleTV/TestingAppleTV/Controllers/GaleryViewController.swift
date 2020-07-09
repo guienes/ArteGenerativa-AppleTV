@@ -16,13 +16,14 @@ class GaleryViewController: UIViewController, UICollectionViewDataSource {
     
     let focusSize = CGSize(width: 510, height: 510)
     
+    let vcArray: [String] = ["MandelbrotVC", "GenerativeJuliaVC"]
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         collectionView.delegate = self
         collectionView.dataSource = self
-        //      collectionView.isScrollEnabled = false
     }
     
     
@@ -31,23 +32,15 @@ class GaleryViewController: UIViewController, UICollectionViewDataSource {
         
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GaleriaCell", for: indexPath) as? GaleryCell {
             
-            
-            if cell.gestureRecognizers?.count == nil {
-                let tap = UITapGestureRecognizer(target: self, action: "tapped:")
-                tap.allowedPressTypes = [NSNumber(integerLiteral: UIPress.PressType.menu.rawValue)]
-                cell.addGestureRecognizer(tap)
-            }
             return cell
         } else {
             return GaleryCell()
         }
     }
     
-    func tapped(gesture: UITapGestureRecognizer) {
-        if let cell = gesture.view as? GaleryCell {
-            //could load next view
-            print("Reconhecido o toque")
-        }
+    @objc func tappedAwayFunction(_ sender: UITapGestureRecognizer) {
+        print("Reconhecido o toque")
+        
     }
     
     
@@ -57,29 +50,37 @@ class GaleryViewController: UIViewController, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return 10
+        return vcArray.count
+        
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        
+        performSegue(withIdentifier: vcArray[indexPath.row], sender: self)
+        
     }
     
-    override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
-        
-        if let prev = context.previouslyFocusedView as? GaleryCell {
-            UIView.animate(withDuration: 0.1) {
-                prev.galleryImg.frame.size = self.defaultSize
-            }
-        }
-        
-        if let next = context.nextFocusedView as? GaleryCell {
-            
-            UIView.animate(withDuration: 0.1) {
-                next.galleryImg.frame.size = self.focusSize
-            }
-        }
-    }
+    
+    
+    
+//    override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+//
+//        if let prev = context.previouslyFocusedView as? GaleryCell {
+//            UIView.animate(withDuration: 0.1) {
+//                prev.galleryImg.frame.size = self.defaultSize
+//            }
+//        }
+//
+//        if let next = context.nextFocusedView as? GaleryCell {
+//
+//            UIView.animate(withDuration: 0.1) {
+//                next.galleryImg.frame.size = self.focusSize
+//            }
+//        }
+//    }
 }
 
 extension GaleryViewController: UIScrollViewDelegate, UICollectionViewDelegate {

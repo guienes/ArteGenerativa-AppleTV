@@ -30,7 +30,7 @@ class GenerativeArtViewController: UIViewController {
         metalView.preferredFramesPerSecond = 60
         metalView.clearColor = MTLClearColor(red: 1.0, green: 0.4, blue: 0.0, alpha: 1.0)
         
-        self.renderer = Renderer(device: metalView.device!, metalView: metalView)
+        self.renderer = Renderer(device: metalView.device!, metalView: metalView, set: set)
         metalView.delegate = self.renderer
     }
     

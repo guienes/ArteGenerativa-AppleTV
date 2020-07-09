@@ -18,9 +18,11 @@ class Renderer: NSObject, MTKViewDelegate {
     var paletteTexture: MTLTexture!
     var samplerState: MTLSamplerState!
     var uniformBufferProvider: BufferProvider!
-    var mandelbrotSceneUniform = Uniform()
+    var sceneUniform = Uniform()
     
     fileprivate var square: Square!
+    
+    var set: Sets
     
     struct Constants {
         var animatedBy: Float = 0.0
@@ -32,14 +34,18 @@ class Renderer: NSObject, MTKViewDelegate {
     var constants = Constants()
     var time: Float = 0
     
-    fileprivate var oldZoom: Float = 0.2
-    fileprivate var shiftX: Float = 0.5
+    fileprivate var oldZoom: Float = 0
+    fileprivate var zoomConstant: Float = 0
+    fileprivate var shiftX: Float = 0
+    fileprivate var shiftXConstant: Float = 0
     fileprivate var shiftY: Float = 0
+    fileprivate var angleConstant: Float = 0
     
-    init(device: MTLDevice, metalView: MTKView) {
+    init(device: MTLDevice, metalView: MTKView, set: Sets) {
         self.device = device
         commandQueue = device.makeCommandQueue()
         square = Square(device: device)
+        self.set = set
         
         let textureLoader = MTKTextureLoader(device: device)
         let path = Bundle.main.path(forResource: "pal", ofType: "png")!
@@ -52,13 +58,24 @@ class Renderer: NSObject, MTKViewDelegate {
         super.init()
         
         buildPipelineState(metalView: metalView)
-        mandelbrotSceneUniform.aspectRatio = Float(metalView.frame.width / metalView.frame.height)
+        configureSet()
+        sceneUniform.aspectRatio = Float(metalView.frame.width / metalView.frame.height)
     }
     
     private func buildPipelineState(metalView: MTKView) {
+        let vertexFunctionName = "vertexShader"
+        var fragmentFunctionName = ""
+        switch set {
+        case .julia:
+            fragmentFunctionName = "juliaFragmentShader"
+        default:
+            fragmentFunctionName = "mandelbrotFragmentShader"
+        }
+        
+        
         guard let library = device.makeDefaultLibrary(),
-            let vertexFunction = library.makeFunction(name: "vertexShader"),
-            let fragmentFunction = library.makeFunction(name: "fragmentShader")
+            let vertexFunction = library.makeFunction(name: vertexFunctionName),
+            let fragmentFunction = library.makeFunction(name: fragmentFunctionName)
             else {
             assert(false)
             return
@@ -73,6 +90,23 @@ class Renderer: NSObject, MTKViewDelegate {
             metalView: metalView
         )
         depthStencilState = compiledDepthState()
+    }
+    
+    func configureSet() {
+        switch set {
+        case .julia:
+            shiftX = 0
+            shiftXConstant = 0
+            zoomConstant = 0
+            angleConstant = 0.4
+            oldZoom = 0.4
+        default:
+            shiftX = 0.5
+            shiftXConstant = 0.0005
+            zoomConstant = 0.001
+            angleConstant = 0
+            oldZoom = 0.2
+        }
     }
     
     func getVertexDescriptor() -> MTLVertexDescriptor {
@@ -122,7 +156,7 @@ class Renderer: NSObject, MTKViewDelegate {
     // MARK: - MTKViewDelegate
     
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
-        mandelbrotSceneUniform.aspectRatio = Float(size.width / size.height)
+        sceneUniform.aspectRatio = Float(size.width / size.height)
         needsRedraw = true
     }
     
@@ -132,11 +166,16 @@ class Renderer: NSObject, MTKViewDelegate {
         guard let drawable = view.currentDrawable else { return }
         
         if animate {
-            oldZoom += 0.001
-            shiftX += 0.0005
+            oldZoom += zoomConstant
+            shiftX += shiftXConstant
+            
+            sceneUniform.angle += angleConstant
+            if sceneUniform.angle == 360 {
+                sceneUniform.angle = 0
+            }
         }
-        mandelbrotSceneUniform.translation = (shiftX, shiftY)
-        mandelbrotSceneUniform.scale = 1 / oldZoom
+        sceneUniform.translation = (shiftX, shiftY)
+        sceneUniform.scale = 1 / oldZoom
         
         renderPassDescriptor.colorAttachments[0].loadAction = .clear
         renderPassDescriptor.colorAttachments[0].clearColor = MTLClearColor(red: 1.0, green: 0.4, blue: 0.6, alpha: 1.0)
@@ -156,7 +195,7 @@ class Renderer: NSObject, MTKViewDelegate {
             renderEncoder.setVertexBuffer(squareBuffer, offset: 0, index: 0)
         }
         
-        let uniformBuffer = uniformBufferProvider.nextBufferWithData(mandelbrotSceneUniform)
+        let uniformBuffer = uniformBufferProvider.nextBufferWithData(sceneUniform)
         renderEncoder.setVertexBuffer(uniformBuffer, offset: 0, index: 1)
         renderEncoder.setFragmentBuffer(uniformBuffer, offset: 0, index: 0)
         

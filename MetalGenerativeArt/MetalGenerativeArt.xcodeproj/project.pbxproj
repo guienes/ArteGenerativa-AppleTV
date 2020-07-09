@@ -35,7 +35,7 @@
 		E431A34624B7897B00B63EF0 /* SetListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetListTableViewController.swift; sourceTree = "<group>"; };
 		E431A34A24B78BF500B63EF0 /* Renderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
 		E431A34C24B7944000B63EF0 /* Shaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
-		E431A34E24B7971500B63EF0 /* pal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pal.png; path = "../../../Downloads/Metal-Mandelbrot-Fractal-master/Mandelbrot/pal.png"; sourceTree = "<group>"; };
+		E431A34E24B7971500B63EF0 /* pal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pal.png; path = ../pal.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

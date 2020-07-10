@@ -48,7 +48,7 @@ class Renderer: NSObject, MTKViewDelegate {
         self.set = set
         
         let textureLoader = MTKTextureLoader(device: device)
-        let path = Bundle.main.path(forResource: "pal", ofType: "png")!
+        let path = Bundle.main.path(forResource: "pal2", ofType: "png")!
         let data = try! Data(contentsOf: URL(fileURLWithPath: path))
         
         paletteTexture = try! textureLoader.newTexture(data: data, options: nil)
@@ -98,7 +98,7 @@ class Renderer: NSObject, MTKViewDelegate {
             shiftX = 0
             shiftXConstant = 0
             zoomConstant = 0
-            angleConstant = 0.01
+            angleConstant = 0.1 //0.01
             oldZoom = 0.4
         default:
             shiftX = 0.5

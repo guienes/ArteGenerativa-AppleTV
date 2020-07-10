@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		952C5C6F24B7960600E3122D /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952C5C6E24B7960600E3122D /* InitialViewController.swift */; };
+		95837B1724B8DC5200DE86D6 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95837B1524B8DC5200DE86D6 /* DataModel.xcdatamodeld */; };
 		BC45C79B24B7AC7300310D48 /* MandelbrotVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC45C79A24B7AC7300310D48 /* MandelbrotVC.swift */; };
 		BC45C79D24B7AF3600310D48 /* GenerativeJuliaVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC45C79C24B7AF3600310D48 /* GenerativeJuliaVC.swift */; };
 		BC6B2EE324B4E32B00545364 /* GaleryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6B2EE224B4E32B00545364 /* GaleryCell.swift */; };
@@ -22,6 +23,7 @@
 
 /* Begin PBXFileReference section */
 		952C5C6E24B7960600E3122D /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
+		95837B1624B8DC5200DE86D6 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		BC45C79A24B7AC7300310D48 /* MandelbrotVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MandelbrotVC.swift; sourceTree = "<group>"; };
 		BC45C79C24B7AF3600310D48 /* GenerativeJuliaVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerativeJuliaVC.swift; sourceTree = "<group>"; };
 		BC6B2EE224B4E32B00545364 /* GaleryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaleryCell.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 			children = (
 				BC9FC05424B39B550087A7F6 /* MemoryCell.swift */,
 				BC6B2EE224B4E32B00545364 /* GaleryCell.swift */,
+				95837B1524B8DC5200DE86D6 /* DataModel.xcdatamodeld */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -175,6 +178,7 @@
 				BC9FC04124B38FD60087A7F6 /* AppDelegate.swift in Sources */,
 				952C5C6F24B7960600E3122D /* InitialViewController.swift in Sources */,
 				BC9FC04324B38FD60087A7F6 /* GaleryViewController.swift in Sources */,
+				95837B1724B8DC5200DE86D6 /* DataModel.xcdatamodeld in Sources */,
 				BC45C79B24B7AC7300310D48 /* MandelbrotVC.swift in Sources */,
 				BC6B2EE324B4E32B00545364 /* GaleryCell.swift in Sources */,
 			);
@@ -374,6 +378,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		95837B1524B8DC5200DE86D6 /* DataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				95837B1624B8DC5200DE86D6 /* DataModel.xcdatamodel */,
+			);
+			currentVersion = 95837B1624B8DC5200DE86D6 /* DataModel.xcdatamodel */;
+			path = DataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = BC9FC03524B38FD60087A7F6 /* Project object */;
 }

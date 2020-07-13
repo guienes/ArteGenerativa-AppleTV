@@ -8,6 +8,12 @@
 
 import UIKit
 
+enum Sets: String {
+    case mandelbrot = "Mandelbrot Set"
+    case julia = "Julia Set"
+    case some = "Some Set"
+}
+
 class GaleryViewController: UIViewController, UICollectionViewDataSource {
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -32,7 +38,17 @@ class GaleryViewController: UIViewController, UICollectionViewDataSource {
         
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GaleriaCell", for: indexPath) as? GaleryCell {
             
+            var imageName = ""
+            if indexPath.row == 0 {
+                imageName = "mandelbrotSet"
+            } else {
+                imageName = "juliaSet"
+            }
+            
+            cell.galleryImg.image = UIImage(named: imageName)
+            
             return cell
+            
         } else {
             return GaleryCell()
         }

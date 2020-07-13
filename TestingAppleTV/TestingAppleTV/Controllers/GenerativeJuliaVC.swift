@@ -8,11 +8,30 @@
 
 import Foundation
 import UIKit
+import MetalKit
 
 class GenerativeJuliaVC: UIViewController{
     
+    var metalView: MTKView {
+        return self.view as! MTKView
+    }
+    
+    var renderer: Renderer?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupMetal()
+        renderer?.animate = true
+    }
+    
+    func setupMetal() {
+        metalView.device = MTLCreateSystemDefaultDevice()
+        metalView.depthStencilPixelFormat = MTLPixelFormat.depth32Float_stencil8
+        metalView.preferredFramesPerSecond = 60
+        metalView.clearColor = MTLClearColor(red: 1.0, green: 0.4, blue: 0.0, alpha: 1.0)
+        metalView.framebufferOnly = false
         
+        self.renderer = Renderer(device: metalView.device!, metalView: metalView, set: .julia)
+        metalView.delegate = self.renderer
     }
 }

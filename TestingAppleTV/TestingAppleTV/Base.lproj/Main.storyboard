@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="16096" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="MAe-vi-24b">
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="16097" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="MAe-vi-24b">
     <device id="appleTV" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -141,16 +141,9 @@
                         <viewControllerLayoutGuide type="top" id="3mn-sp-0nQ"/>
                         <viewControllerLayoutGuide type="bottom" id="9ap-kf-MlJ"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="31T-RF-cLe">
+                    <view key="view" contentMode="scaleToFill" id="31T-RF-cLe" customClass="MTKView">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WMr-Q0-oKH">
-                                <rect key="frame" x="420" y="236" width="1080" height="609"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.21598334860000001" green="1" blue="0.16351597179999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                            </imageView>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="TGu-IF-A17"/>
                     </view>
                     <navigationItem key="navigationItem" id="B0w-1E-58c"/>
@@ -167,16 +160,9 @@
                         <viewControllerLayoutGuide type="top" id="z2v-7I-nUI"/>
                         <viewControllerLayoutGuide type="bottom" id="unD-SK-WLl"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="e0p-x1-EQE">
+                    <view key="view" contentMode="scaleToFill" id="e0p-x1-EQE" customClass="MTKView">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2fb-1S-8pQ">
-                                <rect key="frame" x="420" y="236" width="1080" height="609"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </imageView>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="nwz-oD-SCT"/>
                     </view>
                     <navigationItem key="navigationItem" id="JUu-5l-e25"/>

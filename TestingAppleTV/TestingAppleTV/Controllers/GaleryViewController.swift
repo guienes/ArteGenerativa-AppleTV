@@ -8,6 +8,12 @@
 
 import UIKit
 
+enum Sets: String {
+    case mandelbrot = "Mandelbrot Set"
+    case julia = "Julia Set"
+    case some = "Some Set"
+}
+
 class GaleryViewController: UIViewController, UICollectionViewDataSource {
     
     @IBOutlet weak var collectionView: UICollectionView!

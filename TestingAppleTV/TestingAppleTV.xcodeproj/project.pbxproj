@@ -9,8 +9,7 @@
 /* Begin PBXBuildFile section */
 		952C5C6F24B7960600E3122D /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952C5C6E24B7960600E3122D /* InitialViewController.swift */; };
 		95837B1724B8DC5200DE86D6 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95837B1524B8DC5200DE86D6 /* DataModel.xcdatamodeld */; };
-		BC45C79B24B7AC7300310D48 /* MandelbrotVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC45C79A24B7AC7300310D48 /* MandelbrotVC.swift */; };
-		BC45C79D24B7AF3600310D48 /* GenerativeJuliaVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC45C79C24B7AF3600310D48 /* GenerativeJuliaVC.swift */; };
+		BC45C79D24B7AF3600310D48 /* GenerativeArtVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC45C79C24B7AF3600310D48 /* GenerativeArtVC.swift */; };
 		BC6B2EE324B4E32B00545364 /* GaleryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6B2EE224B4E32B00545364 /* GaleryCell.swift */; };
 		BC9FC04124B38FD60087A7F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9FC04024B38FD60087A7F6 /* AppDelegate.swift */; };
 		BC9FC04324B38FD60087A7F6 /* GaleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9FC04224B38FD60087A7F6 /* GaleryViewController.swift */; };
@@ -32,8 +31,7 @@
 /* Begin PBXFileReference section */
 		952C5C6E24B7960600E3122D /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		95837B1624B8DC5200DE86D6 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
-		BC45C79A24B7AC7300310D48 /* MandelbrotVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MandelbrotVC.swift; sourceTree = "<group>"; };
-		BC45C79C24B7AF3600310D48 /* GenerativeJuliaVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerativeJuliaVC.swift; sourceTree = "<group>"; };
+		BC45C79C24B7AF3600310D48 /* GenerativeArtVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerativeArtVC.swift; sourceTree = "<group>"; };
 		BC6B2EE224B4E32B00545364 /* GaleryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaleryCell.swift; sourceTree = "<group>"; };
 		BC9FC03D24B38FD60087A7F6 /* TestingAppleTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestingAppleTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC9FC04024B38FD60087A7F6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -114,8 +112,7 @@
 				BC9FC04224B38FD60087A7F6 /* GaleryViewController.swift */,
 				BC9FC04424B38FD60087A7F6 /* MemoryViewController.swift */,
 				952C5C6E24B7960600E3122D /* InitialViewController.swift */,
-				BC45C79A24B7AC7300310D48 /* MandelbrotVC.swift */,
-				BC45C79C24B7AF3600310D48 /* GenerativeJuliaVC.swift */,
+				BC45C79C24B7AF3600310D48 /* GenerativeArtVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -220,13 +217,12 @@
 				E4E81FDC24BCE898006FAA5E /* Memory.swift in Sources */,
 				BC9FC05524B39B550087A7F6 /* MemoryCell.swift in Sources */,
 				BC9FC04524B38FD60087A7F6 /* MemoryViewController.swift in Sources */,
-				BC45C79D24B7AF3600310D48 /* GenerativeJuliaVC.swift in Sources */,
+				BC45C79D24B7AF3600310D48 /* GenerativeArtVC.swift in Sources */,
 				BC9FC04124B38FD60087A7F6 /* AppDelegate.swift in Sources */,
 				952C5C6F24B7960600E3122D /* InitialViewController.swift in Sources */,
 				E4E81FD324BCCF7F006FAA5E /* MTLTexture.swift in Sources */,
 				BC9FC04324B38FD60087A7F6 /* GaleryViewController.swift in Sources */,
 				95837B1724B8DC5200DE86D6 /* DataModel.xcdatamodeld in Sources */,
-				BC45C79B24B7AC7300310D48 /* MandelbrotVC.swift in Sources */,
 				E4E81FD124BCCF7F006FAA5E /* Renderer.swift in Sources */,
 				BC6B2EE324B4E32B00545364 /* GaleryCell.swift in Sources */,
 			);

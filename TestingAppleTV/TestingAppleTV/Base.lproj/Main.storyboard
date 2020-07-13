@@ -66,8 +66,7 @@
                     <tabBarItem key="tabBarItem" title="Galeria" id="HmV-fN-AVy"/>
                     <connections>
                         <outlet property="collectionView" destination="spn-Zf-JTq" id="O4D-OR-ZGt"/>
-                        <segue destination="RKb-bL-Yz3" kind="show" identifier="MandelbrotVC" id="glF-4z-zYX"/>
-                        <segue destination="3TV-AG-Qen" kind="show" identifier="GenerativeJuliaVC" id="UZ9-8I-zNW"/>
+                        <segue destination="3TV-AG-Qen" kind="show" identifier="GenerativeArtVC" id="UZ9-8I-zNW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hDT-Fh-5OM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -133,29 +132,10 @@
             </objects>
             <point key="canvasLocation" x="2278" y="-994"/>
         </scene>
-        <!--MandelbrotVC-->
-        <scene sceneID="Fwt-T6-Y5G">
-            <objects>
-                <viewController id="RKb-bL-Yz3" customClass="MandelbrotVC" customModule="TestingAppleTV" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="3mn-sp-0nQ"/>
-                        <viewControllerLayoutGuide type="bottom" id="9ap-kf-MlJ"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="31T-RF-cLe" customClass="MTKView">
-                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="TGu-IF-A17"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="B0w-1E-58c"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="oX0-eL-LO6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="5730" y="862"/>
-        </scene>
-        <!--Generative JuliaVC-->
+        <!--Generative ArtVC-->
         <scene sceneID="Wgh-qe-OCW">
             <objects>
-                <viewController id="3TV-AG-Qen" customClass="GenerativeJuliaVC" customModule="TestingAppleTV" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="3TV-AG-Qen" customClass="GenerativeArtVC" customModule="TestingAppleTV" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="z2v-7I-nUI"/>
                         <viewControllerLayoutGuide type="bottom" id="unD-SK-WLl"/>
@@ -169,7 +149,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pY7-gH-epn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5730" y="3300"/>
+            <point key="canvasLocation" x="5371" y="2273"/>
         </scene>
         <!--Initial View Controller-->
         <scene sceneID="EaH-i7-PRC">

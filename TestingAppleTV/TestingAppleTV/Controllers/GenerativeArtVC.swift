@@ -1,5 +1,5 @@
 //
-//  MandelbrotVC.swift
+//  GenerativeJuliaVC.swift
 //  TestingAppleTV
 //
 //  Created by Guilherme Enes on 09/07/20.
@@ -10,12 +10,13 @@ import Foundation
 import UIKit
 import MetalKit
 
-class MandelbrotVC: UIViewController {
+class GenerativeArtVC: UIViewController{
     
     var metalView: MTKView {
         return self.view as! MTKView
     }
     
+    var set: Sets = .some
     var renderer: Renderer?
     
     override func viewDidLoad() {
@@ -31,8 +32,7 @@ class MandelbrotVC: UIViewController {
         metalView.clearColor = MTLClearColor(red: 1.0, green: 0.4, blue: 0.0, alpha: 1.0)
         metalView.framebufferOnly = false
         
-        self.renderer = Renderer(device: metalView.device!, metalView: metalView, set: .mandelbrot)
+        self.renderer = Renderer(device: metalView.device!, metalView: metalView, set: set)
         metalView.delegate = self.renderer
     }
 }
-

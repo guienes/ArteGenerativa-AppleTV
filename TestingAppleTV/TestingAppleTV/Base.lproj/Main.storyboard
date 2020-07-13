@@ -36,7 +36,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="958" height="716"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Foto2" translatesAutoresizingMaskIntoConstraints="NO" id="77e-yi-K6q">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Foto2" translatesAutoresizingMaskIntoConstraints="NO" id="77e-yi-K6q">
                                                     <rect key="frame" x="0.0" y="0.0" width="958" height="716"/>
                                                 </imageView>
                                             </subviews>

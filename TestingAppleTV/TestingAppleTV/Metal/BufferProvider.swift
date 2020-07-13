@@ -10,14 +10,12 @@ import UIKit
 import simd
 import Accelerate
 
-/// This class is responsible for providing a uniformBuffer which will be passed to vertex shader. It holds n buffers. In case n == 3 for frame0 it will give buffer0 for frame1 - buffer1 for frame2 - buffer2 for frame3 - buffer0 and so on. It's user responsibility to make sure that GPU is not using that buffer before use. For details refer to wwdc session 604 (18:00).
-
 struct Uniform {
     var scale: Float = 1
     var translation: (x: Float, y: Float) = (0, 0)
     var maxNumberOfiterations: Float = 500
     var aspectRatio: Float = 1
-    var angle: Float = 90
+    var angle: Float = 135
     var radius: Float = 0.7885
     
     fileprivate var raw: [Float] {
@@ -28,14 +26,11 @@ struct Uniform {
 }
 
 
-/// I use class, to have deinit() for semaphores cleanup
 class BufferProvider {
     
-    // General values
     static let floatSize = MemoryLayout<Float>.size
     static var bufferSize = Uniform.size
     
-    // Reuse related
     fileprivate(set) var indexOfAvaliableBuffer = 0
     fileprivate(set) var numberOfInflightBuffers: Int
     fileprivate var buffers:[MTLBuffer]
@@ -63,8 +58,6 @@ class BufferProvider {
     }
     
     func nextBufferWithData(_ uniform: Uniform) -> MTLBuffer {
-        
-        // Cycle through buffers
         let uniformBuffer = self.buffers[indexOfAvaliableBuffer]
         indexOfAvaliableBuffer += 1
         if indexOfAvaliableBuffer == numberOfInflightBuffers {

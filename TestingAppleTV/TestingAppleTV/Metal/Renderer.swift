@@ -24,14 +24,9 @@ class Renderer: NSObject, MTKViewDelegate {
     
     var set: Sets
     
-    struct Constants {
-        var animatedBy: Float = 0.0
-    }
-    
     var needsRedraw = true
     var forceAlwaysDraw = false
     var animate = false
-    var constants = Constants()
     var time: Float = 0
     
     fileprivate var oldZoom: Float = 0
@@ -80,8 +75,7 @@ class Renderer: NSObject, MTKViewDelegate {
         case .some:
             fragmentFunctionName = "dewdneyFragmentShader"
         }
-        
-        
+    
         guard let library = device.makeDefaultLibrary(),
             let vertexFunction = library.makeFunction(name: vertexFunctionName),
             let fragmentFunction = library.makeFunction(name: fragmentFunctionName)
@@ -108,15 +102,11 @@ class Renderer: NSObject, MTKViewDelegate {
             shiftX = 0.727
             shiftY = -0.25
             shiftXConstant = 0.0001
-            zoomConstant = 0.1
-            angleConstant = 0
-            oldZoom = 0.2
+            zoomConstant = 0.0001
+            oldZoom = 0.3
         case .julia:
-            shiftX = 0
-            shiftXConstant = 0
-            zoomConstant = 0
-            angleConstant = 0.1 //0.01
-            oldZoom = 0.4
+            angleConstant = 0.01
+            oldZoom = 1.0
         case .some:
             oldZoom = 0.05
         }

@@ -47,8 +47,15 @@ class Renderer: NSObject, MTKViewDelegate {
         square = Square(device: device)
         self.set = set
         
+        var imageName = ""
+        switch set {
+        case .julia:
+            imageName = "paleta_julia"
+        default:
+            imageName = "paleta_mandelbrot"
+        }
         let textureLoader = MTKTextureLoader(device: device)
-        let path = Bundle.main.path(forResource: "pal2", ofType: "png")!
+        let path = Bundle.main.path(forResource: imageName, ofType: "png")!
         let data = try! Data(contentsOf: URL(fileURLWithPath: path))
         
         paletteTexture = try! textureLoader.newTexture(data: data, options: nil)
@@ -66,10 +73,12 @@ class Renderer: NSObject, MTKViewDelegate {
         let vertexFunctionName = "vertexShader"
         var fragmentFunctionName = ""
         switch set {
+        case .mandelbrot:
+            fragmentFunctionName = "mandelbrotFragmentShader"
         case .julia:
             fragmentFunctionName = "juliaFragmentShader"
-        default:
-            fragmentFunctionName = "mandelbrotFragmentShader"
+        case .some:
+            fragmentFunctionName = "dewdneyFragmentShader"
         }
         
         
@@ -94,18 +103,22 @@ class Renderer: NSObject, MTKViewDelegate {
     
     func configureSet() {
         switch set {
+            
+        case .mandelbrot:
+            shiftX = 0.727
+            shiftY = -0.25
+            shiftXConstant = 0.0001
+            zoomConstant = 0.1
+            angleConstant = 0
+            oldZoom = 0.2
         case .julia:
             shiftX = 0
             shiftXConstant = 0
             zoomConstant = 0
             angleConstant = 0.1 //0.01
             oldZoom = 0.4
-        default:
-            shiftX = 0.5
-            shiftXConstant = 0.0005
-            zoomConstant = 0.001
-            angleConstant = 0
-            oldZoom = 0.2
+        case .some:
+            oldZoom = 0.05
         }
     }
     
@@ -166,9 +179,7 @@ class Renderer: NSObject, MTKViewDelegate {
         guard let drawable = view.currentDrawable else { return }
         
         if animate {
-            oldZoom += zoomConstant
-            shiftX += shiftXConstant
-            
+            oldZoom += zoomConstant * max(oldZoom/10, 1)            
             sceneUniform.angle += angleConstant
             if sceneUniform.angle == 360 {
                 sceneUniform.angle = 0

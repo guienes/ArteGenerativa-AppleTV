@@ -18,9 +18,9 @@
 		E431A34724B7897B00B63EF0 /* SetListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E431A34624B7897B00B63EF0 /* SetListTableViewController.swift */; };
 		E431A34B24B78BF500B63EF0 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E431A34A24B78BF500B63EF0 /* Renderer.swift */; };
 		E431A34D24B7944000B63EF0 /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = E431A34C24B7944000B63EF0 /* Shaders.metal */; };
-		E431A34F24B7971500B63EF0 /* pal.png in Resources */ = {isa = PBXBuildFile; fileRef = E431A34E24B7971500B63EF0 /* pal.png */; };
-		E431A35224B7BC0B00B63EF0 /* pal3.png in Resources */ = {isa = PBXBuildFile; fileRef = E431A35024B7BC0B00B63EF0 /* pal3.png */; };
-		E431A35324B7BC0B00B63EF0 /* pal2.png in Resources */ = {isa = PBXBuildFile; fileRef = E431A35124B7BC0B00B63EF0 /* pal2.png */; };
+		E431A34F24B7971500B63EF0 /* paleta_mandelbrot.png in Resources */ = {isa = PBXBuildFile; fileRef = E431A34E24B7971500B63EF0 /* paleta_mandelbrot.png */; };
+		E431A35324B7BC0B00B63EF0 /* paleta_julia.png in Resources */ = {isa = PBXBuildFile; fileRef = E431A35124B7BC0B00B63EF0 /* paleta_julia.png */; };
+		E4E81FC824BCC660006FAA5E /* MTLTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E81FC724BCC660006FAA5E /* MTLTexture.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,9 +37,9 @@
 		E431A34624B7897B00B63EF0 /* SetListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetListTableViewController.swift; sourceTree = "<group>"; };
 		E431A34A24B78BF500B63EF0 /* Renderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
 		E431A34C24B7944000B63EF0 /* Shaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
-		E431A34E24B7971500B63EF0 /* pal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pal.png; path = ../pal.png; sourceTree = "<group>"; };
-		E431A35024B7BC0B00B63EF0 /* pal3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pal3.png; path = ../../../../Desktop/pal3.png; sourceTree = "<group>"; };
-		E431A35124B7BC0B00B63EF0 /* pal2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pal2.png; path = ../pal2.png; sourceTree = "<group>"; };
+		E431A34E24B7971500B63EF0 /* paleta_mandelbrot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = paleta_mandelbrot.png; path = ../paleta_mandelbrot.png; sourceTree = "<group>"; };
+		E431A35124B7BC0B00B63EF0 /* paleta_julia.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = paleta_julia.png; path = ../paleta_julia.png; sourceTree = "<group>"; };
+		E4E81FC724BCC660006FAA5E /* MTLTexture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTLTexture.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,9 +77,8 @@
 				E431A32E24B7870C00B63EF0 /* AppDelegate.swift */,
 				E431A33024B7870C00B63EF0 /* SceneDelegate.swift */,
 				E431A33424B7870C00B63EF0 /* Main.storyboard */,
-				E431A35024B7BC0B00B63EF0 /* pal3.png */,
-				E431A35124B7BC0B00B63EF0 /* pal2.png */,
-				E431A34E24B7971500B63EF0 /* pal.png */,
+				E431A35124B7BC0B00B63EF0 /* paleta_julia.png */,
+				E431A34E24B7971500B63EF0 /* paleta_mandelbrot.png */,
 				E431A33724B7870E00B63EF0 /* Assets.xcassets */,
 				E431A33924B7870E00B63EF0 /* LaunchScreen.storyboard */,
 				E431A33C24B7870E00B63EF0 /* Info.plist */,
@@ -103,6 +102,7 @@
 				E431A34224B7887E00B63EF0 /* BufferProvider.swift */,
 				E431A34A24B78BF500B63EF0 /* Renderer.swift */,
 				E431A34C24B7944000B63EF0 /* Shaders.metal */,
+				E4E81FC724BCC660006FAA5E /* MTLTexture.swift */,
 			);
 			path = Metal;
 			sourceTree = "<group>";
@@ -166,11 +166,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				E431A33B24B7870E00B63EF0 /* LaunchScreen.storyboard in Resources */,
-				E431A35224B7BC0B00B63EF0 /* pal3.png in Resources */,
-				E431A35324B7BC0B00B63EF0 /* pal2.png in Resources */,
+				E431A35324B7BC0B00B63EF0 /* paleta_julia.png in Resources */,
 				E431A33824B7870E00B63EF0 /* Assets.xcassets in Resources */,
 				E431A33624B7870C00B63EF0 /* Main.storyboard in Resources */,
-				E431A34F24B7971500B63EF0 /* pal.png in Resources */,
+				E431A34F24B7971500B63EF0 /* paleta_mandelbrot.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -183,6 +182,7 @@
 			files = (
 				E431A34D24B7944000B63EF0 /* Shaders.metal in Sources */,
 				E431A34724B7897B00B63EF0 /* SetListTableViewController.swift in Sources */,
+				E4E81FC824BCC660006FAA5E /* MTLTexture.swift in Sources */,
 				E431A34524B788B100B63EF0 /* Square.swift in Sources */,
 				E431A34B24B78BF500B63EF0 /* Renderer.swift in Sources */,
 				E431A34324B7887E00B63EF0 /* BufferProvider.swift in Sources */,

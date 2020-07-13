@@ -14,7 +14,6 @@ using namespace metal;
 int findMandelbrot(float cr, float ci, int max_iterations);
 int findJulia(float cr, float ci, float z, int max_iterations);
 
-
 // Vertex data recieved in vertex shader
 struct Vertex {
     float3 position [[attribute(0)]];
@@ -129,6 +128,20 @@ fragment float4 juliaFragmentShader(VertexOut interpolated [[stage_in]],
     
     return finalColor;
 }
+
+fragment float4 dewdneyFragmentShader(VertexOut interpolated [[stage_in]],
+                                    texture2d<float>  tex2D        [[texture(0)]],
+                                    constant Uniforms &uniformBuffer [[buffer(0)]],
+                                    sampler           sampler2D    [[sampler(0)]])
+{
+    float x = interpolated.coords.x;
+    float y = interpolated.coords.y;
+    
+    float r = cos(x) + sin(y);
+    
+    return float4(cos(y*r), cos(x*y*r), sin(r*x), 1);
+}
+
 
 
 

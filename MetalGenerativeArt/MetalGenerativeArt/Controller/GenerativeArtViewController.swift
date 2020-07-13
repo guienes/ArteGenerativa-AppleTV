@@ -11,6 +11,8 @@ import MetalKit
 
 class GenerativeArtViewController: UIViewController {
     
+    @IBOutlet weak var imageView: UIImageView!
+    
     var set: Sets = .some
     
     var metalView: MTKView {
@@ -29,6 +31,7 @@ class GenerativeArtViewController: UIViewController {
         metalView.depthStencilPixelFormat = MTLPixelFormat.depth32Float_stencil8
         metalView.preferredFramesPerSecond = 60
         metalView.clearColor = MTLClearColor(red: 1.0, green: 0.4, blue: 0.0, alpha: 1.0)
+        metalView.framebufferOnly = false
         
         self.renderer = Renderer(device: metalView.device!, metalView: metalView, set: set)
         metalView.delegate = self.renderer
@@ -36,6 +39,14 @@ class GenerativeArtViewController: UIViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         renderer?.animate.toggle()
+    }
+    
+    @IBAction func saveImage(_ sender: Any) {
+        guard let texture = metalView.currentDrawable?.texture,
+            let image = texture.toImage()
+            else { return }
+        
+        imageView.image = UIImage(cgImage: image)
     }
 
 }

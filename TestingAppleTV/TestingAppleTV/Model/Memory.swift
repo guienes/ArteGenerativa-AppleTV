@@ -8,16 +8,16 @@
 
 import UIKit
 
-var memories = [Memory]()
+//var memories = [Memory]()
 
-class Memory {
-    
-    var set: Sets
-    var image: CGImage
-    
-    init(set: Sets, image: CGImage) {
-        self.set = set
-        self.image = image
-    }
-    
-}
+//class Memory {
+//
+//    var set: Sets
+//    var image: CGImage
+//
+//    init(set: Sets, image: CGImage) {
+//        self.set = set
+//        self.image = image
+//    }
+//
+//}

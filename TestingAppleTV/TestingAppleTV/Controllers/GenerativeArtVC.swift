@@ -30,7 +30,7 @@ class GenerativeArtVC: UIViewController{
             let image = texture.toImage()
             else { return }
         
-        memories.append(Memory(set: set, image: image))
+//        memories.append(Memory(set: set, image: image))
     }
     
     func setupMetal() {

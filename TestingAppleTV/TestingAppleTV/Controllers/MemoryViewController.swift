@@ -30,7 +30,7 @@ class MemoryViewController: UIViewController, UICollectionViewDelegate, UICollec
         
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MemoriaCell", for: indexPath) as? MemoryCell {
             
-            cell.memoryImg.image = UIImage(cgImage: memories[indexPath.row].image)
+//            cell.memoryImg.image = UIImage(cgImage: memories[indexPath.row].image)
             
             if cell.gestureRecognizers?.count == nil {
                 let tap = UITapGestureRecognizer(target: self, action: "tapped:")
@@ -58,7 +58,7 @@ class MemoryViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return memories.count
+        return 1//memories.count
     }
     
     override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {

@@ -26,6 +26,8 @@
 		E4E81FD824BCD164006FAA5E /* paleta_julia.png in Resources */ = {isa = PBXBuildFile; fileRef = E4E81FD624BCD163006FAA5E /* paleta_julia.png */; };
 		E4E81FD924BCD164006FAA5E /* paleta_mandelbrot.png in Resources */ = {isa = PBXBuildFile; fileRef = E4E81FD724BCD163006FAA5E /* paleta_mandelbrot.png */; };
 		E4E81FDC24BCE898006FAA5E /* Memory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E81FDB24BCE898006FAA5E /* Memory.swift */; };
+		E4E81FEB24BCF421006FAA5E /* Memory+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E81FE924BCF421006FAA5E /* Memory+CoreDataClass.swift */; };
+		E4E81FEC24BCF421006FAA5E /* Memory+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E81FEA24BCF421006FAA5E /* Memory+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +52,8 @@
 		E4E81FD624BCD163006FAA5E /* paleta_julia.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = paleta_julia.png; sourceTree = "<group>"; };
 		E4E81FD724BCD163006FAA5E /* paleta_mandelbrot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = paleta_mandelbrot.png; sourceTree = "<group>"; };
 		E4E81FDB24BCE898006FAA5E /* Memory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memory.swift; sourceTree = "<group>"; };
+		E4E81FE924BCF421006FAA5E /* Memory+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Memory+CoreDataClass.swift"; sourceTree = "<group>"; };
+		E4E81FEA24BCF421006FAA5E /* Memory+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Memory+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +137,8 @@
 			isa = PBXGroup;
 			children = (
 				95837B1524B8DC5200DE86D6 /* DataModel.xcdatamodeld */,
+				E4E81FEA24BCF421006FAA5E /* Memory+CoreDataProperties.swift */,
+				E4E81FE924BCF421006FAA5E /* Memory+CoreDataClass.swift */,
 				E4E81FDB24BCE898006FAA5E /* Memory.swift */,
 			);
 			path = Model;
@@ -211,6 +217,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4E81FEB24BCF421006FAA5E /* Memory+CoreDataClass.swift in Sources */,
 				E4E81FD424BCCF7F006FAA5E /* Square.swift in Sources */,
 				E4E81FD224BCCF7F006FAA5E /* BufferProvider.swift in Sources */,
 				E4E81FD524BCCF7F006FAA5E /* Shaders.metal in Sources */,
@@ -224,6 +231,7 @@
 				BC9FC04324B38FD60087A7F6 /* GaleryViewController.swift in Sources */,
 				95837B1724B8DC5200DE86D6 /* DataModel.xcdatamodeld in Sources */,
 				E4E81FD124BCCF7F006FAA5E /* Renderer.swift in Sources */,
+				E4E81FEC24BCF421006FAA5E /* Memory+CoreDataProperties.swift in Sources */,
 				BC6B2EE324B4E32B00545364 /* GaleryCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

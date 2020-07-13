@@ -8,6 +8,8 @@
 
 import UIKit
 
+var memories = [Memory]()
+
 class Memory {
     
     var set: Sets

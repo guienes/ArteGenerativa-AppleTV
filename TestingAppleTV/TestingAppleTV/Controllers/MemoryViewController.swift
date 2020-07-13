@@ -11,13 +11,10 @@ import UIKit
 class MemoryViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     let defaultSize = CGSize(width: 400, height: 400)
-    
     let focusSize = CGSize(width: 440, height: 440)
     
-    
     @IBOutlet weak var collectionView: UICollectionView!
-    
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,6 +26,7 @@ class MemoryViewController: UIViewController, UICollectionViewDelegate, UICollec
         
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MemoriaCell", for: indexPath) as? MemoryCell {
             
+            cell.memoryImg.image = UIImage(cgImage: memories[indexPath.row].image)
             
             if cell.gestureRecognizers?.count == nil {
                 let tap = UITapGestureRecognizer(target: self, action: "tapped:")
@@ -56,8 +54,7 @@ class MemoryViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        return 6
+        return memories.count
     }
     
     override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {

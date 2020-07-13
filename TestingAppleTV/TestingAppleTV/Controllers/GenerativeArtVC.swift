@@ -25,6 +25,14 @@ class GenerativeArtVC: UIViewController{
         renderer?.animate = true
     }
     
+    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+        guard let texture = metalView.currentDrawable?.texture,
+            let image = texture.toImage()
+            else { return }
+        
+        memories.append(Memory(set: set, image: image))
+    }
+    
     func setupMetal() {
         metalView.device = MTLCreateSystemDefaultDevice()
         metalView.depthStencilPixelFormat = MTLPixelFormat.depth32Float_stencil8

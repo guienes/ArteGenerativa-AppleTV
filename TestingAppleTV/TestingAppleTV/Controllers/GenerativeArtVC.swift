@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import MetalKit
+import CoreData
 
 class GenerativeArtVC: UIViewController{
     
@@ -19,18 +20,29 @@ class GenerativeArtVC: UIViewController{
     var set: Sets = .some
     var renderer: Renderer?
     
+    var context: NSManagedObjectContext?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
         setupMetal()
         renderer?.animate = true
     }
     
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
-        guard let texture = metalView.currentDrawable?.texture,
+        guard let context = self.context,
+            let texture = metalView.currentDrawable?.texture,
             let image = texture.toImage()
             else { return }
         
-//        memories.append(Memory(set: set, image: image))
+        let uiimage = UIImage(cgImage: image)
+        
+        let newMemory = NSEntityDescription.insertNewObject(forEntityName: "Memory", into: context) as! Memory
+        newMemory.set = self.set.rawValue
+        newMemory.image = uiimage.pngData()
+        
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
     
     func setupMetal() {

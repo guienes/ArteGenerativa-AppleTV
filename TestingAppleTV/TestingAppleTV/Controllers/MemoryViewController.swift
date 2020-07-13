@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class MemoryViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
@@ -14,15 +15,27 @@ class MemoryViewController: UIViewController, UICollectionViewDelegate, UICollec
     let focusSize = CGSize(width: 440, height: 440)
     
     @IBOutlet weak var collectionView: UICollectionView!
+    
+    var context: NSManagedObjectContext?
+    var memories = [Memory]()
         
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
         collectionView.delegate = self
         collectionView.dataSource = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        do{
+            memories = try context!.fetch(Memory.fetchRequest())
+        } catch {
+            print("Erro ao carregar memórias")
+            return
+        }
+        
         collectionView.reloadData()
     }
     
@@ -30,15 +43,19 @@ class MemoryViewController: UIViewController, UICollectionViewDelegate, UICollec
         
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MemoriaCell", for: indexPath) as? MemoryCell {
             
-//            cell.memoryImg.image = UIImage(cgImage: memories[indexPath.row].image)
-            
             if cell.gestureRecognizers?.count == nil {
                 let tap = UITapGestureRecognizer(target: self, action: "tapped:")
                 tap.allowedPressTypes = [NSNumber(integerLiteral: UIPress.PressType.menu.rawValue)]
                 cell.addGestureRecognizer(tap)
             }
             
+            guard let data = memories[indexPath.row].image else {
+                return MemoryCell()
+            }
+            cell.memoryImg.image = UIImage(data: data)
+            
             return cell
+            
         } else {
             return MemoryCell()
         }
@@ -58,7 +75,7 @@ class MemoryViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1//memories.count
+        return memories.count
     }
     
     override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {

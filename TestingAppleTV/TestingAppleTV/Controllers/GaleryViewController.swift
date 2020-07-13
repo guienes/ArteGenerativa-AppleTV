@@ -22,8 +22,8 @@ class GaleryViewController: UIViewController, UICollectionViewDataSource {
     
     let focusSize = CGSize(width: 510, height: 510)
     
-    let vcArray: [String] = ["MandelbrotVC", "GenerativeJuliaVC"]
-    
+    let vcArray: [Sets] = [.mandelbrot, .julia]
+    var selectedSet = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,13 +38,7 @@ class GaleryViewController: UIViewController, UICollectionViewDataSource {
         
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GaleriaCell", for: indexPath) as? GaleryCell {
             
-            var imageName = ""
-            if indexPath.row == 0 {
-                imageName = "mandelbrotSet"
-            } else {
-                imageName = "juliaSet"
-            }
-            
+            let imageName = vcArray[indexPath.row].rawValue
             cell.galleryImg.image = UIImage(named: imageName)
             
             return cell
@@ -65,21 +59,21 @@ class GaleryViewController: UIViewController, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
         return vcArray.count
-        
     }
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-        
-        performSegue(withIdentifier: vcArray[indexPath.row], sender: self)
-        
+        selectedSet = indexPath.row
+        performSegue(withIdentifier: "GenerativeArtVC", sender: self)
     }
     
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let viewController = segue.destination as? GenerativeArtVC else { return }
+        viewController.set = vcArray[selectedSet]
+    }
     
     
 //    override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {

@@ -18,6 +18,7 @@ class GaleryViewController: UIViewController, UICollectionViewDataSource {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    
     let defaultSize = CGSize(width: 458, height: 458)
     
     let focusSize = CGSize(width: 510, height: 510)
@@ -41,6 +42,10 @@ class GaleryViewController: UIViewController, UICollectionViewDataSource {
             let imageName = vcArray[indexPath.row].rawValue
             cell.galleryImg.image = UIImage(named: imageName)
             
+            cell.galleryNameLBL.text = vcArray[indexPath.row].rawValue
+            
+            
+            
             return cell
             
         } else {
@@ -50,7 +55,6 @@ class GaleryViewController: UIViewController, UICollectionViewDataSource {
     
     @objc func tappedAwayFunction(_ sender: UITapGestureRecognizer) {
         print("Reconhecido o toque")
-        
     }
     
     

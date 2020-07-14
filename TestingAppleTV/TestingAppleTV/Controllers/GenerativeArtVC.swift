@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import MetalKit
 import CoreData
+import AVKit
 
 class GenerativeArtVC: UIViewController{
     
@@ -22,12 +23,16 @@ class GenerativeArtVC: UIViewController{
     
     var context: NSManagedObjectContext?
     
+    var audioPlayer: AVAudioPlayer?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
         setupMetal()
         renderer?.animate = true
+        
+        startBackgroundMusic()
     }
     
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
@@ -43,6 +48,23 @@ class GenerativeArtVC: UIViewController{
         newMemory.image = uiimage.pngData()
         
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
+        
+        for press in presses {
+                  
+                   if press.type == .playPause {
+        
+                       if (audioPlayer!.isPlaying == true) {
+                           audioPlayer!.stop()
+                          
+                      } else {
+                           audioPlayer!.play()
+                      }
+                   }
+               
+                   if press.type == .menu {
+                       MusicPlayer.shared.stopPlaying()
+                   }
+               }
     }
     
     func setupMetal() {
@@ -54,5 +76,27 @@ class GenerativeArtVC: UIViewController{
         
         self.renderer = Renderer(device: metalView.device!, metalView: metalView, set: set)
         metalView.delegate = self.renderer
+    }
+    
+    func startBackgroundMusic() {
+    if let bundle = Bundle.main.path(forResource: "bensound-memories", ofType: "mp3") {
+        let backgroundMusic = NSURL(fileURLWithPath: bundle)
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf:backgroundMusic as URL)
+            guard let audioPlayer = audioPlayer else { return }
+            audioPlayer.numberOfLoops = -1
+            audioPlayer.prepareToPlay()
+            audioPlayer.play()
+           
+            if audioPlayer.isPlaying {
+                audioPlayer.play()
+            } else {
+                audioPlayer.stop()
+            }
+            
+        } catch {
+            print(error)
+            }
+        }
     }
 }

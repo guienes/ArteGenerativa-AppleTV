@@ -16,19 +16,30 @@ class MemoryViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    @IBOutlet weak var savedPhotosLBL: UILabel!
+    
+    let addMemoriesLBL = UILabel()
+    
     var context: NSManagedObjectContext?
     var memories = [Memory]()
         
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setLBL()
+        
+        self.view.addSubview(addMemoriesLBL)
+        
         context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
+                
         collectionView.delegate = self
         collectionView.dataSource = self
     }
     
+    
     override func viewDidAppear(_ animated: Bool) {
+        
         do{
             memories = try context!.fetch(Memory.fetchRequest())
         } catch {
@@ -37,17 +48,20 @@ class MemoryViewController: UIViewController, UICollectionViewDelegate, UICollec
         }
         
         collectionView.reloadData()
+        
+        if memories.count > 0 {
+            savedPhotosLBL.isHidden = false
+            addMemoriesLBL.isHidden = true
+        } else {
+            addMemoriesLBL.isHidden = false
+        }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MemoriaCell", for: indexPath) as? MemoryCell {
             
-            if cell.gestureRecognizers?.count == nil {
-                let tap = UITapGestureRecognizer(target: self, action: "tapped:")
-                tap.allowedPressTypes = [NSNumber(integerLiteral: UIPress.PressType.menu.rawValue)]
-                cell.addGestureRecognizer(tap)
-            }
             
             guard let data = memories[indexPath.row].image else {
                 return MemoryCell()
@@ -62,14 +76,6 @@ class MemoryViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
     
-    func tapped(gesture: UITapGestureRecognizer) {
-        if let cell = gesture.view as? MemoryCell {
-            //could load next view
-            print("Reconhecido o toque")
-        }
-    }
-    
-    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -77,6 +83,7 @@ class MemoryViewController: UIViewController, UICollectionViewDelegate, UICollec
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return memories.count
     }
+    
     
     override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
         
@@ -92,6 +99,20 @@ class MemoryViewController: UIViewController, UICollectionViewDelegate, UICollec
                 next.memoryImg.frame.size = self.focusSize
             }
         }
+    }
+
+    
+    func setLBL() {
+        
+        addMemoriesLBL.isHidden = true
+        
+        addMemoriesLBL.frame = CGRect(x: self.view.frame.width/3.7, y: self.view.frame.height/2.8, width: 900, height: 200)
+        
+        addMemoriesLBL.font = addMemoriesLBL.font.withSize(60)
+        
+        addMemoriesLBL.textAlignment = .center
+        
+        addMemoriesLBL.text = "Algo motivador será escrito aqui!"
     }
     
 }

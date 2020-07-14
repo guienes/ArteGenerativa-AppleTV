@@ -10,5 +10,6 @@ import UIKit
 
 class GaleryCell: UICollectionViewCell {
     
+    @IBOutlet weak var galleryNameLBL: UILabel!
     @IBOutlet weak var galleryImg: UIImageView!
 }

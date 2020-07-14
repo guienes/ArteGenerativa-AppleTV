@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="16097" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="MAe-vi-24b">
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="16096" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="MAe-vi-24b">
     <device id="appleTV" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -23,33 +23,41 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="spn-Zf-JTq">
                                 <rect key="frame" x="0.0" y="157" width="1920" height="863"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="130" minimumInteritemSpacing="0.0" id="mxi-Sh-SzQ">
-                                    <size key="itemSize" width="958" height="716"/>
+                                    <size key="itemSize" width="960" height="769"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="550" minY="0.0" maxX="550" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GaleriaCell" id="ec4-Nz-DVe" customClass="GaleryCell" customModule="TestingAppleTV" customModuleProvider="target">
-                                        <rect key="frame" x="550" y="73.5" width="958" height="716"/>
+                                        <rect key="frame" x="550" y="47" width="960" height="769"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="6Hh-aq-YNF">
-                                            <rect key="frame" x="0.0" y="0.0" width="958" height="716"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="960" height="769"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Foto2" translatesAutoresizingMaskIntoConstraints="NO" id="77e-yi-K6q">
-                                                    <rect key="frame" x="0.0" y="0.0" width="958" height="716"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="960" height="677"/>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c9w-J4-HMo">
+                                                    <rect key="frame" x="295" y="685" width="370" height="76"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="45"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="77e-yi-K6q" firstAttribute="leading" secondItem="6Hh-aq-YNF" secondAttribute="leading" id="0x2-sK-bdv"/>
-                                                <constraint firstItem="77e-yi-K6q" firstAttribute="top" secondItem="6Hh-aq-YNF" secondAttribute="top" id="9ED-F4-XfR"/>
-                                                <constraint firstAttribute="bottom" secondItem="77e-yi-K6q" secondAttribute="bottom" id="HbF-Wu-gqe"/>
-                                                <constraint firstAttribute="trailing" secondItem="77e-yi-K6q" secondAttribute="trailing" id="xR8-cg-wOx"/>
+                                                <constraint firstAttribute="bottom" secondItem="77e-yi-K6q" secondAttribute="bottom" constant="92" id="0JX-RR-7FJ"/>
+                                                <constraint firstItem="77e-yi-K6q" firstAttribute="leading" secondItem="6Hh-aq-YNF" secondAttribute="leading" id="2dt-Ae-Pe1"/>
+                                                <constraint firstAttribute="trailing" secondItem="77e-yi-K6q" secondAttribute="trailing" id="UeH-pQ-vws"/>
+                                                <constraint firstItem="77e-yi-K6q" firstAttribute="top" secondItem="6Hh-aq-YNF" secondAttribute="top" id="fne-oc-ift"/>
                                             </constraints>
                                         </collectionViewCellContentView>
-                                        <size key="customSize" width="958" height="716"/>
+                                        <size key="customSize" width="960" height="769"/>
                                         <connections>
                                             <outlet property="galleryImg" destination="77e-yi-K6q" id="1CP-en-DmP"/>
+                                            <outlet property="galleryNameLBL" destination="c9w-J4-HMo" id="Dfm-wC-r3l"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -86,8 +94,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="I2Y-y1-wjt">
-                                <rect key="frame" x="90" y="157" width="1740" height="863"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="50" minimumInteritemSpacing="0.0" sectionInsetReference="safeArea" id="A14-9v-Djp">
+                                <rect key="frame" x="90" y="307" width="1740" height="713"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" sectionInsetReference="safeArea" id="A14-9v-Djp">
                                     <size key="itemSize" width="500" height="500"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -113,19 +121,27 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Suas fotos salvas" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vqa-mC-0Tt">
+                                <rect key="frame" x="608" y="201" width="705" height="71"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="70"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Tzs-WY-Qt2" firstAttribute="trailing" secondItem="I2Y-y1-wjt" secondAttribute="trailing" id="Ccd-L4-1kd"/>
                             <constraint firstItem="Djb-ko-YwX" firstAttribute="top" secondItem="I2Y-y1-wjt" secondAttribute="bottom" id="NOQ-mE-niE"/>
-                            <constraint firstItem="I2Y-y1-wjt" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" id="RDG-SH-wL7"/>
                             <constraint firstItem="I2Y-y1-wjt" firstAttribute="leading" secondItem="Tzs-WY-Qt2" secondAttribute="leading" id="cxo-UV-nCL"/>
+                            <constraint firstItem="I2Y-y1-wjt" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" constant="150" id="czb-KW-szs"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Tzs-WY-Qt2"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Memórias" id="cPa-gy-q4n"/>
                     <connections>
                         <outlet property="CollectionView" destination="I2Y-y1-wjt" id="GtM-GR-Egb"/>
+                        <outlet property="savedPhotosLBL" destination="Vqa-mC-0Tt" id="zEa-uC-dtS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>

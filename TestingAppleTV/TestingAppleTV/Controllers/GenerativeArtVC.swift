@@ -50,14 +50,14 @@ class GenerativeArtVC: UIViewController{
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
         
         for press in presses {
-                  
                    if press.type == .playPause {
-        
                        if (audioPlayer!.isPlaying == true) {
                            audioPlayer!.stop()
-                          
+                        metalView.isPaused =  true
+                        
                       } else {
                            audioPlayer!.play()
+                          metalView.isPaused =  false
                       }
                    }
                

@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		952C5C6F24B7960600E3122D /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952C5C6E24B7960600E3122D /* InitialViewController.swift */; };
 		95837B1724B8DC5200DE86D6 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95837B1524B8DC5200DE86D6 /* DataModel.xcdatamodeld */; };
+		95E44A7624BE3D9900B2341F /* MusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E44A7524BE3D9900B2341F /* MusicPlayer.swift */; };
+		95E44A7824BE3E8000B2341F /* bensound-memories.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 95E44A7724BE3E8000B2341F /* bensound-memories.mp3 */; };
+		95E44A7A24BE3F6300B2341F /* bensound-birthofahero.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 95E44A7924BE3F6300B2341F /* bensound-birthofahero.mp3 */; };
+		95E44A7C24BE3F9E00B2341F /* bensound-tomorrow.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 95E44A7B24BE3F9E00B2341F /* bensound-tomorrow.mp3 */; };
+		95E44A7E24BE408400B2341F /* bensound-photoalbum.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 95E44A7D24BE408400B2341F /* bensound-photoalbum.mp3 */; };
+		95E44A8324BE40C200B2341F /* bensound-ofeliasdream.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 95E44A8224BE40C200B2341F /* bensound-ofeliasdream.mp3 */; };
 		BC45C79D24B7AF3600310D48 /* GenerativeArtVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC45C79C24B7AF3600310D48 /* GenerativeArtVC.swift */; };
 		BC6B2EE324B4E32B00545364 /* GaleryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6B2EE224B4E32B00545364 /* GaleryCell.swift */; };
 		BC9FC04124B38FD60087A7F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9FC04024B38FD60087A7F6 /* AppDelegate.swift */; };
@@ -33,6 +39,12 @@
 /* Begin PBXFileReference section */
 		952C5C6E24B7960600E3122D /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		95837B1624B8DC5200DE86D6 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
+		95E44A7524BE3D9900B2341F /* MusicPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayer.swift; sourceTree = "<group>"; };
+		95E44A7724BE3E8000B2341F /* bensound-memories.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "bensound-memories.mp3"; sourceTree = "<group>"; };
+		95E44A7924BE3F6300B2341F /* bensound-birthofahero.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "bensound-birthofahero.mp3"; sourceTree = "<group>"; };
+		95E44A7B24BE3F9E00B2341F /* bensound-tomorrow.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "bensound-tomorrow.mp3"; sourceTree = "<group>"; };
+		95E44A7D24BE408400B2341F /* bensound-photoalbum.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "bensound-photoalbum.mp3"; sourceTree = "<group>"; };
+		95E44A8224BE40C200B2341F /* bensound-ofeliasdream.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "bensound-ofeliasdream.mp3"; sourceTree = "<group>"; };
 		BC45C79C24B7AF3600310D48 /* GenerativeArtVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerativeArtVC.swift; sourceTree = "<group>"; };
 		BC6B2EE224B4E32B00545364 /* GaleryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaleryCell.swift; sourceTree = "<group>"; };
 		BC9FC03D24B38FD60087A7F6 /* TestingAppleTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestingAppleTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,6 +79,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		95E44A8124BE40A700B2341F /* Songs */ = {
+			isa = PBXGroup;
+			children = (
+				95E44A7724BE3E8000B2341F /* bensound-memories.mp3 */,
+				95E44A7924BE3F6300B2341F /* bensound-birthofahero.mp3 */,
+				95E44A7B24BE3F9E00B2341F /* bensound-tomorrow.mp3 */,
+				95E44A7D24BE408400B2341F /* bensound-photoalbum.mp3 */,
+				95E44A8224BE40C200B2341F /* bensound-ofeliasdream.mp3 */,
+			);
+			path = Songs;
+			sourceTree = "<group>";
+		};
 		BC9FC03424B38FD60087A7F6 = {
 			isa = PBXGroup;
 			children = (
@@ -88,6 +112,8 @@
 			children = (
 				E4E81FD624BCD163006FAA5E /* paleta_julia.png */,
 				E4E81FD724BCD163006FAA5E /* paleta_mandelbrot.png */,
+				95E44A8124BE40A700B2341F /* Songs */,
+				95E44A7524BE3D9900B2341F /* MusicPlayer.swift */,
 				BC9FC04024B38FD60087A7F6 /* AppDelegate.swift */,
 				E4E81FCB24BCCF73006FAA5E /* Metal */,
 				BC9FC05724B39B730087A7F6 /* Controllers */,
@@ -203,10 +229,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC9FC04D24B38FD80087A7F6 /* LaunchScreen.storyboard in Resources */,
+				95E44A7A24BE3F6300B2341F /* bensound-birthofahero.mp3 in Resources */,
 				E4E81FD924BCD164006FAA5E /* paleta_mandelbrot.png in Resources */,
 				BC9FC04A24B38FD80087A7F6 /* Assets.xcassets in Resources */,
+				95E44A7E24BE408400B2341F /* bensound-photoalbum.mp3 in Resources */,
 				E4E81FD824BCD164006FAA5E /* paleta_julia.png in Resources */,
+				95E44A8324BE40C200B2341F /* bensound-ofeliasdream.mp3 in Resources */,
 				BC9FC04824B38FD60087A7F6 /* Main.storyboard in Resources */,
+				95E44A7824BE3E8000B2341F /* bensound-memories.mp3 in Resources */,
+				95E44A7C24BE3F9E00B2341F /* bensound-tomorrow.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,6 +255,7 @@
 				E4E81FDC24BCE898006FAA5E /* Memory.swift in Sources */,
 				BC9FC05524B39B550087A7F6 /* MemoryCell.swift in Sources */,
 				BC9FC04524B38FD60087A7F6 /* MemoryViewController.swift in Sources */,
+				95E44A7624BE3D9900B2341F /* MusicPlayer.swift in Sources */,
 				BC45C79D24B7AF3600310D48 /* GenerativeArtVC.swift in Sources */,
 				BC9FC04124B38FD60087A7F6 /* AppDelegate.swift in Sources */,
 				952C5C6F24B7960600E3122D /* InitialViewController.swift in Sources */,

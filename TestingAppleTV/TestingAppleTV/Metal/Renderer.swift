@@ -34,6 +34,7 @@ class Renderer: NSObject, MTKViewDelegate {
     fileprivate var shiftX: Float = 0
     fileprivate var shiftXConstant: Float = 0
     fileprivate var shiftY: Float = 0
+    fileprivate var shiftYConstant: Float = 0
     fileprivate var angleConstant: Float = 0
     
     init(device: MTLDevice, metalView: MTKView, set: Sets) {
@@ -97,13 +98,10 @@ class Renderer: NSObject, MTKViewDelegate {
     
     func configureSet() {
         switch set {
-            
         case .mandelbrot:
-            shiftX = 0.727
-            shiftY = -0.25
-            shiftXConstant = 0.0001
-            zoomConstant = 0.0001
-            oldZoom = 0.3
+            shiftX = 0.15
+            angleConstant = 0.01
+            oldZoom = 10
         case .julia:
             angleConstant = 0.01
             oldZoom = 1.0
@@ -155,6 +153,17 @@ class Renderer: NSObject, MTKViewDelegate {
         return device.makeDepthStencilState(descriptor: depthStencilDesc)!
     }
     
+    func calculateShift(from angle: Float) -> (x: Float, y: Float) {
+        let theta = angle * .pi / 180
+        
+        let radius: Float = 0.75
+        
+        let x = radius * cos(theta)
+        let y = radius * sin(theta)
+        
+        return (x, y)
+    }
+    
     
     // MARK: - MTKViewDelegate
     
@@ -168,14 +177,25 @@ class Renderer: NSObject, MTKViewDelegate {
         guard let renderPassDescriptor = view.currentRenderPassDescriptor else { return }
         guard let drawable = view.currentDrawable else { return }
         
+        var shift: (x: Float, y: Float) = (0, 0)
+        
         if animate {
             oldZoom += zoomConstant * max(oldZoom/10, 1)            
             sceneUniform.angle += angleConstant
             if sceneUniform.angle == 360 {
                 sceneUniform.angle = 0
             }
+            
+            shift = calculateShift(from: sceneUniform.angle)
+            
         }
-        sceneUniform.translation = (shiftX, shiftY)
+        
+        switch set {
+        case .mandelbrot:
+            sceneUniform.translation = (shiftX - shift.x, shiftY - shift.y)
+        default:
+            sceneUniform.translation = (shiftX, shiftY)
+        }
         sceneUniform.scale = 1 / oldZoom
         
         renderPassDescriptor.colorAttachments[0].loadAction = .clear

@@ -25,6 +25,9 @@ class GenerativeArtVC: UIViewController{
     
     var audioPlayer: AVAudioPlayer?
     
+    var songName = GaleryViewController()
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -33,6 +36,7 @@ class GenerativeArtVC: UIViewController{
         renderer?.animate = true
         
         startBackgroundMusic()
+        
     }
     
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
@@ -54,7 +58,6 @@ class GenerativeArtVC: UIViewController{
                        if (audioPlayer!.isPlaying == true) {
                            audioPlayer!.stop()
                         metalView.isPaused =  true
-                        
                       } else {
                            audioPlayer!.play()
                           metalView.isPaused =  false
@@ -79,7 +82,22 @@ class GenerativeArtVC: UIViewController{
     }
     
     func startBackgroundMusic() {
-    if let bundle = Bundle.main.path(forResource: "bensound-memories", ofType: "mp3") {
+        var songName = ""
+        switch set {
+        case .julia:
+            print("juju")
+            songName = "bensound-birthofahero"
+        case .mandelbrot:
+            songName = "bensound-memories"
+            print("mand")
+        case.some:
+            songName = "bensound-memories"
+            
+        default:
+             songName = "bensound-memories"
+        }
+        
+        if let bundle = Bundle.main.path(forResource: "\(songName.self)", ofType: "mp3") {
         let backgroundMusic = NSURL(fileURLWithPath: bundle)
         do {
             audioPlayer = try AVAudioPlayer(contentsOf:backgroundMusic as URL)

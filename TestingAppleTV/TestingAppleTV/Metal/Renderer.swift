@@ -46,6 +46,7 @@ class Renderer: NSObject, MTKViewDelegate {
         switch set {
         case .julia:
             imageName = "paleta_julia"
+            
         default:
             imageName = "paleta_mandelbrot"
         }

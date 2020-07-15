@@ -9,22 +9,22 @@
 import UIKit
 
 class InitialViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-   setupTap()
+        setupTap()
     }
-
+    
     func setupTap() {
-          let defaults = UserDefaults.standard
-          let touchDown = UILongPressGestureRecognizer(target:self, action: #selector(didTouchDown))
+        let defaults = UserDefaults.standard
+        let touchDown = UILongPressGestureRecognizer(target:self, action: #selector(didTouchDown))
         defaults.set(true, forKey: "hasViewedWalkthrough");         touchDown.minimumPressDuration = 0
         dismiss(animated: true, completion: nil);                view.addGestureRecognizer(touchDown)
-                 }
-
-       @objc func didTouchDown(gesture: UILongPressGestureRecognizer) {
-          if gesture.state == .began {
+    }
+    
+    @objc func didTouchDown(gesture: UILongPressGestureRecognizer) {
+        if gesture.state == .began {
             performSegue(withIdentifier: "goToMainScreen", sender: self)
-          }
-}
+        }
+    }
 }

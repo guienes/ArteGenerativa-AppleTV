@@ -17,7 +17,10 @@ class GenerativeArtVC: UIViewController{
         return self.view as! MTKView
     }
     
+    @IBOutlet weak var descriptionView: DescriptionView!
+    
     var set: Sets = .some
+    var setIndex: Int = 0
     var renderer: Renderer?
     
     var context: NSManagedObjectContext?
@@ -28,6 +31,9 @@ class GenerativeArtVC: UIViewController{
         
         setupMetal()
         renderer?.animate = true
+        
+        setupTagGesture()
+        descriptionView.descriptionText.text = artData[setIndex].description
     }
     
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
@@ -55,4 +61,26 @@ class GenerativeArtVC: UIViewController{
         self.renderer = Renderer(device: metalView.device!, metalView: metalView, set: set)
         metalView.delegate = self.renderer
     }
+    
+    func setupTagGesture() {
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTap))
+        tapRecognizer.allowedPressTypes = [NSNumber(value: UIPress.PressType.playPause.rawValue)]
+        self.view.addGestureRecognizer(tapRecognizer)
+    }
+    
+    @objc func didTap(gesture: UITapGestureRecognizer) {
+        self.descriptionView.layer.opacity = 0
+        UIView.animate(withDuration: 1, animations: {
+            self.descriptionView.isHidden = false
+            self.descriptionView.layer.opacity = 1
+        }) { (completed) in
+            UIView.animate(withDuration: 1, delay: 10, animations: {
+                self.descriptionView.layer.opacity = 0
+            }) { (completed) in
+                self.descriptionView.isHidden = true
+            }
+        }
+        
+    }
+    
 }

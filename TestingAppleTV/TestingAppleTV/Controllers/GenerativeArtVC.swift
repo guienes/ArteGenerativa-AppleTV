@@ -18,7 +18,10 @@ class GenerativeArtVC: UIViewController{
         return self.view as! MTKView
     }
     
+    @IBOutlet weak var descriptionView: DescriptionView!
+    
     var set: Sets = .some
+    var setIndex: Int = 0
     var renderer: Renderer?
     
     var context: NSManagedObjectContext?
@@ -26,7 +29,7 @@ class GenerativeArtVC: UIViewController{
     var audioPlayer: AVAudioPlayer?
     
     var songName = GaleryViewController()
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +40,8 @@ class GenerativeArtVC: UIViewController{
         
         startBackgroundMusic()
         
+        setupTagGesture()
+        descriptionView.descriptionText.text = artData[setIndex].description
     }
     
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
@@ -54,20 +59,20 @@ class GenerativeArtVC: UIViewController{
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
         
         for press in presses {
-                   if press.type == .playPause {
-                       if (audioPlayer!.isPlaying == true) {
-                           audioPlayer!.stop()
-                        metalView.isPaused =  true
-                      } else {
-                           audioPlayer!.play()
-                          metalView.isPaused =  false
-                      }
-                   }
-               
-                   if press.type == .menu {
-                       MusicPlayer.shared.stopPlaying()
-                   }
-               }
+            if press.type == .playPause {
+                if (audioPlayer!.isPlaying == true) {
+                    audioPlayer!.stop()
+                    metalView.isPaused =  true
+                } else {
+                    audioPlayer!.play()
+                    metalView.isPaused =  false
+                }
+            }
+            
+            if press.type == .menu {
+                MusicPlayer.shared.stopPlaying()
+            }
+        }
     }
     
     func setupMetal() {
@@ -90,29 +95,48 @@ class GenerativeArtVC: UIViewController{
             songName = "bensound-memories"
         case.some:
             songName = "bensound-memories"
-            
-        default:
-             songName = "bensound-memories"
         }
         
         if let bundle = Bundle.main.path(forResource: "\(songName.self)", ofType: "mp3") {
-        let backgroundMusic = NSURL(fileURLWithPath: bundle)
-        do {
-            audioPlayer = try AVAudioPlayer(contentsOf:backgroundMusic as URL)
-            guard let audioPlayer = audioPlayer else { return }
-            audioPlayer.numberOfLoops = -1
-            audioPlayer.prepareToPlay()
-            audioPlayer.play()
-           
-            if audioPlayer.isPlaying {
+            let backgroundMusic = NSURL(fileURLWithPath: bundle)
+            do {
+                audioPlayer = try AVAudioPlayer(contentsOf:backgroundMusic as URL)
+                guard let audioPlayer = audioPlayer else { return }
+                audioPlayer.numberOfLoops = -1
+                audioPlayer.prepareToPlay()
                 audioPlayer.play()
-            } else {
-                audioPlayer.stop()
-            }
-            
-        } catch {
-            print(error)
+                
+                if audioPlayer.isPlaying {
+                    audioPlayer.play()
+                } else {
+                    audioPlayer.stop()
+                }
+                
+            } catch {
+                print(error)
             }
         }
     }
+    
+    func setupTagGesture() {
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTap))
+        tapRecognizer.allowedPressTypes = [NSNumber(value: UIPress.PressType.playPause.rawValue)]
+        self.view.addGestureRecognizer(tapRecognizer)
+    }
+    
+    @objc func didTap(gesture: UITapGestureRecognizer) {
+        self.descriptionView.layer.opacity = 0
+        UIView.animate(withDuration: 1, animations: {
+            self.descriptionView.isHidden = false
+            self.descriptionView.layer.opacity = 1
+        }) { (completed) in
+            UIView.animate(withDuration: 1, delay: 10, animations: {
+                self.descriptionView.layer.opacity = 0
+            }) { (completed) in
+                self.descriptionView.isHidden = true
+            }
+        }
+        
+    }
+    
 }

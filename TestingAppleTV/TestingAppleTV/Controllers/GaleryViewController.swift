@@ -23,7 +23,6 @@ class GaleryViewController: UIViewController, UICollectionViewDataSource {
     
     let focusSize = CGSize(width: 510, height: 510)
     
-    let vcArray: [Sets] = [.mandelbrot, .julia]
     var selectedSet = 0
   
     override func viewDidLoad() {
@@ -39,12 +38,10 @@ class GaleryViewController: UIViewController, UICollectionViewDataSource {
         
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GaleriaCell", for: indexPath) as? GaleryCell {
             
-            let imageName = vcArray[indexPath.row].rawValue
+            let imageName = artData[indexPath.row].name
             cell.galleryImg.image = UIImage(named: imageName)
             
-            cell.galleryNameLBL.text = vcArray[indexPath.row].rawValue
-            
-            
+            cell.galleryNameLBL.text = artData[indexPath.row].name
             
             return cell
             
@@ -63,7 +60,7 @@ class GaleryViewController: UIViewController, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return vcArray.count
+        return artData.count
     }
     
     
@@ -75,12 +72,15 @@ class GaleryViewController: UIViewController, UICollectionViewDataSource {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let viewController = segue.destination as? GenerativeArtVC else { return }
-        viewController.set = vcArray[selectedSet]
+        guard let viewController = segue.destination as? GenerativeArtVC,
+            let set = Sets(rawValue: artData[selectedSet].name)
+            else { return }
+        viewController.setIndex = selectedSet
+        viewController.set = set
     }
     
     
-//    override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+//    override func didUipdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
 //
 //        if let prev = context.previouslyFocusedView as? GaleryCell {
 //            UIView.animate(withDuration: 0.1) {

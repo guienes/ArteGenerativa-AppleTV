@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="16096" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="MAe-vi-24b">
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="16097" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="MAe-vi-24b">
     <device id="appleTV" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -142,11 +142,45 @@
                     <connections>
                         <outlet property="CollectionView" destination="I2Y-y1-wjt" id="GtM-GR-Egb"/>
                         <outlet property="savedPhotosLBL" destination="Vqa-mC-0Tt" id="zEa-uC-dtS"/>
+                        <segue destination="HzP-66-wYs" kind="show" identifier="MemoryPhotoShow" id="iwl-Qe-sJf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2278" y="-994"/>
+        </scene>
+        <!--Memory Photos Show-->
+        <scene sceneID="23o-Y7-dgi">
+            <objects>
+                <viewController id="HzP-66-wYs" customClass="MemoryPhotosShow" customModule="TestingAppleTV" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wIt-YL-HUz"/>
+                        <viewControllerLayoutGuide type="bottom" id="4zN-gf-FGM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="IGv-8X-DzA">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EJs-C7-9BM">
+                                <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                            </imageView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="EJs-C7-9BM" firstAttribute="leading" secondItem="IGv-8X-DzA" secondAttribute="leading" id="WSy-OM-9wT"/>
+                            <constraint firstItem="EJs-C7-9BM" firstAttribute="top" secondItem="IGv-8X-DzA" secondAttribute="top" id="cJf-d8-SG6"/>
+                            <constraint firstAttribute="trailing" secondItem="EJs-C7-9BM" secondAttribute="trailing" id="gf1-xi-Ts9"/>
+                            <constraint firstAttribute="bottom" secondItem="EJs-C7-9BM" secondAttribute="bottom" id="z87-TT-FRZ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ifn-bM-39x"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="6uo-Dh-Ezb"/>
+                    <connections>
+                        <outlet property="memoryPhotoPresentationIMGView" destination="EJs-C7-9BM" id="sM8-Iy-cV1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5xg-O9-7hO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5371" y="-994"/>
         </scene>
         <!--Generative ArtVC-->
         <scene sceneID="Wgh-qe-OCW">
@@ -159,9 +193,24 @@
                     <view key="view" contentMode="scaleToFill" id="e0p-x1-EQE" customClass="MTKView">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qwq-9m-U0q" customClass="DescriptionView" customModule="TestingAppleTV" customModuleProvider="target">
+                                <rect key="frame" x="290" y="790" width="1340" height="222"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="unD-SK-WLl" firstAttribute="top" secondItem="Qwq-9m-U0q" secondAttribute="bottom" constant="8" id="6mQ-C9-OaY"/>
+                            <constraint firstItem="Qwq-9m-U0q" firstAttribute="leading" secondItem="nwz-oD-SCT" secondAttribute="leading" constant="200" id="KDZ-vz-hCy"/>
+                            <constraint firstItem="nwz-oD-SCT" firstAttribute="trailing" secondItem="Qwq-9m-U0q" secondAttribute="trailing" constant="200" id="WAg-py-skW"/>
+                            <constraint firstItem="Qwq-9m-U0q" firstAttribute="top" secondItem="z2v-7I-nUI" secondAttribute="bottom" constant="730" id="sK7-jn-Um3"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="nwz-oD-SCT"/>
                     </view>
                     <navigationItem key="navigationItem" id="JUu-5l-e25"/>
+                    <connections>
+                        <outlet property="descriptionView" destination="Qwq-9m-U0q" id="39h-4K-5MY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pY7-gH-epn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -22,7 +22,9 @@ class MemoryViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     var context: NSManagedObjectContext?
     var memories = [Memory]()
-        
+    
+    var saveMemory = Data()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,7 +34,7 @@ class MemoryViewController: UIViewController, UICollectionViewDelegate, UICollec
         
         context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
-                
+        
         collectionView.delegate = self
         collectionView.dataSource = self
     }
@@ -62,11 +64,14 @@ class MemoryViewController: UIViewController, UICollectionViewDelegate, UICollec
         
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MemoriaCell", for: indexPath) as? MemoryCell {
             
-            
             guard let data = memories[indexPath.row].image else {
                 return MemoryCell()
             }
+            
+            saveMemory = data
+            
             cell.memoryImg.image = UIImage(data: data)
+            
             
             return cell
             
@@ -100,7 +105,28 @@ class MemoryViewController: UIViewController, UICollectionViewDelegate, UICollec
             }
         }
     }
-
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        guard let data = memories[indexPath.row].image else {
+            return
+        }
+        
+        saveMemory = data
+        
+        performSegue(withIdentifier: "MemoryPhotoShow", sender: self)
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        guard let showImageVC = segue.destination as? MemoryPhotosShow else { return }
+        
+        print(saveMemory)
+        showImageVC.imageToPresent = UIImage(data: saveMemory) ?? UIImage()
+        
+    }
+    
     
     func setLBL() {
         

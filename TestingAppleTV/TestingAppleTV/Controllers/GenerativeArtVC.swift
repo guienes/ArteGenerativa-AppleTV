@@ -30,9 +30,9 @@ class GenerativeArtVC: UIViewController{
         context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
         setupMetal()
-//        renderer?.animate = true
+        renderer?.animate = true
         
-        descriptionView.isHidden = false
+        setupTagGesture()
         descriptionView.descriptionText.text = artData[setIndex].description
     }
     
@@ -61,4 +61,26 @@ class GenerativeArtVC: UIViewController{
         self.renderer = Renderer(device: metalView.device!, metalView: metalView, set: set)
         metalView.delegate = self.renderer
     }
+    
+    func setupTagGesture() {
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTap))
+        tapRecognizer.allowedPressTypes = [NSNumber(value: UIPress.PressType.playPause.rawValue)]
+        self.view.addGestureRecognizer(tapRecognizer)
+    }
+    
+    @objc func didTap(gesture: UITapGestureRecognizer) {
+        self.descriptionView.layer.opacity = 0
+        UIView.animate(withDuration: 1, animations: {
+            self.descriptionView.isHidden = false
+            self.descriptionView.layer.opacity = 1
+        }) { (completed) in
+            UIView.animate(withDuration: 1, delay: 10, animations: {
+                self.descriptionView.layer.opacity = 0
+            }) { (completed) in
+                self.descriptionView.isHidden = true
+            }
+        }
+        
+    }
+    
 }

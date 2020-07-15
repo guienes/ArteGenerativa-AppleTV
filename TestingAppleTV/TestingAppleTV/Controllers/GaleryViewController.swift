@@ -15,7 +15,7 @@ enum Sets: String {
 }
 
 class GaleryViewController: UIViewController, UICollectionViewDataSource {
-    
+
     @IBOutlet weak var collectionView: UICollectionView!
     
     
@@ -23,16 +23,16 @@ class GaleryViewController: UIViewController, UICollectionViewDataSource {
     
     let focusSize = CGSize(width: 510, height: 510)
     
-//    let vcArray: [Sets] = [.mandelbrot, .julia]
     var selectedSet = 0
-    
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         
         collectionView.delegate = self
         collectionView.dataSource = self
+       
+       
     }
-    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         

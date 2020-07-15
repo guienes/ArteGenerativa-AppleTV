@@ -34,7 +34,6 @@ class GaleryViewController: UIViewController, UICollectionViewDataSource {
     }
     
     
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GaleriaCell", for: indexPath) as? GaleryCell {
@@ -76,6 +75,7 @@ class GaleryViewController: UIViewController, UICollectionViewDataSource {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let viewController = segue.destination as? GenerativeArtVC else { return }
+        
         viewController.set = vcArray[selectedSet]
     }
     

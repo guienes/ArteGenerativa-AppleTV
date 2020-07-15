@@ -142,11 +142,45 @@
                     <connections>
                         <outlet property="CollectionView" destination="I2Y-y1-wjt" id="GtM-GR-Egb"/>
                         <outlet property="savedPhotosLBL" destination="Vqa-mC-0Tt" id="zEa-uC-dtS"/>
+                        <segue destination="HzP-66-wYs" kind="show" identifier="MemoryPhotoShow" id="iwl-Qe-sJf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2278" y="-994"/>
+        </scene>
+        <!--Memory Photos Show-->
+        <scene sceneID="23o-Y7-dgi">
+            <objects>
+                <viewController id="HzP-66-wYs" customClass="MemoryPhotosShow" customModule="TestingAppleTV" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wIt-YL-HUz"/>
+                        <viewControllerLayoutGuide type="bottom" id="4zN-gf-FGM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="IGv-8X-DzA">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EJs-C7-9BM">
+                                <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                            </imageView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="EJs-C7-9BM" firstAttribute="leading" secondItem="IGv-8X-DzA" secondAttribute="leading" id="WSy-OM-9wT"/>
+                            <constraint firstItem="EJs-C7-9BM" firstAttribute="top" secondItem="IGv-8X-DzA" secondAttribute="top" id="cJf-d8-SG6"/>
+                            <constraint firstAttribute="trailing" secondItem="EJs-C7-9BM" secondAttribute="trailing" id="gf1-xi-Ts9"/>
+                            <constraint firstAttribute="bottom" secondItem="EJs-C7-9BM" secondAttribute="bottom" id="z87-TT-FRZ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ifn-bM-39x"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="6uo-Dh-Ezb"/>
+                    <connections>
+                        <outlet property="memoryPhotoPresentationIMGView" destination="EJs-C7-9BM" id="sM8-Iy-cV1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5xg-O9-7hO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5371" y="-994"/>
         </scene>
         <!--Generative ArtVC-->
         <scene sceneID="Wgh-qe-OCW">

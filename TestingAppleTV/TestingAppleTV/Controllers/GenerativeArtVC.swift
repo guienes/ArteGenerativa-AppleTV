@@ -70,7 +70,17 @@ class GenerativeArtVC: UIViewController{
             if press.type == .menu {
                 MusicPlayer.shared.stopPlaying()
             }
-        }
+            
+        // DescriptionView
+            if  press.type == .select {
+                    if (descriptionView.isHidden == true) {
+                                descriptionView.isHidden = false
+
+                            } else {
+                        descriptionView.isHidden = true
+                            }
+                    }
+            }
     }
     
     func setupMetal() {

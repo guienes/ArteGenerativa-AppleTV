@@ -122,7 +122,7 @@
 				95E44A8124BE40A700B2341F /* Songs */,
 				E4907A7424BF96E5009F417A /* Color */,
 				E4E81FCB24BCCF73006FAA5E /* Metal */,
-				BC9FC05724B39B730087A7F6 /* Controllers */,
+				BC9FC05724B39B730087A7F6 /* Controller */,
 				BC9FC05624B39B5E0087A7F6 /* View */,
 				E4E81FDA24BCE886006FAA5E /* Model */,
 				BC9FC04624B38FD60087A7F6 /* Main.storyboard */,
@@ -143,7 +143,7 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		BC9FC05724B39B730087A7F6 /* Controllers */ = {
+		BC9FC05724B39B730087A7F6 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
 				BC9FC04224B38FD60087A7F6 /* GaleryViewController.swift */,
@@ -152,7 +152,7 @@
 				BC45C79C24B7AF3600310D48 /* GenerativeArtVC.swift */,
 				BC1C830824BF743500B749C0 /* MemoryPhotosShow.swift */,
 			);
-			path = Controllers;
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		E4907A7424BF96E5009F417A /* Color */ = {

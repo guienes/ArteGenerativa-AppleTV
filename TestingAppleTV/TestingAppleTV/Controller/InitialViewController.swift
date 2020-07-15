@@ -15,6 +15,8 @@ class InitialViewController: UIViewController {
         return self.view as! MTKView
     }
     
+    @IBOutlet weak var shaderView: UIView!
+    
     var renderer: Renderer?
     
     override func viewDidLoad() {
@@ -23,6 +25,14 @@ class InitialViewController: UIViewController {
         setupMetal()
         renderer?.animate = true
         renderer?.isOnboarding = true
+        
+        shaderView.alpha = 1
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        UIView.animate(withDuration: 2) {
+            self.shaderView.alpha = 0.4
+        }
     }
     
     func setupTap() {

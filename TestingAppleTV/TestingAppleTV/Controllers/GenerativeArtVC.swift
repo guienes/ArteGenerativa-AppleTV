@@ -85,11 +85,9 @@ class GenerativeArtVC: UIViewController{
         var songName = ""
         switch set {
         case .julia:
-            print("juju")
             songName = "bensound-birthofahero"
         case .mandelbrot:
             songName = "bensound-memories"
-            print("mand")
         case.some:
             songName = "bensound-memories"
             

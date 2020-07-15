@@ -12,8 +12,9 @@ class DescriptionView: UIView {
     
     lazy var descriptionText: UILabel = {
         let descriptionText = UILabel()
-        descriptionText.font = UIFont.systemFont(ofSize: 20, weight: .regular)
+        descriptionText.font = UIFont.systemFont(ofSize: 31, weight: .medium)
         descriptionText.text = "Descrição"
+        descriptionText.numberOfLines = 0
         descriptionText.textAlignment = .center
         descriptionText.translatesAutoresizingMaskIntoConstraints = false
         return descriptionText
@@ -30,8 +31,8 @@ class DescriptionView: UIView {
     }
     
     private func setupView() {
-        backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.5)
-        layer.cornerRadius = 5
+        backgroundColor = #colorLiteral(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393, alpha: 0.75)
+        layer.cornerRadius = 10
         layer.masksToBounds = true;
         addSubview(descriptionText)
         setupLayout()
@@ -39,10 +40,10 @@ class DescriptionView: UIView {
     
     private func setupLayout() {
         NSLayoutConstraint.activate([
-            descriptionText.topAnchor.constraint(equalTo: self.topAnchor),
-            descriptionText.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            descriptionText.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            descriptionText.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            descriptionText.topAnchor.constraint(equalTo: self.topAnchor, constant: 15),
+            descriptionText.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -15),
+            descriptionText.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15),
+            descriptionText.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15)
         ])
     }
     

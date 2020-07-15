@@ -159,9 +159,24 @@
                     <view key="view" contentMode="scaleToFill" id="e0p-x1-EQE" customClass="MTKView">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qwq-9m-U0q" customClass="DescriptionView" customModule="TestingAppleTV" customModuleProvider="target">
+                                <rect key="frame" x="290" y="790" width="1340" height="222"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="unD-SK-WLl" firstAttribute="top" secondItem="Qwq-9m-U0q" secondAttribute="bottom" constant="8" id="6mQ-C9-OaY"/>
+                            <constraint firstItem="Qwq-9m-U0q" firstAttribute="leading" secondItem="nwz-oD-SCT" secondAttribute="leading" constant="200" id="KDZ-vz-hCy"/>
+                            <constraint firstItem="nwz-oD-SCT" firstAttribute="trailing" secondItem="Qwq-9m-U0q" secondAttribute="trailing" constant="200" id="WAg-py-skW"/>
+                            <constraint firstItem="Qwq-9m-U0q" firstAttribute="top" secondItem="z2v-7I-nUI" secondAttribute="bottom" constant="730" id="sK7-jn-Um3"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="nwz-oD-SCT"/>
                     </view>
                     <navigationItem key="navigationItem" id="JUu-5l-e25"/>
+                    <connections>
+                        <outlet property="descriptionView" destination="Qwq-9m-U0q" id="39h-4K-5MY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pY7-gH-epn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

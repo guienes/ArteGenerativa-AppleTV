@@ -17,6 +17,8 @@ class GenerativeArtVC: UIViewController{
         return self.view as! MTKView
     }
     
+    @IBOutlet weak var descriptionView: DescriptionView!
+    
     var set: Sets = .some
     var setIndex: Int = 0
     var renderer: Renderer?
@@ -28,7 +30,10 @@ class GenerativeArtVC: UIViewController{
         context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
         setupMetal()
-        renderer?.animate = true
+//        renderer?.animate = true
+        
+        descriptionView.isHidden = false
+        descriptionView.descriptionText.text = artData[setIndex].description
     }
     
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {

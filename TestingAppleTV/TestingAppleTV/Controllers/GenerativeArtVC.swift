@@ -18,6 +18,7 @@ class GenerativeArtVC: UIViewController{
     }
     
     var set: Sets = .some
+    var setIndex: Int = 0
     var renderer: Renderer?
     
     var context: NSManagedObjectContext?

@@ -27,10 +27,7 @@ class GenerativeArtVC: UIViewController{
     var context: NSManagedObjectContext?
     
     var audioPlayer: AVAudioPlayer?
-    
-    var songName = GaleryViewController()
-    
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -120,7 +117,7 @@ class GenerativeArtVC: UIViewController{
     
     func setupTagGesture() {
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTap))
-        tapRecognizer.allowedPressTypes = [NSNumber(value: UIPress.PressType.playPause.rawValue)]
+        tapRecognizer.allowedPressTypes = [NSNumber(value: UIPress.PressType.select.rawValue)]
         self.view.addGestureRecognizer(tapRecognizer)
     }
     

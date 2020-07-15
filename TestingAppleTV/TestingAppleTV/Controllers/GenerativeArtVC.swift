@@ -55,6 +55,7 @@ class GenerativeArtVC: UIViewController{
         
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
         
+        // Music
         for press in presses {
             if press.type == .playPause {
                 if (audioPlayer!.isPlaying == true) {
@@ -89,7 +90,7 @@ class GenerativeArtVC: UIViewController{
         case .julia:
             songName = "bensound-birthofahero"
         case .mandelbrot:
-            songName = "bensound-memories"
+            songName = "bensound-tomorrow"
         case.some:
             songName = "bensound-memories"
         }

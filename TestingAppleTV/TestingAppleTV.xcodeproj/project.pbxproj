@@ -118,11 +118,9 @@
 		BC9FC03F24B38FD60087A7F6 /* TestingAppleTV */ = {
 			isa = PBXGroup;
 			children = (
-				E4E81FD624BCD163006FAA5E /* paleta_julia.png */,
-				E4E81FD724BCD163006FAA5E /* paleta_mandelbrot.png */,
-				95E44A8124BE40A700B2341F /* Songs */,
-				95E44A7524BE3D9900B2341F /* MusicPlayer.swift */,
 				BC9FC04024B38FD60087A7F6 /* AppDelegate.swift */,
+				95E44A8124BE40A700B2341F /* Songs */,
+				E4907A7424BF96E5009F417A /* Color */,
 				E4E81FCB24BCCF73006FAA5E /* Metal */,
 				BC9FC05724B39B730087A7F6 /* Controllers */,
 				BC9FC05624B39B5E0087A7F6 /* View */,
@@ -157,6 +155,15 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
+		E4907A7424BF96E5009F417A /* Color */ = {
+			isa = PBXGroup;
+			children = (
+				E4E81FD624BCD163006FAA5E /* paleta_julia.png */,
+				E4E81FD724BCD163006FAA5E /* paleta_mandelbrot.png */,
+			);
+			path = Color;
+			sourceTree = "<group>";
+		};
 		E4E81FCB24BCCF73006FAA5E /* Metal */ = {
 			isa = PBXGroup;
 			children = (
@@ -172,6 +179,7 @@
 		E4E81FDA24BCE886006FAA5E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				95E44A7524BE3D9900B2341F /* MusicPlayer.swift */,
 				95837B1524B8DC5200DE86D6 /* DataModel.xcdatamodeld */,
 				E4E81FEA24BCF421006FAA5E /* Memory+CoreDataProperties.swift */,
 				E4E81FE924BCF421006FAA5E /* Memory+CoreDataClass.swift */,

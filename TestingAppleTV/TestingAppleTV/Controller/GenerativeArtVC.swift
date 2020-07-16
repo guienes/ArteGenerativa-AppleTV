@@ -12,7 +12,7 @@ import MetalKit
 import CoreData
 import AVKit
 
-class GenerativeArtVC: UIViewController{
+class GenerativeArtVC: UIViewController {
     
     var metalView: MTKView {
         return self.view as! MTKView

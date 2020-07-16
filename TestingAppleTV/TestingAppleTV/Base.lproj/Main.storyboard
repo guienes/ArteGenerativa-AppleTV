@@ -224,13 +224,14 @@
                         <viewControllerLayoutGuide type="top" id="0xC-aZ-5B2"/>
                         <viewControllerLayoutGuide type="bottom" id="Io6-bv-9Om"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="aO9-91-u40">
+                    <view key="view" contentMode="scaleToFill" id="aO9-91-u40" customClass="MTKView">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tree" translatesAutoresizingMaskIntoConstraints="NO" id="0jz-LH-Sp3">
+                            <view alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v8K-sw-PxW">
                                 <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
-                            </imageView>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nome do app" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C8X-or-VrD">
                                 <rect key="frame" x="106" y="118" width="817" height="178"/>
                                 <constraints>
@@ -260,23 +261,24 @@
                             </label>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="v8K-sw-PxW" firstAttribute="leading" secondItem="aO9-91-u40" secondAttribute="leading" id="2xm-6e-HHy"/>
                             <constraint firstItem="2OQ-rx-ECK" firstAttribute="trailing" secondItem="cfc-Ed-6fc" secondAttribute="trailing" constant="605" id="4HT-II-Zgc"/>
-                            <constraint firstAttribute="bottom" secondItem="0jz-LH-Sp3" secondAttribute="bottom" id="BPk-nk-bx3"/>
                             <constraint firstItem="2OQ-rx-ECK" firstAttribute="trailing" secondItem="C8X-or-VrD" secondAttribute="trailing" constant="907" id="BrG-rJ-Hx0"/>
+                            <constraint firstAttribute="trailing" secondItem="v8K-sw-PxW" secondAttribute="trailing" id="GsO-OC-mRi"/>
                             <constraint firstItem="2OQ-rx-ECK" firstAttribute="trailing" secondItem="u67-gZ-iXX" secondAttribute="trailing" constant="377" id="K9i-5J-Mun"/>
                             <constraint firstItem="C8X-or-VrD" firstAttribute="leading" secondItem="2OQ-rx-ECK" secondAttribute="leading" constant="16" id="KUf-hW-xCv"/>
-                            <constraint firstAttribute="trailing" secondItem="0jz-LH-Sp3" secondAttribute="trailing" id="KeM-ZP-RTq"/>
                             <constraint firstItem="cfc-Ed-6fc" firstAttribute="top" secondItem="C8X-or-VrD" secondAttribute="bottom" constant="8" id="Mzc-Ax-BPc"/>
-                            <constraint firstItem="0jz-LH-Sp3" firstAttribute="leading" secondItem="aO9-91-u40" secondAttribute="leading" id="Nta-nz-Uq9"/>
-                            <constraint firstItem="0jz-LH-Sp3" firstAttribute="top" secondItem="aO9-91-u40" secondAttribute="top" id="PLW-u2-kiO"/>
                             <constraint firstItem="cfc-Ed-6fc" firstAttribute="leading" secondItem="2OQ-rx-ECK" secondAttribute="leading" constant="16" id="S7Q-VM-cZm"/>
+                            <constraint firstAttribute="bottom" secondItem="v8K-sw-PxW" secondAttribute="bottom" id="T6s-p4-1QA"/>
                             <constraint firstItem="u67-gZ-iXX" firstAttribute="leading" secondItem="2OQ-rx-ECK" secondAttribute="leading" constant="378" id="Zic-qf-xpV"/>
                             <constraint firstItem="Io6-bv-9Om" firstAttribute="top" secondItem="u67-gZ-iXX" secondAttribute="bottom" constant="69" id="biq-dO-URZ"/>
+                            <constraint firstItem="v8K-sw-PxW" firstAttribute="top" secondItem="aO9-91-u40" secondAttribute="top" id="bpE-2Z-jfT"/>
                             <constraint firstItem="C8X-or-VrD" firstAttribute="top" secondItem="0xC-aZ-5B2" secondAttribute="bottom" constant="58" id="f2U-jB-uot"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="2OQ-rx-ECK"/>
                     </view>
                     <connections>
+                        <outlet property="shaderView" destination="v8K-sw-PxW" id="Sab-fo-FqG"/>
                         <segue destination="49e-Tb-3d3" kind="show" identifier="goToMainScreen" id="ieh-si-hDJ"/>
                     </connections>
                 </viewController>
@@ -307,6 +309,5 @@
     <resources>
         <image name="Foto2" width="341" height="256"/>
         <image name="Fundo1" width="907" height="806"/>
-        <image name="tree" width="1406" height="766"/>
     </resources>
 </document>

@@ -27,7 +27,8 @@ class Renderer: NSObject, MTKViewDelegate {
     var needsRedraw = true
     var forceAlwaysDraw = false
     var animate = false
-    var time: Float = 0
+    var isOnboarding = false
+    var time = Date()
     
     fileprivate var oldZoom: Float = 0
     fileprivate var zoomConstant: Float = 0
@@ -43,20 +44,6 @@ class Renderer: NSObject, MTKViewDelegate {
         square = Square(device: device)
         self.set = set
         
-        var imageName = ""
-        switch set {
-        case .julia:
-            imageName = "paleta_julia"
-            
-        default:
-            imageName = "paleta_mandelbrot"
-        }
-        let textureLoader = MTKTextureLoader(device: device)
-        let path = Bundle.main.path(forResource: imageName, ofType: "png")!
-        let data = try! Data(contentsOf: URL(fileURLWithPath: path))
-        
-        paletteTexture = try! textureLoader.newTexture(data: data, options: nil)
-        samplerState = square.defaultSampler(device)
         uniformBufferProvider = BufferProvider(inFlightBuffers: 3, device: device)
         
         super.init()
@@ -98,17 +85,28 @@ class Renderer: NSObject, MTKViewDelegate {
     }
     
     func configureSet() {
+        var imageName = ""
         switch set {
         case .mandelbrot:
             shiftX = 0.15
             angleConstant = 0.01
             oldZoom = 10
+            imageName = "paleta_mandelbrot"
         case .julia:
             angleConstant = 0.01
             oldZoom = 1.0
+            imageName = "paleta_julia"
         case .some:
             oldZoom = 0.05
+            imageName = "paleta_mandelbrot"
         }
+        
+        let textureLoader = MTKTextureLoader(device: device)
+        let path = Bundle.main.path(forResource: imageName, ofType: "png")!
+        let data = try! Data(contentsOf: URL(fileURLWithPath: path))
+        
+        paletteTexture = try! textureLoader.newTexture(data: data, options: nil)
+        samplerState = square.defaultSampler(device)
     }
     
     func getVertexDescriptor() -> MTLVertexDescriptor {
@@ -188,6 +186,18 @@ class Renderer: NSObject, MTKViewDelegate {
             }
             
             shift = calculateShift(from: sceneUniform.angle)
+            
+            if time.timeIntervalSinceNow < -30 && isOnboarding {
+                if set == .mandelbrot {
+                    set = .julia
+                } else {
+                    set = .mandelbrot
+                }
+                
+                buildPipelineState(metalView: view)
+                configureSet()
+                time = Date()
+            }
             
         }
         

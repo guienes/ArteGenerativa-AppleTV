@@ -1,10 +1,10 @@
 [
     {
         "name": "Mandelbrot Set",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Non consectetur a erat nam at lectus urna. Commodo odio aenean sed adipiscing. Facilisi cras fermentum odio eu feugiat. Aliquet eget sit amet tellus cras adipiscing enim eu."
+        "description": "O conjunto de Mandelbrot recebe o nome do matemático Benoit B. Mandelbrot. Aliás, foi ele quem descobriu os fractais, isto é, as formas geométricas que se formam repetidas vezes a partir de uma fórmula matemática. O conjunto de Mandelbrot, gerada pela equação zn + 1 = zn2 + c, nos permite ver muitos detalhes em todas as escalas com ótima resolução."
     },
     {
         "name": "Julia Set",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Non consectetur a erat nam at lectus urna. Commodo odio aenean sed adipiscing. Facilisi cras fermentum odio eu feugiat. Aliquet eget sit amet tellus cras adipiscing enim eu."
+        "description": "O conjunto de Julia recebe o nome do matemático francês Gaston Julia, que se interessava por estudar as propriedades iterativas de funções polinomiais. Utilizando a mesma fórmula do conjunto de Mandelbrot, mas tendo c como constante. Realizando a iteração para cada pixel na imagem, podemos construir este belo fractal. Ao mudar o valor da constante c a cada quadro, observamos uma animação realmente hipnotizante."
     }
 ]

@@ -52,7 +52,7 @@
 		BC1C830824BF743500B749C0 /* MemoryPhotosShow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryPhotosShow.swift; sourceTree = "<group>"; };
 		BC45C79C24B7AF3600310D48 /* GenerativeArtVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerativeArtVC.swift; sourceTree = "<group>"; };
 		BC6B2EE224B4E32B00545364 /* GaleryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaleryCell.swift; sourceTree = "<group>"; };
-		BC9FC03D24B38FD60087A7F6 /* TestingAppleTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestingAppleTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BC9FC03D24B38FD60087A7F6 /* Generate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Generate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC9FC04024B38FD60087A7F6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BC9FC04224B38FD60087A7F6 /* GaleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaleryViewController.swift; sourceTree = "<group>"; };
 		BC9FC04424B38FD60087A7F6 /* MemoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryViewController.swift; sourceTree = "<group>"; };
@@ -110,7 +110,7 @@
 		BC9FC03E24B38FD60087A7F6 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				BC9FC03D24B38FD60087A7F6 /* TestingAppleTV.app */,
+				BC9FC03D24B38FD60087A7F6 /* Generate.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -207,7 +207,7 @@
 			);
 			name = TestingAppleTV;
 			productName = TestingAppleTV;
-			productReference = BC9FC03D24B38FD60087A7F6 /* TestingAppleTV.app */;
+			productReference = BC9FC03D24B38FD60087A7F6 /* Generate.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -433,14 +433,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = V894BS73ZJ;
+				DEVELOPMENT_TEAM = 56RTBWDLYU;
 				INFOPLIST_FILE = TestingAppleTV/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = br.developeracademy.TestingAppleTV;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Generate;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
 			};
@@ -451,14 +451,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = V894BS73ZJ;
+				DEVELOPMENT_TEAM = 56RTBWDLYU;
 				INFOPLIST_FILE = TestingAppleTV/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = br.developeracademy.TestingAppleTV;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Generate;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
 			};

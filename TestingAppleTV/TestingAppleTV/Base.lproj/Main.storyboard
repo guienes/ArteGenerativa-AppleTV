@@ -121,26 +121,38 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Suas fotos salvas" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vqa-mC-0Tt">
-                                <rect key="frame" x="608" y="201" width="705" height="71"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Suas fotos salvas" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vqa-mC-0Tt">
+                                <rect key="frame" x="707" y="165" width="506" height="84"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="70"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Você ainda não tem nenhuma memória. Navegue pela galeria e crie fotos das artes generativas clicando na superfície touch." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iIp-JZ-xs6">
+                                <rect key="frame" x="273.5" y="494" width="1373" height="92"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="iIp-JZ-xs6" firstAttribute="centerX" secondItem="QS5-Rx-YEW" secondAttribute="centerX" id="4YU-e2-YfU"/>
+                            <constraint firstItem="Vqa-mC-0Tt" firstAttribute="centerX" secondItem="QS5-Rx-YEW" secondAttribute="centerX" id="9aq-u9-Lqe"/>
+                            <constraint firstItem="Vqa-mC-0Tt" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" constant="8" id="C6f-aQ-FkI"/>
                             <constraint firstItem="Tzs-WY-Qt2" firstAttribute="trailing" secondItem="I2Y-y1-wjt" secondAttribute="trailing" id="Ccd-L4-1kd"/>
                             <constraint firstItem="Djb-ko-YwX" firstAttribute="top" secondItem="I2Y-y1-wjt" secondAttribute="bottom" id="NOQ-mE-niE"/>
+                            <constraint firstItem="iIp-JZ-xs6" firstAttribute="centerY" secondItem="QS5-Rx-YEW" secondAttribute="centerY" id="PLS-Pv-qhC"/>
                             <constraint firstItem="I2Y-y1-wjt" firstAttribute="leading" secondItem="Tzs-WY-Qt2" secondAttribute="leading" id="cxo-UV-nCL"/>
                             <constraint firstItem="I2Y-y1-wjt" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" constant="150" id="czb-KW-szs"/>
+                            <constraint firstItem="iIp-JZ-xs6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="QS5-Rx-YEW" secondAttribute="leading" constant="200" id="uQn-XP-WoL"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="iIp-JZ-xs6" secondAttribute="trailing" constant="200" id="ysb-mL-Rh8"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Tzs-WY-Qt2"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Memórias" id="cPa-gy-q4n"/>
                     <connections>
                         <outlet property="CollectionView" destination="I2Y-y1-wjt" id="GtM-GR-Egb"/>
+                        <outlet property="noMemoriesLabel" destination="iIp-JZ-xs6" id="8zK-iq-gQC"/>
                         <outlet property="savedPhotosLBL" destination="Vqa-mC-0Tt" id="zEa-uC-dtS"/>
                         <segue destination="HzP-66-wYs" kind="show" identifier="MemoryPhotoShow" id="iwl-Qe-sJf"/>
                     </connections>

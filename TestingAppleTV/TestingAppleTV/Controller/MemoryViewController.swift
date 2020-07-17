@@ -15,11 +15,9 @@ class MemoryViewController: UIViewController, UICollectionViewDelegate, UICollec
     let focusSize = CGSize(width: 440, height: 440)
     
     @IBOutlet weak var collectionView: UICollectionView!
-    
+    @IBOutlet weak var noMemoriesLabel: UILabel!
     @IBOutlet weak var savedPhotosLBL: UILabel!
-    
-    let addMemoriesLBL = UILabel()
-    
+        
     var context: NSManagedObjectContext?
     var memories = [Memory]()
     
@@ -27,22 +25,15 @@ class MemoryViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setLBL()
-        
-        self.view.addSubview(addMemoriesLBL)
-        
+                        
         context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        
         
         collectionView.delegate = self
         collectionView.dataSource = self
     }
     
-    
-    override func viewDidAppear(_ animated: Bool) {
-        
-        do{
+    override func viewWillAppear(_ animated: Bool) {
+        do {
             memories = try context!.fetch(Memory.fetchRequest())
         } catch {
             print("Erro ao carregar memórias")
@@ -51,13 +42,8 @@ class MemoryViewController: UIViewController, UICollectionViewDelegate, UICollec
         
         collectionView.reloadData()
         
-        if memories.count > 0 {
-            savedPhotosLBL.isHidden = false
-            addMemoriesLBL.isHidden = true
-        } else {
-            addMemoriesLBL.isHidden = false
-        }
-        
+        noMemoriesLabel.isHidden = memories.count > 0
+        savedPhotosLBL.isHidden = !noMemoriesLabel.isHidden
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -125,20 +111,6 @@ class MemoryViewController: UIViewController, UICollectionViewDelegate, UICollec
         print(saveMemory)
         showImageVC.imageToPresent = UIImage(data: saveMemory) ?? UIImage()
         
-    }
-    
-    
-    func setLBL() {
-        
-        addMemoriesLBL.isHidden = true
-        
-        addMemoriesLBL.frame = CGRect(x: self.view.frame.width/3.7, y: self.view.frame.height/2.8, width: 900, height: 200)
-        
-        addMemoriesLBL.font = addMemoriesLBL.font.withSize(60)
-        
-        addMemoriesLBL.textAlignment = .center
-        
-        addMemoriesLBL.text = "Algo motivador será escrito aqui!"
     }
     
 }

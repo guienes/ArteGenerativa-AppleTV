@@ -29,7 +29,7 @@ class GenerativeArtVC: UIViewController {
     var context: NSManagedObjectContext?
     
     var audioPlayer: AVAudioPlayer?
-    var animator = UIViewPropertyAnimator.init(duration: 1, curve: .easeInOut)
+    var animator = UIViewPropertyAnimator(duration: 1, curve: .easeInOut)
     var timer: Timer?
     var descriptionIsShown = false
         

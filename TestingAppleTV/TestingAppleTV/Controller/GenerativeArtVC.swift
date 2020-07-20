@@ -55,13 +55,7 @@ class GenerativeArtVC: UIViewController {
         descriptionIsShown = true
         animator.startAnimation()
         
-        self.timer = Timer.scheduledTimer(
-            timeInterval: 10,
-            target: self,
-            selector: #selector(self.showReverseAnimation),
-            userInfo: nil,
-            repeats: false
-        )
+        setTimer(with: 10)
     }
     
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
@@ -138,41 +132,28 @@ class GenerativeArtVC: UIViewController {
     @objc func didTap(gesture: UITapGestureRecognizer) {
         if descriptionIsShown {
             timer?.invalidate()
-            timer = nil
             animator.stopAnimation(true)
             animator.addAnimations ({
                 self.descriptionView.alpha = 0
             })
             animator.addCompletion { (completion) in
-                self.descriptionView.descriptionText.text = artData[self.setIndex].description
-                self.timer?.invalidate()
-                self.timer = Timer.scheduledTimer(
-                    timeInterval: 0.1,
-                    target: self,
-                    selector: #selector(self.showReverseAnimation),
-                    userInfo: nil,
-                    repeats: false
-                )
-
+                self.setTimer(with: 0.1)
             }
             animator.startAnimation()
             descriptionIsShown = false
             
         } else {
             showReverseAnimation()
-            timer?.invalidate()
-            self.timer = Timer.scheduledTimer(
-                timeInterval: 10,
-                target: self,
-                selector: #selector(self.showReverseAnimation),
-                userInfo: nil,
-                repeats: false
-            )
+            setTimer(with: 10)
         }
         
     }
     
     @objc func showReverseAnimation() {
+        if descriptionView.descriptionText.text == introductionText {
+            self.descriptionView.descriptionText.text = artData[self.setIndex].description
+        }
+        
         animator.stopAnimation(true)
         animator.addAnimations ({
             self.descriptionView.alpha = self.descriptionIsShown ? 0 : 1
@@ -181,16 +162,19 @@ class GenerativeArtVC: UIViewController {
         descriptionIsShown = !descriptionIsShown
         
         if descriptionIsShown {
-            self.timer?.invalidate()
-            self.timer = Timer.scheduledTimer(
-                timeInterval: 10,
-                target: self,
-                selector: #selector(self.showReverseAnimation),
-                userInfo: nil,
-                repeats: false
-            )
-
+            setTimer(with: 10)
         }
+    }
+    
+    func setTimer(with duration: TimeInterval) {
+        self.timer?.invalidate()
+        self.timer = Timer.scheduledTimer(
+            timeInterval: duration,
+            target: self,
+            selector: #selector(self.showReverseAnimation),
+            userInfo: nil,
+            repeats: false
+        )
     }
     
     func captureImage() {

@@ -14,6 +14,8 @@ import AVKit
 
 class GenerativeArtVC: UIViewController {
     
+    @IBOutlet weak var photoSavedLBL: UILabel!
+    
     var metalView: MTKView {
         return self.view as! MTKView
     }
@@ -31,8 +33,10 @@ class GenerativeArtVC: UIViewController {
     var audioPlayer: AVAudioPlayer?
     var animator = UIViewPropertyAnimator.init(duration: 1, curve: .easeInOut)
     var timer: Timer?
+    var timerLBL: Timer?
     var descriptionIsShown = false
-        
+    var saveLabelIsShown = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -41,6 +45,7 @@ class GenerativeArtVC: UIViewController {
         renderer?.animate = true
         
         startBackgroundMusic()
+        photoSavedLBLedit()
         
         setupTagGesture()
         descriptionView.descriptionText.text = introductionText //artData[setIndex].description
@@ -53,9 +58,11 @@ class GenerativeArtVC: UIViewController {
             self.descriptionView.alpha = 1
         }
         descriptionIsShown = true
+        saveLabelIsShown = true
+        
         animator.startAnimation()
         
-        setTimer(with: 10)
+        setTimer(with: 5)
     }
     
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
@@ -130,23 +137,42 @@ class GenerativeArtVC: UIViewController {
     }
     
     @objc func didTap(gesture: UITapGestureRecognizer) {
+        
         if descriptionIsShown {
             timer?.invalidate()
             animator.stopAnimation(true)
             animator.addAnimations ({
                 self.descriptionView.alpha = 0
             })
+            
             animator.addCompletion { (completion) in
                 self.setTimer(with: 0.1)
             }
             animator.startAnimation()
-            descriptionIsShown = false
+            descriptionIsShown = true
             
         } else {
             showReverseAnimation()
             setTimer(with: 10)
         }
         
+        
+        if saveLabelIsShown {
+            timerLBL?.invalidate()
+            animator.stopAnimation(true)
+            animator.addAnimations {
+                self.photoSavedLBL.alpha = 1
+            }
+            
+            animator.addCompletion { (completion) in
+                self.setTimerforLBL(with: 0.1)
+            }
+            animator.startAnimation()
+            saveLabelIsShown = true
+        } else {
+            showReverseAnimationLBL()
+            setTimerforLBL(with: 3)
+        }
     }
     
     @objc func showReverseAnimation() {
@@ -163,6 +189,21 @@ class GenerativeArtVC: UIViewController {
         
         if descriptionIsShown {
             setTimer(with: 10)
+            setTimerforLBL(with: 3)
+        }
+    }
+    
+    
+    @objc func showReverseAnimationLBL() {
+        
+        animator.addAnimations ({
+            self.photoSavedLBL.alpha = self.saveLabelIsShown ? 0 : 1
+        })
+        animator.startAnimation()
+        saveLabelIsShown = !saveLabelIsShown
+        
+        if saveLabelIsShown {
+            setTimerforLBL(with: 3)
         }
     }
     
@@ -177,6 +218,18 @@ class GenerativeArtVC: UIViewController {
         )
     }
     
+    func setTimerforLBL(with duration: TimeInterval) {
+        self.timerLBL?.invalidate()
+        self.timerLBL = Timer.scheduledTimer(
+            timeInterval: duration,
+            target: self,
+            selector: #selector(self.showReverseAnimationLBL),
+            userInfo: nil,
+            repeats: false
+        )
+    }
+    
+    
     func captureImage() {
         guard let context = self.context,
             let texture = metalView.currentDrawable?.texture,
@@ -190,6 +243,15 @@ class GenerativeArtVC: UIViewController {
         newMemory.image = uiimage.pngData()
         
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
+    }
+    
+    func photoSavedLBLedit() {
+        photoSavedLBL.layer.cornerRadius = photoSavedLBL.frame.size.height/4
+        photoSavedLBL.layer.masksToBounds = true
+        
+        photoSavedLBL.backgroundColor = UIColor.gray.withAlphaComponent(0.4)
+        
+        photoSavedLBL.alpha = 0
     }
     
 }

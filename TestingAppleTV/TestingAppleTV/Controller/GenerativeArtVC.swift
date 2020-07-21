@@ -14,6 +14,8 @@ import AVKit
 
 class GenerativeArtVC: UIViewController {
     
+    @IBOutlet weak var photoSavedLBL: UILabel!
+    
     var metalView: MTKView {
         return self.view as! MTKView
     }
@@ -24,10 +26,18 @@ class GenerativeArtVC: UIViewController {
     var setIndex: Int = 0
     var renderer: Renderer?
     
+    let introductionText = "Para ver mais informações sobre esta arte generativa, dê um tap no controle. \nPara capturar uma imagem desta arte, dê um clique no controle."
+    
     var context: NSManagedObjectContext?
     
     var audioPlayer: AVAudioPlayer?
-        
+    var animator = UIViewPropertyAnimator(duration: 1, curve: .easeInOut)
+    var animatorLBL = UIViewPropertyAnimator(duration: 1, curve: .easeInOut)
+    var timer: Timer?
+    var timerLBL: Timer?
+    var descriptionIsShown = false
+    var saveLabelIsShown = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -36,26 +46,27 @@ class GenerativeArtVC: UIViewController {
         renderer?.animate = true
         
         startBackgroundMusic()
+        photoSavedLBLedit()
         
         setupTagGesture()
-        descriptionView.descriptionText.text = artData[setIndex].description
+        descriptionView.descriptionText.text = introductionText //artData[setIndex].description
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        descriptionView.alpha = 0
+        animator.addAnimations {
+            self.descriptionView.isHidden = false
+            self.descriptionView.alpha = 1
+        }
+        descriptionIsShown = true
+        saveLabelIsShown = true
+        
+        animator.startAnimation()
+        
+        setTimer(with: 5)
     }
     
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
-        guard let context = self.context,
-            let texture = metalView.currentDrawable?.texture,
-            let image = texture.toImage()
-            else { return }
-        
-        let uiimage = UIImage(cgImage: image)
-        
-        let newMemory = NSEntityDescription.insertNewObject(forEntityName: "Memory", into: context) as! Memory
-        newMemory.set = self.set.rawValue
-        newMemory.image = uiimage.pngData()
-        
-        (UIApplication.shared.delegate as! AppDelegate).saveContext()
-        
-        // Music
         for press in presses {
             if press.type == .playPause {
                 if (audioPlayer!.isPlaying == true) {
@@ -71,16 +82,10 @@ class GenerativeArtVC: UIViewController {
                 MusicPlayer.shared.stopPlaying()
             }
             
-        // DescriptionView
-            if  press.type == .select {
-                    if (descriptionView.isHidden == true) {
-                                descriptionView.isHidden = false
-
-                            } else {
-                        descriptionView.isHidden = true
-                            }
-                    }
+            if press.type == .select {
+                captureImage()
             }
+        }
     }
     
     func setupMetal() {
@@ -133,18 +138,124 @@ class GenerativeArtVC: UIViewController {
     }
     
     @objc func didTap(gesture: UITapGestureRecognizer) {
-        self.descriptionView.layer.opacity = 0
-        UIView.animate(withDuration: 1, animations: {
-            self.descriptionView.isHidden = false
-            self.descriptionView.layer.opacity = 1
-        }) { (completed) in
-            UIView.animate(withDuration: 1, delay: 10, animations: {
-                self.descriptionView.layer.opacity = 0
-            }) { (completed) in
-                self.descriptionView.isHidden = true
+        
+        if descriptionIsShown {
+            timer?.invalidate()
+            animator.stopAnimation(true)
+            animator.addAnimations ({
+                self.descriptionView.alpha = 0
+            })
+            
+            animator.addCompletion { (completion) in
+                self.setTimer(with: 0.1)
             }
+            animator.startAnimation()
+            descriptionIsShown = true
+            
+        } else {
+            showReverseAnimation()
+            setTimer(with: 3)
         }
         
+        
+        if saveLabelIsShown {
+            timerLBL?.invalidate()
+            animatorLBL.stopAnimation(true)
+            animatorLBL.addAnimations {
+                self.photoSavedLBL.alpha = 1
+            }
+            
+            animatorLBL.addCompletion { (completion) in
+                self.setTimerforLBL(with: 0.1)
+            }
+            animatorLBL.startAnimation()
+            saveLabelIsShown = true
+        } else {
+            showReverseAnimationLBL()
+            setTimerforLBL(with: 3)
+        }
+    }
+    
+    @objc func showReverseAnimation() {
+        
+        
+        animator.stopAnimation(true)
+        animator.addAnimations ({
+            self.descriptionView.alpha = self.descriptionIsShown ? 0 : 1
+        })
+        
+        animator.addCompletion { (completion) in
+            if self.descriptionView.descriptionText.text == self.introductionText {
+                self.descriptionView.descriptionText.text = artData[self.setIndex].description
+            }
+        }
+        animator.startAnimation()
+        descriptionIsShown = !descriptionIsShown
+        
+        if descriptionIsShown {
+            setTimer(with: 10)
+        }
+    }
+    
+    
+    @objc func showReverseAnimationLBL() {
+        
+        animatorLBL.addAnimations ({
+            self.photoSavedLBL.alpha = self.saveLabelIsShown ? 0 : 1
+        })
+        animatorLBL.startAnimation()
+        saveLabelIsShown = !saveLabelIsShown
+        
+        if saveLabelIsShown {
+            setTimerforLBL(with: 3)
+        }
+    }
+    
+    func setTimer(with duration: TimeInterval) {
+        self.timer?.invalidate()
+        self.timer = Timer.scheduledTimer(
+            timeInterval: duration,
+            target: self,
+            selector: #selector(self.showReverseAnimation),
+            userInfo: nil,
+            repeats: false
+        )
+    }
+    
+    func setTimerforLBL(with duration: TimeInterval) {
+        self.timerLBL?.invalidate()
+        self.timerLBL = Timer.scheduledTimer(
+            timeInterval: duration,
+            target: self,
+            selector: #selector(self.showReverseAnimationLBL),
+            userInfo: nil,
+            repeats: false
+        )
+    }
+    
+    
+    func captureImage() {
+        guard let context = self.context,
+            let texture = metalView.currentDrawable?.texture,
+            let image = texture.toImage()
+            else { return }
+        
+        let uiimage = UIImage(cgImage: image)
+        
+        let newMemory = NSEntityDescription.insertNewObject(forEntityName: "Memory", into: context) as! Memory
+        newMemory.set = self.set.rawValue
+        newMemory.image = uiimage.pngData()
+        
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
+    }
+    
+    func photoSavedLBLedit() {
+        photoSavedLBL.layer.cornerRadius = photoSavedLBL.frame.size.height/4
+        photoSavedLBL.layer.masksToBounds = true
+        
+        photoSavedLBL.backgroundColor = UIColor.gray.withAlphaComponent(0.4)
+        
+        photoSavedLBL.alpha = 0
     }
     
 }

@@ -18,7 +18,6 @@ class GaleryViewController: UIViewController, UICollectionViewDataSource {
 
     @IBOutlet weak var collectionView: UICollectionView!
     
-    
     let defaultSize = CGSize(width: 458, height: 458)
     
     let focusSize = CGSize(width: 510, height: 510)
@@ -30,8 +29,6 @@ class GaleryViewController: UIViewController, UICollectionViewDataSource {
         
         collectionView.delegate = self
         collectionView.dataSource = self
-       
-       
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

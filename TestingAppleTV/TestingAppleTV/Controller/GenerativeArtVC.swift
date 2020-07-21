@@ -32,6 +32,7 @@ class GenerativeArtVC: UIViewController {
     
     var audioPlayer: AVAudioPlayer?
     var animator = UIViewPropertyAnimator(duration: 1, curve: .easeInOut)
+    var animatorLBL = UIViewPropertyAnimator(duration: 1, curve: .easeInOut)
     var timer: Timer?
     var timerLBL: Timer?
     var descriptionIsShown = false
@@ -153,21 +154,21 @@ class GenerativeArtVC: UIViewController {
             
         } else {
             showReverseAnimation()
-            setTimer(with: 10)
+            setTimer(with: 3)
         }
         
         
         if saveLabelIsShown {
             timerLBL?.invalidate()
-            animator.stopAnimation(true)
-            animator.addAnimations {
+            animatorLBL.stopAnimation(true)
+            animatorLBL.addAnimations {
                 self.photoSavedLBL.alpha = 1
             }
             
-            animator.addCompletion { (completion) in
+            animatorLBL.addCompletion { (completion) in
                 self.setTimerforLBL(with: 0.1)
             }
-            animator.startAnimation()
+            animatorLBL.startAnimation()
             saveLabelIsShown = true
         } else {
             showReverseAnimationLBL()
@@ -176,30 +177,33 @@ class GenerativeArtVC: UIViewController {
     }
     
     @objc func showReverseAnimation() {
-        if descriptionView.descriptionText.text == introductionText {
-            self.descriptionView.descriptionText.text = artData[self.setIndex].description
-        }
+        
         
         animator.stopAnimation(true)
         animator.addAnimations ({
             self.descriptionView.alpha = self.descriptionIsShown ? 0 : 1
         })
+        
+        animator.addCompletion { (completion) in
+            if self.descriptionView.descriptionText.text == self.introductionText {
+                self.descriptionView.descriptionText.text = artData[self.setIndex].description
+            }
+        }
         animator.startAnimation()
         descriptionIsShown = !descriptionIsShown
         
         if descriptionIsShown {
             setTimer(with: 10)
-            setTimerforLBL(with: 3)
         }
     }
     
     
     @objc func showReverseAnimationLBL() {
         
-        animator.addAnimations ({
+        animatorLBL.addAnimations ({
             self.photoSavedLBL.alpha = self.saveLabelIsShown ? 0 : 1
         })
-        animator.startAnimation()
+        animatorLBL.startAnimation()
         saveLabelIsShown = !saveLabelIsShown
         
         if saveLabelIsShown {

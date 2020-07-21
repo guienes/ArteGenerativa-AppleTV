@@ -154,7 +154,7 @@ class GenerativeArtVC: UIViewController {
             
         } else {
             showReverseAnimation()
-            setTimer(with: 3)
+            setTimer(with: 10)
         }
         
         

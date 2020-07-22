@@ -68,7 +68,9 @@ class GaleryViewController: UIViewController, UICollectionViewDataSource {
         
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         selectedSet = indexPath.row
+     
         performSegue(withIdentifier: "GenerativeArtVC", sender: self)
+    
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

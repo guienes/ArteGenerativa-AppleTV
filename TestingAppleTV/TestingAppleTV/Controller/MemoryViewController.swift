@@ -30,6 +30,7 @@ class MemoryViewController: UIViewController, UICollectionViewDelegate, UICollec
         
         collectionView.delegate = self
         collectionView.dataSource = self
+   
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,6 +47,26 @@ class MemoryViewController: UIViewController, UICollectionViewDelegate, UICollec
         savedPhotosLBL.isHidden = !noMemoriesLabel.isHidden
     }
     
+      func setupTap() {
+        //  let defaults = UserDefaults.standard
+          let press = UILongPressGestureRecognizer(target:self, action: #selector(didTouchDown))
+          press.minimumPressDuration = 2
+          view.addGestureRecognizer(press)
+       
+      }
+  
+      
+      @objc func didTouchDown(gesture: UILongPressGestureRecognizer) {
+          if gesture.state == .began {
+            let showPopUp = PopUpViewController()
+                       showPopUp.modalTransitionStyle  =  .crossDissolve
+                       showPopUp.modalPresentationStyle = .overCurrentContext
+                       self.present(showPopUp, animated: true, completion: nil)
+
+          }
+      }
+    
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MemoriaCell", for: indexPath) as? MemoryCell {
@@ -53,6 +74,8 @@ class MemoryViewController: UIViewController, UICollectionViewDelegate, UICollec
             guard let data = memories[indexPath.row].image else {
                 return MemoryCell()
             }
+            setupTap()
+            print("toque reconhecido")
             
             saveMemory = data
             

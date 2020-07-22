@@ -164,6 +164,10 @@ class Renderer: NSObject, MTKViewDelegate {
         return (x, y)
     }
     
+    func changePattern(for set: Sets, theme: String) {
+        
+    }
+    
     func animate(_ view: MTKView) {
         var shift: (x: Float, y: Float) = (0, 0)
         

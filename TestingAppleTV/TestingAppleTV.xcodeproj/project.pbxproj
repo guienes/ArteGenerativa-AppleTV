@@ -29,6 +29,7 @@
 		E437381824C8A8310032B5F0 /* paleta4.png in Resources */ = {isa = PBXBuildFile; fileRef = E437381724C8A8310032B5F0 /* paleta4.png */; };
 		E437381C24C8B9830032B5F0 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E437381B24C8B9830032B5F0 /* CollectionViewController.swift */; };
 		E437381E24C8BA9C0032B5F0 /* ThemeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E437381D24C8BA9C0032B5F0 /* ThemeCell.swift */; };
+		E437382024C8D0D50032B5F0 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = E437381F24C8D0D50032B5F0 /* Enums.swift */; };
 		E4701E0A24BF710C0064F5A1 /* ArtDescription.json in Resources */ = {isa = PBXBuildFile; fileRef = E4701E0924BF710C0064F5A1 /* ArtDescription.json */; };
 		E4701E0C24BF73C40064F5A1 /* ArtDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4701E0B24BF73C40064F5A1 /* ArtDescription.swift */; };
 		E4701E1024BF79D70064F5A1 /* DescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4701E0F24BF79D70064F5A1 /* DescriptionView.swift */; };
@@ -69,6 +70,7 @@
 		E437381724C8A8310032B5F0 /* paleta4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = paleta4.png; sourceTree = "<group>"; };
 		E437381B24C8B9830032B5F0 /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		E437381D24C8BA9C0032B5F0 /* ThemeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeCell.swift; sourceTree = "<group>"; };
+		E437381F24C8D0D50032B5F0 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		E4701E0924BF710C0064F5A1 /* ArtDescription.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ArtDescription.json; sourceTree = "<group>"; };
 		E4701E0B24BF73C40064F5A1 /* ArtDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtDescription.swift; sourceTree = "<group>"; };
 		E4701E0F24BF79D70064F5A1 /* DescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionView.swift; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 				E4E81FDB24BCE898006FAA5E /* Memory.swift */,
 				E4701E0924BF710C0064F5A1 /* ArtDescription.json */,
 				E4701E0B24BF73C40064F5A1 /* ArtDescription.swift */,
+				E437381F24C8D0D50032B5F0 /* Enums.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -292,6 +295,7 @@
 				E4E81FD524BCCF7F006FAA5E /* Shaders.metal in Sources */,
 				E4E81FDC24BCE898006FAA5E /* Memory.swift in Sources */,
 				E4701E0C24BF73C40064F5A1 /* ArtDescription.swift in Sources */,
+				E437382024C8D0D50032B5F0 /* Enums.swift in Sources */,
 				BC9FC05524B39B550087A7F6 /* MemoryCell.swift in Sources */,
 				BC9FC04524B38FD60087A7F6 /* MemoryViewController.swift in Sources */,
 				95E44A7624BE3D9900B2341F /* MusicPlayer.swift in Sources */,

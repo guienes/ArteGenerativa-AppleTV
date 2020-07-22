@@ -92,14 +92,14 @@ class Renderer: NSObject, MTKViewDelegate {
             shiftX = 0.15
             angleConstant = 0.01
             oldZoom = 10
-            imageName = "paleta_mandelbrot"
+            imageName = "paleta1"
         case .julia:
             angleConstant = 0.01
             oldZoom = 1.0
-            imageName = "paleta3"//"paleta_julia"
+            imageName = "paleta2"
         case .some:
             oldZoom = 0.05
-            imageName = "paleta_mandelbrot"
+            imageName = "paleta4"
         }
         
         let textureLoader = MTKTextureLoader(device: device)

@@ -43,13 +43,12 @@ class GenerativeArtVC: UIViewController {
         context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
         setupMetal()
-        renderer?.animate = true
         
         startBackgroundMusic()
         photoSavedLBLedit()
         
         setupTagGesture()
-        descriptionView.descriptionText.text = introductionText //artData[setIndex].description
+        descriptionView.descriptionText.text = introductionText 
     }
     
     override func viewDidAppear(_ animated: Bool) {

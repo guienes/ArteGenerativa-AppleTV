@@ -26,7 +26,6 @@ class Renderer: NSObject, MTKViewDelegate {
     
     var needsRedraw = true
     var forceAlwaysDraw = false
-    var animate = false
     var isOnboarding = false
     var time = Date()
     
@@ -51,6 +50,8 @@ class Renderer: NSObject, MTKViewDelegate {
         buildPipelineState(metalView: metalView)
         configureSet()
         sceneUniform.aspectRatio = Float(metalView.frame.width / metalView.frame.height)
+        sceneUniform.scale = 1 / oldZoom
+        sceneUniform.translation = (shiftX, shiftY)
     }
     
     private func buildPipelineState(metalView: MTKView) {
@@ -95,7 +96,7 @@ class Renderer: NSObject, MTKViewDelegate {
         case .julia:
             angleConstant = 0.01
             oldZoom = 1.0
-            imageName = "paleta_julia"
+            imageName = "paleta3"//"paleta_julia"
         case .some:
             oldZoom = 0.05
             imageName = "paleta_mandelbrot"
@@ -163,6 +164,37 @@ class Renderer: NSObject, MTKViewDelegate {
         return (x, y)
     }
     
+    func animate(_ view: MTKView) {
+        var shift: (x: Float, y: Float) = (0, 0)
+        
+        sceneUniform.angle += angleConstant
+        if sceneUniform.angle == 360 {
+            sceneUniform.angle = 0
+        }
+        
+        shift = calculateShift(from: sceneUniform.angle)
+        
+        if isOnboarding && time.timeIntervalSinceNow < -30 {
+            if set == .mandelbrot {
+                set = .julia
+            } else {
+                set = .mandelbrot
+            }
+            
+            buildPipelineState(metalView: view)
+            configureSet()
+            sceneUniform.scale = 1 / oldZoom
+            time = Date()
+        }
+        
+        
+        if set == .mandelbrot {
+            sceneUniform.translation = (shiftX - shift.x, shiftY - shift.y)
+        } else {
+            sceneUniform.translation = (shiftX, shiftY)
+        }
+    }
+    
     
     // MARK: - MTKViewDelegate
     
@@ -175,49 +207,18 @@ class Renderer: NSObject, MTKViewDelegate {
         guard (needsRedraw == true || forceAlwaysDraw == true) else { return }
         guard let renderPassDescriptor = view.currentRenderPassDescriptor else { return }
         guard let drawable = view.currentDrawable else { return }
-        
-        var shift: (x: Float, y: Float) = (0, 0)
-        
-        if animate {
-            oldZoom += zoomConstant * max(oldZoom/10, 1)            
-            sceneUniform.angle += angleConstant
-            if sceneUniform.angle == 360 {
-                sceneUniform.angle = 0
-            }
-            
-            shift = calculateShift(from: sceneUniform.angle)
-            
-            if time.timeIntervalSinceNow < -30 && isOnboarding {
-                if set == .mandelbrot {
-                    set = .julia
-                } else {
-                    set = .mandelbrot
-                }
                 
-                buildPipelineState(metalView: view)
-                configureSet()
-                time = Date()
-            }
-            
-        }
-        
-        switch set {
-        case .mandelbrot:
-            sceneUniform.translation = (shiftX - shift.x, shiftY - shift.y)
-        default:
-            sceneUniform.translation = (shiftX, shiftY)
-        }
-        sceneUniform.scale = 1 / oldZoom
+        animate(view)
         
         renderPassDescriptor.colorAttachments[0].loadAction = .clear
         renderPassDescriptor.colorAttachments[0].clearColor = MTLClearColor(red: 1.0, green: 0.4, blue: 0.6, alpha: 1.0)
         renderPassDescriptor.colorAttachments[0].storeAction = MTLStoreAction.store
         renderPassDescriptor.colorAttachments[0].texture = drawable.texture
         
-        guard let commandBuffer = commandQueue.makeCommandBuffer(),
-            let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor) else {
-                return
-        }
+        guard
+            let commandBuffer = commandQueue.makeCommandBuffer(),
+            let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor)
+            else { return }
         
         renderEncoder.setRenderPipelineState(pipelineState)
         renderEncoder.setDepthStencilState(depthStencilState)

@@ -58,7 +58,7 @@ class InitialViewController: UIViewController {
         metalView.clearColor = MTLClearColor(red: 1.0, green: 0.4, blue: 0.0, alpha: 1.0)
         metalView.framebufferOnly = false
         
-        self.renderer = Renderer(device: metalView.device!, metalView: metalView, set: .julia)
+        self.renderer = Renderer(device: metalView.device!, metalView: metalView, set: .julia, theme: .lightning)
         metalView.delegate = self.renderer
     }
     

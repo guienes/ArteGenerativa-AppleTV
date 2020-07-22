@@ -22,7 +22,8 @@ class Renderer: NSObject, MTKViewDelegate {
     
     fileprivate var square: Square!
     
-    var set: Sets
+    private var set: Sets
+    private var theme: Theme
     
     var needsRedraw = true
     var forceAlwaysDraw = false
@@ -37,11 +38,12 @@ class Renderer: NSObject, MTKViewDelegate {
     fileprivate var shiftYConstant: Float = 0
     fileprivate var angleConstant: Float = 0
     
-    init(device: MTLDevice, metalView: MTKView, set: Sets) {
+    init(device: MTLDevice, metalView: MTKView, set: Sets, theme: Theme) {
         self.device = device
         commandQueue = device.makeCommandQueue()
         square = Square(device: device)
         self.set = set
+        self.theme = theme
         
         uniformBufferProvider = BufferProvider(inFlightBuffers: 3, device: device)
         
@@ -86,24 +88,20 @@ class Renderer: NSObject, MTKViewDelegate {
     }
     
     func configureSet() {
-        var imageName = ""
         switch set {
         case .mandelbrot:
             shiftX = 0.15
             angleConstant = 0.01
             oldZoom = 10
-            imageName = "paleta1"
         case .julia:
             angleConstant = 0.01
             oldZoom = 1.0
-            imageName = "paleta4"
         case .some:
             oldZoom = 0.05
-            imageName = "paleta4"
         }
         
         let textureLoader = MTKTextureLoader(device: device)
-        let path = Bundle.main.path(forResource: imageName, ofType: "png")!
+        let path = Bundle.main.path(forResource: theme.rawValue, ofType: "png")!
         let data = try! Data(contentsOf: URL(fileURLWithPath: path))
         
         paletteTexture = try! textureLoader.newTexture(data: data, options: nil)
@@ -164,8 +162,14 @@ class Renderer: NSObject, MTKViewDelegate {
         return (x, y)
     }
     
-    func changePattern(for set: Sets, theme: String) {
+    func changePattern(for set: Sets, theme: Theme, in view: MTKView) {
+        self.set = set
+        self.theme = theme
         
+        buildPipelineState(metalView: view)
+        configureSet()
+        sceneUniform.scale = 1 / oldZoom
+        time = Date()
     }
     
     func animate(_ view: MTKView) {
@@ -179,16 +183,18 @@ class Renderer: NSObject, MTKViewDelegate {
         shift = calculateShift(from: sceneUniform.angle)
         
         if isOnboarding && time.timeIntervalSinceNow < -30 {
+            var nextSet = set
+            var nextTheme = theme
+            
             if set == .mandelbrot {
-                set = .julia
+                nextSet = .julia
+                nextTheme = .lightning
             } else {
-                set = .mandelbrot
+                nextSet = .mandelbrot
+                nextTheme = .main
             }
             
-            buildPipelineState(metalView: view)
-            configureSet()
-            sceneUniform.scale = 1 / oldZoom
-            time = Date()
+            changePattern(for: nextSet, theme: nextTheme, in: view)
         }
         
         

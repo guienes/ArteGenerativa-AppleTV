@@ -21,10 +21,13 @@ class GenerativeArtVC: UIViewController {
     }
     
     @IBOutlet weak var descriptionView: DescriptionView!
+    @IBOutlet weak var themeCollectionView: UICollectionView!
     
     var set: Sets = .some
     var setIndex: Int = 0
     var renderer: Renderer?
+    
+    var collectionViewController: CollectionViewController?
     
     let introductionText = "Para ver mais informações sobre esta arte generativa, dê um tap no controle. \nPara capturar uma imagem desta arte, dê um clique no controle."
     
@@ -48,7 +51,12 @@ class GenerativeArtVC: UIViewController {
         photoSavedLBLedit()
         
         setupTagGesture()
-        descriptionView.descriptionText.text = introductionText 
+        descriptionView.descriptionText.text = introductionText
+        
+        themeCollectionView.layer.cornerRadius = 20
+        collectionViewController = CollectionViewController(set: set)
+        themeCollectionView.delegate = collectionViewController
+        themeCollectionView.dataSource = collectionViewController
     }
     
     override func viewDidAppear(_ animated: Bool) {

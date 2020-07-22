@@ -96,7 +96,7 @@ class Renderer: NSObject, MTKViewDelegate {
         case .julia:
             angleConstant = 0.01
             oldZoom = 1.0
-            imageName = "paleta2"
+            imageName = "paleta4"
         case .some:
             oldZoom = 0.05
             imageName = "paleta4"

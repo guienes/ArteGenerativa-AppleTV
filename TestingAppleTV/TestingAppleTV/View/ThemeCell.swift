@@ -16,4 +16,12 @@ class ThemeCell: UICollectionViewCell {
         }
     }
     
+    override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+        if isFocused {
+            themeImage.adjustsImageWhenAncestorFocused = true
+        } else {
+            themeImage.adjustsImageWhenAncestorFocused = false
+        }
+    }
+    
 }

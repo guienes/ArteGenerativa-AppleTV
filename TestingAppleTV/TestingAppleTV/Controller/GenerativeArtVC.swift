@@ -50,7 +50,7 @@ class GenerativeArtVC: UIViewController {
         startBackgroundMusic()
         photoSavedLBLedit()
         
-//        setupTagGesture()
+        setupTagGesture()
         descriptionView.descriptionText.text = introductionText
         
         setupCollectionView()
@@ -151,44 +151,49 @@ class GenerativeArtVC: UIViewController {
     func setupTagGesture() {
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTap))
         tapRecognizer.allowedPressTypes = [NSNumber(value: UIPress.PressType.select.rawValue)]
+        tapRecognizer.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tapRecognizer)
     }
     
     @objc func didTap(gesture: UITapGestureRecognizer) {
-        if descriptionIsShown {
-            timer?.invalidate()
-            animator.stopAnimation(true)
-            animator.addAnimations ({
-                self.descriptionView.alpha = 0
-            })
-            
-            animator.addCompletion { (completion) in
-                self.setTimer(with: 0.1)
-            }
-            animator.startAnimation()
-            descriptionIsShown = true
-            
-        } else {
-            showReverseAnimation()
-            setTimer(with: 3)
-        }
+        guard let view = gesture.view else { return }
         
-        
-        if saveLabelIsShown {
-            timerLBL?.invalidate()
-            animatorLBL.stopAnimation(true)
-            animatorLBL.addAnimations {
-                self.photoSavedLBL.alpha = 1
+        if !view.isDescendant(of: themeCollectionView) {
+            if descriptionIsShown {
+                timer?.invalidate()
+                animator.stopAnimation(true)
+                animator.addAnimations ({
+                    self.descriptionView.alpha = 0
+                })
+                
+                animator.addCompletion { (completion) in
+                    self.setTimer(with: 0.1)
+                }
+                animator.startAnimation()
+                descriptionIsShown = true
+                
+            } else {
+                showReverseAnimation()
+                setTimer(with: 3)
             }
             
-            animatorLBL.addCompletion { (completion) in
-                self.setTimerforLBL(with: 0.1)
+            
+            if saveLabelIsShown {
+                timerLBL?.invalidate()
+                animatorLBL.stopAnimation(true)
+                animatorLBL.addAnimations {
+                    self.photoSavedLBL.alpha = 1
+                }
+                
+                animatorLBL.addCompletion { (completion) in
+                    self.setTimerforLBL(with: 0.1)
+                }
+                animatorLBL.startAnimation()
+                saveLabelIsShown = true
+            } else {
+                showReverseAnimationLBL()
+                setTimerforLBL(with: 3)
             }
-            animatorLBL.startAnimation()
-            saveLabelIsShown = true
-        } else {
-            showReverseAnimationLBL()
-            setTimerforLBL(with: 3)
         }
     }
     

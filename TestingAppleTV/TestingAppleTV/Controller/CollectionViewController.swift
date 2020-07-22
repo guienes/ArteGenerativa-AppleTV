@@ -13,6 +13,10 @@ class CollectionViewController: NSObject, UICollectionViewDelegate, UICollection
     var set: Sets
     var imageName: [String]
     
+    var defaultSize = CGSize(width: 350, height: 200)
+    var focusedSize = CGSize(width: 350, height: 200)
+    
+    
     init(set: Sets) {
         self.set = set
         
@@ -35,9 +39,17 @@ class CollectionViewController: NSObject, UICollectionViewDelegate, UICollection
         
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, canFocusItemAt indexPath: IndexPath) -> Bool {
+        return true
+    }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 350, height: collectionView.frame.size.height - 60)
+        
+        defaultSize = CGSize(width: 350, height: collectionView.frame.size.height - 60)
+        focusedSize = CGSize(width: 330, height: collectionView.frame.size.height - 40)
+        
+        return defaultSize
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

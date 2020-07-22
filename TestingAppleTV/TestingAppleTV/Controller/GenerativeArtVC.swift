@@ -53,7 +53,7 @@ class GenerativeArtVC: UIViewController {
         setupTagGesture()
         descriptionView.descriptionText.text = introductionText
         
-        themeCollectionView.layer.cornerRadius = 20
+        setupCollectionView()
         collectionViewController = CollectionViewController(set: set)
         themeCollectionView.delegate = collectionViewController
         themeCollectionView.dataSource = collectionViewController
@@ -106,6 +106,16 @@ class GenerativeArtVC: UIViewController {
         metalView.delegate = self.renderer
     }
     
+    func setupCollectionView() {
+        themeCollectionView.layer.cornerRadius = 20
+        
+        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = themeCollectionView.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        themeCollectionView.backgroundView = blurEffectView
+    }
+    
     func startBackgroundMusic() {
         var songName = ""
         switch set {
@@ -145,7 +155,6 @@ class GenerativeArtVC: UIViewController {
     }
     
     @objc func didTap(gesture: UITapGestureRecognizer) {
-        
         if descriptionIsShown {
             timer?.invalidate()
             animator.stopAnimation(true)
@@ -184,8 +193,6 @@ class GenerativeArtVC: UIViewController {
     }
     
     @objc func showReverseAnimation() {
-        
-        
         animator.stopAnimation(true)
         animator.addAnimations ({
             self.descriptionView.alpha = self.descriptionIsShown ? 0 : 1
@@ -206,7 +213,6 @@ class GenerativeArtVC: UIViewController {
     
     
     @objc func showReverseAnimationLBL() {
-        
         animatorLBL.addAnimations ({
             self.photoSavedLBL.alpha = self.saveLabelIsShown ? 0 : 1
         })

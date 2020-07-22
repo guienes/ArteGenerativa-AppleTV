@@ -50,11 +50,11 @@ class GenerativeArtVC: UIViewController {
         startBackgroundMusic()
         photoSavedLBLedit()
         
-        setupTagGesture()
+//        setupTagGesture()
         descriptionView.descriptionText.text = introductionText
         
         setupCollectionView()
-        collectionViewController = CollectionViewController(set: set)
+        collectionViewController = CollectionViewController(set: set, viewController: self)
         themeCollectionView.delegate = collectionViewController
         themeCollectionView.dataSource = collectionViewController
     }

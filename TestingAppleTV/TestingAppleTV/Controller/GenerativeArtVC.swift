@@ -37,9 +37,7 @@ class GenerativeArtVC: UIViewController {
     var labelAnimator: AnimationController?
     
     var audioPlayer: AVAudioPlayer?
-    
-    var saveLabelIsShown = false
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -74,7 +72,7 @@ class GenerativeArtVC: UIViewController {
             }
         })
         
-        labelAnimator?.setAnimation(animation: descriptionAnimator?.fadeInOut ?? {})
+        labelAnimator?.setAnimation(animation: labelAnimator?.fadeInOut ?? {})
     }
     
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
@@ -172,26 +170,10 @@ class GenerativeArtVC: UIViewController {
                 })
                 
             } else {
-                descriptionAnimator?.animate(delay: 3, reverts: true, with: nil)
+                descriptionAnimator?.animate(delay: 10, reverts: true, with: nil)
             }
             
-            
-            if saveLabelIsShown {
-//                timerLBL?.invalidate()
-//                animatorLBL.stopAnimation(true)
-//                animatorLBL.addAnimations {
-//                    self.photoSavedLBL.alpha = 1
-//                }
-//
-//                animatorLBL.addCompletion { (completion) in
-//                    self.setTimerforLBL(with: 0.1)
-//                }
-//                animatorLBL.startAnimation()
-                saveLabelIsShown = true
-            } else {
-//                showReverseAnimationLBL()
-//                setTimerforLBL(with: 3)
-            }
+            captureImage()
         }
     }
     

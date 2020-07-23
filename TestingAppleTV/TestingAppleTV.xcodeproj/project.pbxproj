@@ -433,13 +433,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 56RTBWDLYU;
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = V894BS73ZJ;
 				INFOPLIST_FILE = TestingAppleTV/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = br.developeracademy.TestingAppleTV;
+				PRODUCT_BUNDLE_IDENTIFIER = br.enes.TestingAppleTV;
 				PRODUCT_NAME = Generate;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -451,13 +452,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 56RTBWDLYU;
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = V894BS73ZJ;
 				INFOPLIST_FILE = TestingAppleTV/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = br.developeracademy.TestingAppleTV;
+				PRODUCT_BUNDLE_IDENTIFIER = br.enes.TestingAppleTV;
 				PRODUCT_NAME = Generate;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;

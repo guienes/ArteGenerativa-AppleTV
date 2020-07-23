@@ -21,7 +21,7 @@ class InitialViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTap()
+//        setupTap()
         setupMetal()
         renderer?.animate = true
         renderer?.isOnboarding = true
@@ -34,6 +34,22 @@ class InitialViewController: UIViewController {
             self.shaderView.alpha = 0.4
         }
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for item in touches {
+            if item.type == .indirect{
+                performSegue(withIdentifier: "goToMainScreen", sender: self)
+            }
+        }
+    }
+    
+//    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+//        for item in presses {
+//            if item.type == .select {
+//                print("Teste")
+//            }
+//        }
+//    }
     
     func setupTap() {
         let defaults = UserDefaults.standard
@@ -56,7 +72,7 @@ class InitialViewController: UIViewController {
     }
     
     @objc func didTouchDown(gesture: UILongPressGestureRecognizer) {
-        if gesture.state == .began {
+        if gesture.state == .recognized {
             performSegue(withIdentifier: "goToMainScreen", sender: self)
         }
     }

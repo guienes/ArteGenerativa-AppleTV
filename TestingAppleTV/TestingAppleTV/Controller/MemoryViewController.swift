@@ -152,8 +152,8 @@ class MemoryViewController: UIViewController, UICollectionViewDelegate, UICollec
              
              alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
              NSLog("The \"OK\" alert occured.")
-               
                self.removeCell()
+                self.deleteData()
                    }))
                  
                  alert.addAction(UIAlertAction(title: NSLocalizedString("Cancelar", comment: "Default action"), style: .cancel, handler: { _ in
@@ -197,7 +197,7 @@ class MemoryViewController: UIViewController, UICollectionViewDelegate, UICollec
          let managedContext = appDelegate.persistentContainer.viewContext
          
          let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Memory")
-         fetchRequest.predicate = NSPredicate(format: "memory = %@", "mem")
+       //  fetchRequest.predicate = NSPredicate(format: "memory = %@")
         
          do
          {

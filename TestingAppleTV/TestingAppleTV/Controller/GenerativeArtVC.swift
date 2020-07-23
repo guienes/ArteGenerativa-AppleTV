@@ -33,12 +33,11 @@ class GenerativeArtVC: UIViewController {
     
     var context: NSManagedObjectContext?
     
+    var descriptionAnimator: AnimationController?
+    var labelAnimator: AnimationController?
+    
     var audioPlayer: AVAudioPlayer?
-    var animator = UIViewPropertyAnimator(duration: 1, curve: .easeInOut)
-    var animatorLBL = UIViewPropertyAnimator(duration: 1, curve: .easeInOut)
-    var timer: Timer?
-    var timerLBL: Timer?
-    var descriptionIsShown = false
+    
     var saveLabelIsShown = false
     
     override func viewDidLoad() {
@@ -57,20 +56,25 @@ class GenerativeArtVC: UIViewController {
         collectionViewController = CollectionViewController(set: set, viewController: self)
         themeCollectionView.delegate = collectionViewController
         themeCollectionView.dataSource = collectionViewController
+        
+        descriptionAnimator = AnimationController(view: descriptionView, duration: 10)
+        labelAnimator = AnimationController(view: photoSavedLBL, duration: 3)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         descriptionView.alpha = 0
-        animator.addAnimations {
-            self.descriptionView.isHidden = false
-            self.descriptionView.alpha = 1
-        }
-        descriptionIsShown = true
-        saveLabelIsShown = true
+        descriptionView.isHidden = false
         
-        animator.startAnimation()
+        descriptionAnimator?.setAnimation(animation: descriptionAnimator?.fadeInOut ?? {})
         
-        setTimer(with: 5)
+        descriptionAnimator?.animate(delay: 5, reverts: true, with: {
+            (completion) in
+            if self.descriptionView.descriptionText.text == self.introductionText {
+                self.descriptionView.descriptionText.text = artData[self.setIndex].description
+            }
+        })
+        
+        labelAnimator?.setAnimation(animation: descriptionAnimator?.fadeInOut ?? {})
     }
     
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
@@ -159,98 +163,37 @@ class GenerativeArtVC: UIViewController {
         guard let view = gesture.view else { return }
         
         if !view.isDescendant(of: themeCollectionView) {
-            if descriptionIsShown {
-                timer?.invalidate()
-                animator.stopAnimation(true)
-                animator.addAnimations ({
-                    self.descriptionView.alpha = 0
+            if descriptionAnimator!.isVisible {
+                descriptionAnimator?.animate(delay: 0.1, reverts: true, with:  {
+                    (completion) in
+                    if self.descriptionView.descriptionText.text == self.introductionText {
+                        self.descriptionView.descriptionText.text = artData[self.setIndex].description
+                    }
                 })
                 
-                animator.addCompletion { (completion) in
-                    self.setTimer(with: 0.1)
-                }
-                animator.startAnimation()
-                descriptionIsShown = true
-                
             } else {
-                showReverseAnimation()
-                setTimer(with: 3)
+                descriptionAnimator?.animate(delay: 3, reverts: true, with: nil)
             }
             
             
             if saveLabelIsShown {
-                timerLBL?.invalidate()
-                animatorLBL.stopAnimation(true)
-                animatorLBL.addAnimations {
-                    self.photoSavedLBL.alpha = 1
-                }
-                
-                animatorLBL.addCompletion { (completion) in
-                    self.setTimerforLBL(with: 0.1)
-                }
-                animatorLBL.startAnimation()
+//                timerLBL?.invalidate()
+//                animatorLBL.stopAnimation(true)
+//                animatorLBL.addAnimations {
+//                    self.photoSavedLBL.alpha = 1
+//                }
+//
+//                animatorLBL.addCompletion { (completion) in
+//                    self.setTimerforLBL(with: 0.1)
+//                }
+//                animatorLBL.startAnimation()
                 saveLabelIsShown = true
             } else {
-                showReverseAnimationLBL()
-                setTimerforLBL(with: 3)
+//                showReverseAnimationLBL()
+//                setTimerforLBL(with: 3)
             }
         }
     }
-    
-    @objc func showReverseAnimation() {
-        animator.stopAnimation(true)
-        animator.addAnimations ({
-            self.descriptionView.alpha = self.descriptionIsShown ? 0 : 1
-        })
-        
-        animator.addCompletion { (completion) in
-            if self.descriptionView.descriptionText.text == self.introductionText {
-                self.descriptionView.descriptionText.text = artData[self.setIndex].description
-            }
-        }
-        animator.startAnimation()
-        descriptionIsShown = !descriptionIsShown
-        
-        if descriptionIsShown {
-            setTimer(with: 10)
-        }
-    }
-    
-    
-    @objc func showReverseAnimationLBL() {
-        animatorLBL.addAnimations ({
-            self.photoSavedLBL.alpha = self.saveLabelIsShown ? 0 : 1
-        })
-        animatorLBL.startAnimation()
-        saveLabelIsShown = !saveLabelIsShown
-        
-        if saveLabelIsShown {
-            setTimerforLBL(with: 3)
-        }
-    }
-    
-    func setTimer(with duration: TimeInterval) {
-        self.timer?.invalidate()
-        self.timer = Timer.scheduledTimer(
-            timeInterval: duration,
-            target: self,
-            selector: #selector(self.showReverseAnimation),
-            userInfo: nil,
-            repeats: false
-        )
-    }
-    
-    func setTimerforLBL(with duration: TimeInterval) {
-        self.timerLBL?.invalidate()
-        self.timerLBL = Timer.scheduledTimer(
-            timeInterval: duration,
-            target: self,
-            selector: #selector(self.showReverseAnimationLBL),
-            userInfo: nil,
-            repeats: false
-        )
-    }
-    
     
     func captureImage() {
         guard let context = self.context,
@@ -265,6 +208,14 @@ class GenerativeArtVC: UIViewController {
         newMemory.image = uiimage.pngData()
         
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
+        
+        
+        if labelAnimator!.isVisible {
+            labelAnimator?.animate(delay: 0.1, reverts: true, with: nil)
+            
+        } else {
+            labelAnimator?.animate(delay: 3, reverts: true, with: nil)
+        }
     }
     
     func photoSavedLBLedit() {

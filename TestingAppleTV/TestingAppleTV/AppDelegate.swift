@@ -62,6 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
              if context.hasChanges {
                  do {
                      try context.save()
+                
                  } catch {
 
                      let nserror = error as NSError
@@ -69,6 +70,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                  }
              }
          }
+    
+    
 
      }
 

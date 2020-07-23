@@ -21,8 +21,6 @@ class MemoryViewController: UIViewController, UICollectionViewDelegate, UICollec
     var context: NSManagedObjectContext?
     var memories = [Memory]()
     var saveMemory = Data()
-  //  var popUp = PopUpViewController()
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,18 +28,8 @@ class MemoryViewController: UIViewController, UICollectionViewDelegate, UICollec
         collectionView.delegate = self
         collectionView.dataSource = self
         
-   
+  
     }
-//
-//    @IBAction func handleGesture(_ sender: UILongPressGestureRecognizer) {
-//        if sender.state == .began {
-//            let alertController = UIAlertController(title: nil, message:
-//                "Long-Press Gesture Detected", preferredStyle: .alert)
-//            alertController.addAction(UIAlertAction(title: "OK", style: .default,handler: nil))
-//
-//            present(alertController, animated: true, completion: nil)
-//        }
-//    }
     override func viewWillAppear(_ animated: Bool) {
         do {
             memories = try context!.fetch(Memory.fetchRequest())
@@ -147,22 +135,50 @@ class MemoryViewController: UIViewController, UICollectionViewDelegate, UICollec
             return
         }
         saveMemory = data
-      
-        self.memories.remove(at: indexPath.row)
-         collectionView.deleteItems(at: [indexPath])
-        
-        print("memória removida")
-        
+ 
         if memories.count == 0 {
            noMemoriesLabel.isHidden = false
            savedPhotosLBL.isHidden = true
            }
-        
         performSegue(withIdentifier: "MemoryPhotoShow", sender: self)
-  
     }
-    func deleteMemory() {
-      //8hytrewq      popUp.deleteButton(self)
+    
+// Aparece o Pop Up para remover a foto
+    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+        for press in presses {
+            // Aparentemente o .select não funciona (ao menos no simulador)
+            if press.type == .playPause {
+    let alert = UIAlertController(title: "Remover foto", message: "Você tem certeza de que deseja remover a foto das tuas memórias?", preferredStyle: .alert)
+             
+             alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+             NSLog("The \"OK\" alert occured.")
+               
+               self.removeCell()
+                   }))
+                 
+                 alert.addAction(UIAlertAction(title: NSLocalizedString("Cancelar", comment: "Default action"), style: .cancel, handler: { _ in
+                 NSLog("The \"Cancelar\" alert occured.")
+             }))
+             self.present(alert, animated: true, completion: nil)
+             
+            }
+        }
+    }
+
+    // Está dando ruim
+    func deleteMemory(at indexPath: IndexPath) {
+        memories.remove(at: indexPath.row)
+        collectionView.deleteItems(at: [indexPath])
+        print("memória removida")
+    }
+    
+    func removeCell() {
+        self.collectionView.performBatchUpdates({
+            memories.popLast()
+            self.collectionView.deleteItems(at: [IndexPath(item: memories.count - 1, section: 0)])
+        }) { (competed) in
+            print("Perform batch updates completed")
+        }
     }
 
 
@@ -174,16 +190,37 @@ class MemoryViewController: UIViewController, UICollectionViewDelegate, UICollec
         showImageVC.imageToPresent = UIImage(data: saveMemory) ?? UIImage()
         
     }
-        
-    //    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
-    //        for press in presses {
-    //              if press.type == .playPause {
-    //                let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-    //                let newViewController = storyBoard.instantiateViewController(withIdentifier: "PopUpViewController") as! PopUpViewController
-    //                self.navigationController?.pushViewController(newViewController, animated: true)
-    //            }
-    //        }
-    //    }
     
+    func deleteData() {
+         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+
+         let managedContext = appDelegate.persistentContainer.viewContext
+         
+         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Memory")
+         fetchRequest.predicate = NSPredicate(format: "memory = %@", "mem")
+        
+         do
+         {
+             let test = try managedContext.fetch(fetchRequest)
+             
+             let objectToDelete = test[0] as! NSManagedObject
+             managedContext.delete(objectToDelete)
+             
+             do{
+                 try managedContext.save()
+             }
+             catch
+             {
+                 print(error)
+             }
+             
+         }
+         catch
+         {
+             print(error)
+         }
+    }
 }
+    
+
 

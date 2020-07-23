@@ -113,15 +113,11 @@
                                                     <rect key="frame" x="50" y="50" width="400" height="400"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <gestureRecognizers/>
-                                                    <connections>
-                                                        <outletCollection property="gestureRecognizers" destination="IMV-Ef-IGv" appends="YES" id="WyD-sR-Gfg"/>
-                                                    </connections>
                                                 </imageView>
                                             </subviews>
                                         </collectionViewCellContentView>
                                         <connections>
                                             <outlet property="memoryImg" destination="UAk-7h-feD" id="Y3m-bR-R9s"/>
-                                            <segue destination="VqX-o5-bvZ" kind="show" id="hu6-O4-gjk"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -163,12 +159,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
-                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="IMV-Ef-IGv">
-                    <pressTypeMask key="allowedPressTypes" select="YES"/>
-                    <connections>
-                        <action selector="handleGesture:" destination="8rJ-Kc-sve" id="dqa-lW-io4"/>
-                    </connections>
-                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2460" y="-957"/>
         </scene>

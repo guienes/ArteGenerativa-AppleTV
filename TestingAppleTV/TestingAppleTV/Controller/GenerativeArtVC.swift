@@ -88,6 +88,8 @@ class GenerativeArtVC: UIViewController {
         }
     }
     
+    
+    
     func setupMetal() {
         metalView.device = MTLCreateSystemDefaultDevice()
         metalView.depthStencilPixelFormat = MTLPixelFormat.depth32Float_stencil8
@@ -131,6 +133,30 @@ class GenerativeArtVC: UIViewController {
         }
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for item in touches {
+            if item.type == .indirect{
+                  if descriptionIsShown {
+                      timer?.invalidate()
+                      animator.stopAnimation(true)
+                      animator.addAnimations ({
+                          self.descriptionView.alpha = 0
+                      })
+                      
+                      animator.addCompletion { (completion) in
+                          self.setTimer(with: 0.1)
+                      }
+                      animator.startAnimation()
+                      descriptionIsShown = true
+                      
+                  } else {
+                      showReverseAnimation()
+                      setTimer(with: 10)
+                  }
+            }
+        }
+    }
+    
     func setupTagGesture() {
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTap))
         tapRecognizer.allowedPressTypes = [NSNumber(value: UIPress.PressType.select.rawValue)]
@@ -138,25 +164,6 @@ class GenerativeArtVC: UIViewController {
     }
     
     @objc func didTap(gesture: UITapGestureRecognizer) {
-        
-        if descriptionIsShown {
-            timer?.invalidate()
-            animator.stopAnimation(true)
-            animator.addAnimations ({
-                self.descriptionView.alpha = 0
-            })
-            
-            animator.addCompletion { (completion) in
-                self.setTimer(with: 0.1)
-            }
-            animator.startAnimation()
-            descriptionIsShown = true
-            
-        } else {
-            showReverseAnimation()
-            setTimer(with: 10)
-        }
-        
         
         if saveLabelIsShown {
             timerLBL?.invalidate()
@@ -174,6 +181,8 @@ class GenerativeArtVC: UIViewController {
             showReverseAnimationLBL()
             setTimerforLBL(with: 3)
         }
+        
+      
     }
     
     @objc func showReverseAnimation() {

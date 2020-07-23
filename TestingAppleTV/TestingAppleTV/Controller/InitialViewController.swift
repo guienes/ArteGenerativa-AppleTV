@@ -43,6 +43,7 @@ class InitialViewController: UIViewController {
         }
     }
     
+    
 //    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
 //        for item in presses {
 //            if item.type == .select {
@@ -51,14 +52,14 @@ class InitialViewController: UIViewController {
 //        }
 //    }
     
-    func setupTap() {
-        let defaults = UserDefaults.standard
-        let touchDown = UILongPressGestureRecognizer(target:self, action: #selector(didTouchDown))
-        defaults.set(true, forKey: "hasViewedWalkthrough")
-        touchDown.minimumPressDuration = 0
-        dismiss(animated: true, completion: nil)
-        view.addGestureRecognizer(touchDown)
-    }
+//    func setupTap() {
+//        let defaults = UserDefaults.standard
+//        let touchDown = UILongPressGestureRecognizer(target:self, action: #selector(didTouchDown))
+//        defaults.set(true, forKey: "hasViewedWalkthrough")
+//        touchDown.minimumPressDuration = 0
+//        dismiss(animated: true, completion: nil)
+//        view.addGestureRecognizer(touchDown)
+//    }
     
     func setupMetal() {
         metalView.device = MTLCreateSystemDefaultDevice()
@@ -71,9 +72,9 @@ class InitialViewController: UIViewController {
         metalView.delegate = self.renderer
     }
     
-    @objc func didTouchDown(gesture: UILongPressGestureRecognizer) {
-        if gesture.state == .recognized {
-            performSegue(withIdentifier: "goToMainScreen", sender: self)
-        }
-    }
+//    @objc func didTouchDown(gesture: UILongPressGestureRecognizer) {
+//        if gesture.state == .recognized {
+//            performSegue(withIdentifier: "goToMainScreen", sender: self)
+//        }
+//    }
 }

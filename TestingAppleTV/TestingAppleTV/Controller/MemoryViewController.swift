@@ -21,7 +21,7 @@ class MemoryViewController: UIViewController, UICollectionViewDelegate, UICollec
     var context: NSManagedObjectContext?
     var memories = [Memory]()
     var saveMemory = Data()
-    var popUp = PopUpViewController()
+  //  var popUp = PopUpViewController()
 
     
     override func viewDidLoad() {
@@ -29,7 +29,8 @@ class MemoryViewController: UIViewController, UICollectionViewDelegate, UICollec
         context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         collectionView.delegate = self
         collectionView.dataSource = self
- 
+        
+   
     }
 //
 //    @IBAction func handleGesture(_ sender: UILongPressGestureRecognizer) {
@@ -152,11 +153,16 @@ class MemoryViewController: UIViewController, UICollectionViewDelegate, UICollec
         
         print("memória removida")
         
+        if memories.count == 0 {
+           noMemoriesLabel.isHidden = false
+           savedPhotosLBL.isHidden = true
+           }
+        
         performSegue(withIdentifier: "MemoryPhotoShow", sender: self)
   
     }
     func deleteMemory() {
-        popUp.deleteButton(self)
+      //8hytrewq      popUp.deleteButton(self)
     }
 
 

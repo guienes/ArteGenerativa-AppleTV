@@ -57,7 +57,7 @@ class CollectionViewController: NSObject, UICollectionViewDelegate, UICollection
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        defaultSize = CGSize(width: 350, height: collectionView.frame.size.height - 60)
+        defaultSize = CGSize(width: 370, height: collectionView.frame.size.height - 60)
         focusedSize = CGSize(width: 330, height: collectionView.frame.size.height - 40)
         
         return defaultSize
@@ -66,8 +66,8 @@ class CollectionViewController: NSObject, UICollectionViewDelegate, UICollection
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         
         let viewWidth = Int(collectionView.frame.size.width)
-        let remainingSpace = viewWidth - imageName.count * 350 - 60
-        let spacing = CGFloat(remainingSpace / (imageName.count - 1))
+        let remainingSpace = viewWidth - imageName.count * 370
+        let spacing = CGFloat(remainingSpace / (imageName.count))
         
         return spacing
     }

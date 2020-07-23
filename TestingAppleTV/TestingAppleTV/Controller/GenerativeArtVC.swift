@@ -35,6 +35,7 @@ class GenerativeArtVC: UIViewController {
     
     var descriptionAnimator: AnimationController?
     var labelAnimator: AnimationController?
+    var collectionAnimator: AnimationController?
     
     var audioPlayer: AVAudioPlayer?
         
@@ -48,6 +49,7 @@ class GenerativeArtVC: UIViewController {
         photoSavedLBLedit()
         
         setupTagGesture()
+        setupSwipeGesture()
         descriptionView.descriptionText.text = introductionText
         
         setupCollectionView()
@@ -57,6 +59,7 @@ class GenerativeArtVC: UIViewController {
         
         descriptionAnimator = AnimationController(view: descriptionView, duration: 10)
         labelAnimator = AnimationController(view: photoSavedLBL, duration: 3)
+        collectionAnimator = AnimationController(view: themeCollectionView, duration: 3)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -73,6 +76,15 @@ class GenerativeArtVC: UIViewController {
         })
         
         labelAnimator?.setAnimation(animation: labelAnimator?.fadeInOut ?? {})
+        
+        collectionAnimator?.setAnimation {
+            let viewHeight = self.view.frame.height
+            let collectionHeight = self.themeCollectionView.frame.height
+            let y = self.themeCollectionView.center.y
+            let distance = viewHeight - y + collectionHeight / 2
+            
+            self.themeCollectionView.center.y += distance + collectionHeight
+        }
     }
     
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
@@ -157,6 +169,12 @@ class GenerativeArtVC: UIViewController {
         self.view.addGestureRecognizer(tapRecognizer)
     }
     
+    func setupSwipeGesture() {
+        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(didSwipe))
+        swipe.direction = .down
+        self.view.addGestureRecognizer(swipe)
+    }
+    
     @objc func didTap(gesture: UITapGestureRecognizer) {
         guard let view = gesture.view else { return }
         
@@ -175,6 +193,14 @@ class GenerativeArtVC: UIViewController {
             
             captureImage()
         }
+    }
+    
+    @objc func didSwipe(gesture: UISwipeGestureRecognizer) {
+        print("Swipe")
+        collectionAnimator?.animate(delay: 1, reverts: false, with: { (completion) in
+            self.themeCollectionView.isHidden = true
+            self.themeCollectionView.isUserInteractionEnabled = false
+        })
     }
     
     func captureImage() {

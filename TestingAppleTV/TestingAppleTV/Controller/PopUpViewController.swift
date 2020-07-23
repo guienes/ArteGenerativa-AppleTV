@@ -10,10 +10,20 @@ import UIKit
 
 class PopUpViewController: UIViewController {
 
+    var memory = MemoryViewController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
       
     }
 
-
+    @IBAction func deleteButton(_ sender: Any) {
+            self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func cancelButton(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
 }

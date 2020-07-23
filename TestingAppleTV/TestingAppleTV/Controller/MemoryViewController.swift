@@ -21,6 +21,7 @@ class MemoryViewController: UIViewController, UICollectionViewDelegate, UICollec
     var context: NSManagedObjectContext?
     var memories = [Memory]()
     var saveMemory = Data()
+    var popUp = PopUpViewController()
 
     
     override func viewDidLoad() {
@@ -30,16 +31,16 @@ class MemoryViewController: UIViewController, UICollectionViewDelegate, UICollec
         collectionView.dataSource = self
  
     }
-    
-    @IBAction func handleGesture(_ sender: UILongPressGestureRecognizer) {
-        if sender.state == .began {
-            let alertController = UIAlertController(title: nil, message:
-                "Long-Press Gesture Detected", preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: "OK", style: .default,handler: nil))
-
-            present(alertController, animated: true, completion: nil)
-        }
-    }
+//
+//    @IBAction func handleGesture(_ sender: UILongPressGestureRecognizer) {
+//        if sender.state == .began {
+//            let alertController = UIAlertController(title: nil, message:
+//                "Long-Press Gesture Detected", preferredStyle: .alert)
+//            alertController.addAction(UIAlertAction(title: "OK", style: .default,handler: nil))
+//
+//            present(alertController, animated: true, completion: nil)
+//        }
+//    }
     override func viewWillAppear(_ animated: Bool) {
         do {
             memories = try context!.fetch(Memory.fetchRequest())
@@ -145,12 +146,20 @@ class MemoryViewController: UIViewController, UICollectionViewDelegate, UICollec
             return
         }
         saveMemory = data
-       // setupTap()
-        handleGesture(.init())
-        performSegue(withIdentifier: "MemoryPhotoShow", sender: self)
+      
+        self.memories.remove(at: indexPath.row)
+         collectionView.deleteItems(at: [indexPath])
         
+        print("memória removida")
+        
+        performSegue(withIdentifier: "MemoryPhotoShow", sender: self)
+  
     }
-    
+    func deleteMemory() {
+        popUp.deleteButton(self)
+    }
+
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         guard let showImageVC = segue.destination as? MemoryPhotosShow else { return }

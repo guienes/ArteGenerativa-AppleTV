@@ -209,8 +209,10 @@
                                     <constraint firstAttribute="height" constant="94" id="oO2-MK-O0z"/>
                                 </constraints>
                                 <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
-                                <size key="titleShadowOffset" width="2" height="2"/>
                                 <state key="normal" title="Deletar"/>
+                                <connections>
+                                    <action selector="deleteButton:" destination="VqX-o5-bvZ" eventType="primaryActionTriggered" id="Cij-y0-mH5"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9WL-7N-920">
                                 <rect key="frame" x="684" y="657" width="553" height="94"/>
@@ -219,6 +221,9 @@
                                 </constraints>
                                 <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
                                 <state key="normal" title="Cancelar"/>
+                                <connections>
+                                    <action selector="cancelButton:" destination="VqX-o5-bvZ" eventType="primaryActionTriggered" id="UvT-LK-Ryg"/>
+                                </connections>
                             </button>
                         </subviews>
                         <constraints>
@@ -226,6 +231,7 @@
                             <constraint firstItem="fyv-N6-4ia" firstAttribute="trailing" secondItem="5vT-Lr-B0z" secondAttribute="trailing" constant="685" id="3fE-2N-eyQ"/>
                             <constraint firstItem="fyv-N6-4ia" firstAttribute="trailing" secondItem="SxV-y1-TqE" secondAttribute="trailing" constant="593" id="7bE-FN-o8U"/>
                             <constraint firstItem="SxV-y1-TqE" firstAttribute="top" secondItem="GfX-mT-LcG" secondAttribute="bottom" constant="57" id="APF-hj-I1R"/>
+                            <constraint firstItem="oJ6-1X-RcX" firstAttribute="top" secondItem="9WL-7N-920" secondAttribute="bottom" constant="269" id="B8W-gu-gza"/>
                             <constraint firstItem="fyv-N6-4ia" firstAttribute="trailing" secondItem="GfX-mT-LcG" secondAttribute="trailing" constant="289" id="GYx-0Q-eae"/>
                             <constraint firstItem="5vT-Lr-B0z" firstAttribute="leading" secondItem="fyv-N6-4ia" secondAttribute="leading" constant="686" id="Gsr-s2-NQ4"/>
                             <constraint firstItem="SxV-y1-TqE" firstAttribute="leading" secondItem="fyv-N6-4ia" secondAttribute="leading" constant="594" id="LXD-Dm-hty"/>

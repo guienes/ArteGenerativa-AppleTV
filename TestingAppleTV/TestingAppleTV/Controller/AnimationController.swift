@@ -41,12 +41,16 @@ class AnimationController {
                
         self.completion = completion
         
-        animator.startAnimation()
-        isVisible = true
-        
         if reverts {
             setTimer(with: delay)
+        } else {
+            if let completion = self.completion {
+                animator.addCompletion(completion)
+            }
         }
+        
+        animator.startAnimation()
+        isVisible = true
     }
     
     public func setTimer(with duration: TimeInterval) {

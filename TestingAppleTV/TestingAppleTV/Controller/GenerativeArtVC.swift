@@ -21,21 +21,20 @@ class GenerativeArtVC: UIViewController {
     }
     
     @IBOutlet weak var descriptionView: DescriptionView!
-    @IBOutlet weak var themeCollectionView: UICollectionView!
     
     var set: Sets = .some
     var setIndex: Int = 0
     var renderer: Renderer?
     
-    var collectionViewController: CollectionViewController?
-    
+    var themes: [Theme] = [.main, .lightning, .peace, .blackAndWhite]
+    var currentTheme = 0
+        
     let introductionText = "Para ver mais informações sobre esta arte generativa, dê um tap no controle. \nPara capturar uma imagem desta arte, dê um clique no controle."
     
     var context: NSManagedObjectContext?
     
     var descriptionAnimator: AnimationController?
     var labelAnimator: AnimationController?
-    var collectionAnimator: AnimationController?
     
     var audioPlayer: AVAudioPlayer?
         
@@ -52,39 +51,26 @@ class GenerativeArtVC: UIViewController {
         setupSwipeGesture()
         descriptionView.descriptionText.text = introductionText
         
-        setupCollectionView()
-        collectionViewController = CollectionViewController(set: set, viewController: self)
-        themeCollectionView.delegate = collectionViewController
-        themeCollectionView.dataSource = collectionViewController
-        
         descriptionAnimator = AnimationController(view: descriptionView, duration: 10)
         labelAnimator = AnimationController(view: photoSavedLBL, duration: 3)
-        collectionAnimator = AnimationController(view: themeCollectionView, duration: 3)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         descriptionView.alpha = 0
         descriptionView.isHidden = false
         
         descriptionAnimator?.setAnimation(animation: descriptionAnimator?.fadeInOut ?? {})
         
+        labelAnimator?.setAnimation(animation: labelAnimator?.fadeInOut ?? {})
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         descriptionAnimator?.animate(delay: 5, reverts: true, with: {
             (completion) in
             if self.descriptionView.descriptionText.text == self.introductionText {
                 self.descriptionView.descriptionText.text = artData[self.setIndex].description
             }
         })
-        
-        labelAnimator?.setAnimation(animation: labelAnimator?.fadeInOut ?? {})
-        
-        collectionAnimator?.setAnimation {
-            let viewHeight = self.view.frame.height
-            let collectionHeight = self.themeCollectionView.frame.height
-            let y = self.themeCollectionView.center.y
-            let distance = viewHeight - y + collectionHeight / 2
-            
-            self.themeCollectionView.center.y += distance + collectionHeight
-        }
     }
     
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
@@ -118,16 +104,6 @@ class GenerativeArtVC: UIViewController {
         
         self.renderer = Renderer(device: metalView.device!, metalView: metalView, set: set, theme: .main)
         metalView.delegate = self.renderer
-    }
-    
-    func setupCollectionView() {
-        themeCollectionView.layer.cornerRadius = 20
-        
-        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = themeCollectionView.bounds
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        themeCollectionView.backgroundView = blurEffectView
     }
     
     func startBackgroundMusic() {
@@ -170,37 +146,46 @@ class GenerativeArtVC: UIViewController {
     }
     
     func setupSwipeGesture() {
-        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(didSwipe))
-        swipe.direction = .down
-        self.view.addGestureRecognizer(swipe)
+        let swipeRight = UISwipeGestureRecognizer(target: self, action:  #selector(didSwipe))
+        swipeRight.direction = .right
+        self.view.addGestureRecognizer(swipeRight)
+        
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action:  #selector(didSwipe))
+        swipeLeft.direction = .left
+        self.view.addGestureRecognizer(swipeLeft)
     }
     
     @objc func didTap(gesture: UITapGestureRecognizer) {
         guard let view = gesture.view else { return }
         
-        if !view.isDescendant(of: themeCollectionView) {
-            if descriptionAnimator!.isVisible {
-                descriptionAnimator?.animate(delay: 0.1, reverts: true, with:  {
-                    (completion) in
-                    if self.descriptionView.descriptionText.text == self.introductionText {
-                        self.descriptionView.descriptionText.text = artData[self.setIndex].description
-                    }
-                })
-                
-            } else {
-                descriptionAnimator?.animate(delay: 10, reverts: true, with: nil)
-            }
+        if descriptionAnimator!.isVisible {
+            descriptionAnimator?.animate(delay: 0.1, reverts: true, with:  {
+                (completion) in
+                if self.descriptionView.descriptionText.text == self.introductionText {
+                    self.descriptionView.descriptionText.text = artData[self.setIndex].description
+                }
+            })
             
-            captureImage()
+        } else {
+            descriptionAnimator?.animate(delay: 10, reverts: true, with: nil)
         }
+        
+        captureImage()
     }
     
     @objc func didSwipe(gesture: UISwipeGestureRecognizer) {
-        print("Swipe")
-        collectionAnimator?.animate(delay: 1, reverts: false, with: { (completion) in
-            self.themeCollectionView.isHidden = true
-            self.themeCollectionView.isUserInteractionEnabled = false
-        })
+        if gesture.direction == .right {
+            currentTheme += 1
+            if currentTheme >= themes.count {
+                currentTheme = 0
+            }
+        } else {
+            currentTheme -= 1
+            if currentTheme <= 0 {
+                currentTheme = themes.count - 1
+            }
+        }
+        renderer?.changePattern(for: set, theme: themes[currentTheme], in: metalView)
     }
     
     func captureImage() {
@@ -220,7 +205,6 @@ class GenerativeArtVC: UIViewController {
         
         if labelAnimator!.isVisible {
             labelAnimator?.animate(delay: 0.1, reverts: true, with: nil)
-            
         } else {
             labelAnimator?.animate(delay: 3, reverts: true, with: nil)
         }

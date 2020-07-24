@@ -31,6 +31,7 @@ class GaleryViewController: UIViewController, UICollectionViewDataSource {
             
             let imageName = artData[indexPath.row].name
             cell.galleryImg.image = UIImage(named: imageName)
+            cell.galleryImg.adjustsImageWhenAncestorFocused = true
             
             cell.galleryNameLBL.text = artData[indexPath.row].name
             

@@ -208,7 +208,25 @@
                         <subviews>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qwq-9m-U0q" customClass="DescriptionView" customModule="Generate" customModuleProvider="target">
                                 <rect key="frame" x="336" y="750" width="1248" height="270"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <subviews>
+                                    <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lto-gy-s7M">
+                                        <rect key="frame" x="0.0" y="0.0" width="1248" height="270"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="sa7-Q4-esv">
+                                            <rect key="frame" x="0.0" y="0.0" width="1248" height="270"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </view>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <blurEffect style="dark"/>
+                                    </visualEffectView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="lto-gy-s7M" secondAttribute="bottom" id="5JR-HJ-E6j"/>
+                                    <constraint firstItem="lto-gy-s7M" firstAttribute="leading" secondItem="Qwq-9m-U0q" secondAttribute="leading" id="MNe-Qg-wua"/>
+                                    <constraint firstItem="lto-gy-s7M" firstAttribute="top" secondItem="Qwq-9m-U0q" secondAttribute="top" id="NuC-zi-aIH"/>
+                                    <constraint firstAttribute="trailing" secondItem="lto-gy-s7M" secondAttribute="trailing" id="l7K-Cr-cI0"/>
+                                </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Foto Salva" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZrX-hi-Xnh">
                                 <rect key="frame" x="1603" y="90" width="197" height="48"/>

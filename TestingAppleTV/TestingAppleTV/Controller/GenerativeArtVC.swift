@@ -29,7 +29,7 @@ class GenerativeArtVC: UIViewController {
     var themes: [Theme] = [.main, .lightning, .peace, .blackAndWhite]
     var currentTheme = 0
         
-    let introductionText = "Para ver mais informações sobre esta arte generativa, dê um tap no controle. \nPara capturar uma imagem desta arte, dê um clique no controle."
+    let introductionText = "Para ver mais informações sobre esta arte generativa, dê um tap no controle. \nPara capturar uma imagem desta arte, dê um clique no controle. \nArraste para o lado para alterar a cor da arte generativa."
     
     var context: NSManagedObjectContext?
     

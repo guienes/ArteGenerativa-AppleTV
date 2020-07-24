@@ -21,9 +21,7 @@ class InitialViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        setupTap()
         setupMetal()
-        renderer?.animate = true
         renderer?.isOnboarding = true
         
         shaderView.alpha = 1
@@ -42,24 +40,14 @@ class InitialViewController: UIViewController {
             }
         }
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        metalView.isPaused = false
+    }
     
-    
-//    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
-//        for item in presses {
-//            if item.type == .select {
-//                print("Teste")
-//            }
-//        }
-//    }
-    
-//    func setupTap() {
-//        let defaults = UserDefaults.standard
-//        let touchDown = UILongPressGestureRecognizer(target:self, action: #selector(didTouchDown))
-//        defaults.set(true, forKey: "hasViewedWalkthrough")
-//        touchDown.minimumPressDuration = 0
-//        dismiss(animated: true, completion: nil)
-//        view.addGestureRecognizer(touchDown)
-//    }
+    override func viewWillDisappear(_ animated: Bool) {
+        metalView.isPaused = true
+    }
     
     func setupMetal() {
         metalView.device = MTLCreateSystemDefaultDevice()
@@ -68,13 +56,8 @@ class InitialViewController: UIViewController {
         metalView.clearColor = MTLClearColor(red: 1.0, green: 0.4, blue: 0.0, alpha: 1.0)
         metalView.framebufferOnly = false
         
-        self.renderer = Renderer(device: metalView.device!, metalView: metalView, set: .julia)
+        self.renderer = Renderer(device: metalView.device!, metalView: metalView, set: .julia, theme: .lightning)
         metalView.delegate = self.renderer
     }
     
-//    @objc func didTouchDown(gesture: UILongPressGestureRecognizer) {
-//        if gesture.state == .recognized {
-//            performSegue(withIdentifier: "goToMainScreen", sender: self)
-//        }
-//    }
 }

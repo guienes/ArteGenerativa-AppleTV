@@ -13,57 +13,63 @@ import CoreData
 import AVKit
 
 class GenerativeArtVC: UIViewController {
-    
-    @IBOutlet weak var photoSavedLBL: UILabel!
-    
+        
     var metalView: MTKView {
         return self.view as! MTKView
     }
     
     @IBOutlet weak var descriptionView: DescriptionView!
+    @IBOutlet weak var photoSavedLabel: UIVisualEffectView!
     
     var set: Sets = .some
     var setIndex: Int = 0
     var renderer: Renderer?
     
-    let introductionText = "Para ver mais informações sobre esta arte generativa, dê um tap no controle. \nPara capturar uma imagem desta arte, dê um clique no controle."
+    var themes: [Theme] = [.main, .lightning, .peace, .blackAndWhite]
+    var currentTheme = 0
+        
+    let introductionText = "Para ver mais informações sobre esta arte generativa, dê um tap no controle. \nPara capturar uma imagem desta arte, dê um clique no controle. \nArraste para o lado para alterar a cor da arte generativa."
     
     var context: NSManagedObjectContext?
     
-    var audioPlayer: AVAudioPlayer?
-    var animator = UIViewPropertyAnimator(duration: 1, curve: .easeInOut)
-    var animatorLBL = UIViewPropertyAnimator(duration: 1, curve: .easeInOut)
-    var timer: Timer?
-    var timerLBL: Timer?
-    var descriptionIsShown = false
-    var saveLabelIsShown = false
+    var descriptionAnimator: AnimationController?
+    var labelAnimator: AnimationController?
     
+    var audioPlayer: AVAudioPlayer?
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
         setupMetal()
-        renderer?.animate = true
         
         startBackgroundMusic()
         photoSavedLBLedit()
         
         setupTagGesture()
-        descriptionView.descriptionText.text = introductionText //artData[setIndex].description
+        setupSwipeGesture()
+        descriptionView.descriptionText.text = introductionText
+        
+        descriptionAnimator = AnimationController(view: descriptionView, duration: 10)
+        labelAnimator = AnimationController(view: photoSavedLabel, duration: 3)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        descriptionView.alpha = 0
+        descriptionView.isHidden = false
+        
+        descriptionAnimator?.setAnimation(animation: descriptionAnimator?.fadeInOut ?? {})
+        
+        labelAnimator?.setAnimation(animation: labelAnimator?.fadeInOut ?? {})
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        descriptionView.alpha = 0
-        animator.addAnimations {
-            self.descriptionView.isHidden = false
-            self.descriptionView.alpha = 1
-        }
-        descriptionIsShown = true
-        saveLabelIsShown = true
-        
-        animator.startAnimation()
-        
-        setTimer(with: 5)
+        descriptionAnimator?.animate(delay: 5, reverts: true, with: {
+            (completion) in
+            if self.descriptionView.descriptionText.text == self.introductionText {
+                self.descriptionView.descriptionText.text = artData[self.setIndex].description
+            }
+        })
     }
     
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
@@ -88,8 +94,6 @@ class GenerativeArtVC: UIViewController {
         }
     }
     
-    
-    
     func setupMetal() {
         metalView.device = MTLCreateSystemDefaultDevice()
         metalView.depthStencilPixelFormat = MTLPixelFormat.depth32Float_stencil8
@@ -97,7 +101,7 @@ class GenerativeArtVC: UIViewController {
         metalView.clearColor = MTLClearColor(red: 1.0, green: 0.4, blue: 0.0, alpha: 1.0)
         metalView.framebufferOnly = false
         
-        self.renderer = Renderer(device: metalView.device!, metalView: metalView, set: set)
+        self.renderer = Renderer(device: metalView.device!, metalView: metalView, set: set, theme: .main)
         metalView.delegate = self.renderer
     }
     
@@ -136,23 +140,17 @@ class GenerativeArtVC: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for item in touches {
             if item.type == .indirect{
-                  if descriptionIsShown {
-                      timer?.invalidate()
-                      animator.stopAnimation(true)
-                      animator.addAnimations ({
-                          self.descriptionView.alpha = 0
-                      })
-                      
-                      animator.addCompletion { (completion) in
-                          self.setTimer(with: 0.1)
-                      }
-                      animator.startAnimation()
-                      descriptionIsShown = true
-                      
-                  } else {
-                      showReverseAnimation()
-                      setTimer(with: 10)
-                  }
+                if descriptionAnimator!.isVisible {
+                    descriptionAnimator?.animate(delay: 0.1, reverts: true, with:  {
+                        (completion) in
+                        if self.descriptionView.descriptionText.text == self.introductionText {
+                            self.descriptionView.descriptionText.text = artData[self.setIndex].description
+                        }
+                    })
+                    
+                } else {
+                    descriptionAnimator?.animate(delay: 10, reverts: true, with: nil)
+                }
             }
         }
     }
@@ -160,88 +158,37 @@ class GenerativeArtVC: UIViewController {
     func setupTagGesture() {
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTap))
         tapRecognizer.allowedPressTypes = [NSNumber(value: UIPress.PressType.select.rawValue)]
+        tapRecognizer.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tapRecognizer)
     }
     
+    func setupSwipeGesture() {
+        let swipeRight = UISwipeGestureRecognizer(target: self, action:  #selector(didSwipe))
+        swipeRight.direction = .right
+        self.view.addGestureRecognizer(swipeRight)
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action:  #selector(didSwipe))
+        swipeLeft.direction = .left
+        self.view.addGestureRecognizer(swipeLeft)
+    }
+    
     @objc func didTap(gesture: UITapGestureRecognizer) {
-        
-        if saveLabelIsShown {
-            timerLBL?.invalidate()
-            animatorLBL.stopAnimation(true)
-            animatorLBL.addAnimations {
-                self.photoSavedLBL.alpha = 1
+//        captureImage()
+    }
+    
+    @objc func didSwipe(gesture: UISwipeGestureRecognizer) {
+        if gesture.direction == .right {
+            currentTheme += 1
+            if currentTheme >= themes.count {
+                currentTheme = 0
             }
-            
-            animatorLBL.addCompletion { (completion) in
-                self.setTimerforLBL(with: 0.1)
-            }
-            animatorLBL.startAnimation()
-            saveLabelIsShown = true
         } else {
-            showReverseAnimationLBL()
-            setTimerforLBL(with: 3)
-        }
-        
-      
-    }
-    
-    @objc func showReverseAnimation() {
-        
-        
-        animator.stopAnimation(true)
-        animator.addAnimations ({
-            self.descriptionView.alpha = self.descriptionIsShown ? 0 : 1
-        })
-        
-        animator.addCompletion { (completion) in
-            if self.descriptionView.descriptionText.text == self.introductionText {
-                self.descriptionView.descriptionText.text = artData[self.setIndex].description
+            currentTheme -= 1
+            if currentTheme <= 0 {
+                currentTheme = themes.count - 1
             }
         }
-        animator.startAnimation()
-        descriptionIsShown = !descriptionIsShown
-        
-        if descriptionIsShown {
-            setTimer(with: 10)
-        }
+        renderer?.changePattern(for: set, theme: themes[currentTheme], in: metalView)
     }
-    
-    
-    @objc func showReverseAnimationLBL() {
-        
-        animatorLBL.addAnimations ({
-            self.photoSavedLBL.alpha = self.saveLabelIsShown ? 0 : 1
-        })
-        animatorLBL.startAnimation()
-        saveLabelIsShown = !saveLabelIsShown
-        
-        if saveLabelIsShown {
-            setTimerforLBL(with: 3)
-        }
-    }
-    
-    func setTimer(with duration: TimeInterval) {
-        self.timer?.invalidate()
-        self.timer = Timer.scheduledTimer(
-            timeInterval: duration,
-            target: self,
-            selector: #selector(self.showReverseAnimation),
-            userInfo: nil,
-            repeats: false
-        )
-    }
-    
-    func setTimerforLBL(with duration: TimeInterval) {
-        self.timerLBL?.invalidate()
-        self.timerLBL = Timer.scheduledTimer(
-            timeInterval: duration,
-            target: self,
-            selector: #selector(self.showReverseAnimationLBL),
-            userInfo: nil,
-            repeats: false
-        )
-    }
-    
     
     func captureImage() {
         guard let context = self.context,
@@ -256,15 +203,20 @@ class GenerativeArtVC: UIViewController {
         newMemory.image = uiimage.pngData()
         
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
+        
+        
+        if labelAnimator!.isVisible {
+            labelAnimator?.animate(delay: 0.1, reverts: true, with: nil)
+        } else {
+            labelAnimator?.animate(delay: 3, reverts: true, with: nil)
+        }
     }
     
     func photoSavedLBLedit() {
-        photoSavedLBL.layer.cornerRadius = photoSavedLBL.frame.size.height/4
-        photoSavedLBL.layer.masksToBounds = true
-        
-        photoSavedLBL.backgroundColor = UIColor.gray.withAlphaComponent(0.4)
-        
-        photoSavedLBL.alpha = 0
+        photoSavedLabel.layer.cornerRadius = photoSavedLabel.frame.size.height / 4
+        photoSavedLabel.layer.masksToBounds = true
+                
+        photoSavedLabel.alpha = 0
     }
     
 }

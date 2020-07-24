@@ -13,7 +13,7 @@ import Accelerate
 struct Uniform {
     var scale: Float = 1
     var translation: (x: Float, y: Float) = (0, 0)
-    var maxNumberOfiterations: Float = 500
+    var maxNumberOfiterations: Float = 100
     var aspectRatio: Float = 1
     var angle: Float = 135
     var radius: Float = 0.7885

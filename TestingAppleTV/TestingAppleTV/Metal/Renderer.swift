@@ -22,11 +22,11 @@ class Renderer: NSObject, MTKViewDelegate {
     
     fileprivate var square: Square!
     
-    var set: Sets
+    private var set: Sets
+    private var theme: Theme
     
     var needsRedraw = true
     var forceAlwaysDraw = false
-    var animate = false
     var isOnboarding = false
     var time = Date()
     
@@ -38,11 +38,12 @@ class Renderer: NSObject, MTKViewDelegate {
     fileprivate var shiftYConstant: Float = 0
     fileprivate var angleConstant: Float = 0
     
-    init(device: MTLDevice, metalView: MTKView, set: Sets) {
+    init(device: MTLDevice, metalView: MTKView, set: Sets, theme: Theme) {
         self.device = device
         commandQueue = device.makeCommandQueue()
         square = Square(device: device)
         self.set = set
+        self.theme = theme
         
         uniformBufferProvider = BufferProvider(inFlightBuffers: 3, device: device)
         
@@ -51,6 +52,8 @@ class Renderer: NSObject, MTKViewDelegate {
         buildPipelineState(metalView: metalView)
         configureSet()
         sceneUniform.aspectRatio = Float(metalView.frame.width / metalView.frame.height)
+        sceneUniform.scale = 1 / oldZoom
+        sceneUniform.translation = (shiftX, shiftY)
     }
     
     private func buildPipelineState(metalView: MTKView) {
@@ -85,24 +88,20 @@ class Renderer: NSObject, MTKViewDelegate {
     }
     
     func configureSet() {
-        var imageName = ""
         switch set {
         case .mandelbrot:
             shiftX = 0.15
             angleConstant = 0.01
             oldZoom = 10
-            imageName = "paleta_mandelbrot"
         case .julia:
             angleConstant = 0.01
             oldZoom = 1.0
-            imageName = "paleta_julia"
         case .some:
             oldZoom = 0.05
-            imageName = "paleta_mandelbrot"
         }
         
         let textureLoader = MTKTextureLoader(device: device)
-        let path = Bundle.main.path(forResource: imageName, ofType: "png")!
+        let path = Bundle.main.path(forResource: theme.rawValue, ofType: "png")!
         let data = try! Data(contentsOf: URL(fileURLWithPath: path))
         
         paletteTexture = try! textureLoader.newTexture(data: data, options: nil)
@@ -163,6 +162,49 @@ class Renderer: NSObject, MTKViewDelegate {
         return (x, y)
     }
     
+    func changePattern(for set: Sets, theme: Theme, in view: MTKView) {
+        self.set = set
+        self.theme = theme
+        
+        buildPipelineState(metalView: view)
+        configureSet()
+        sceneUniform.scale = 1 / oldZoom
+        time = Date()
+    }
+    
+    func animate(_ view: MTKView) {
+        var shift: (x: Float, y: Float) = (0, 0)
+        
+        sceneUniform.angle += angleConstant
+        if sceneUniform.angle == 360 {
+            sceneUniform.angle = 0
+        }
+        
+        shift = calculateShift(from: sceneUniform.angle)
+        
+        if isOnboarding && time.timeIntervalSinceNow < -30 {
+            var nextSet = set
+            var nextTheme = theme
+            
+            if set == .mandelbrot {
+                nextSet = .julia
+                nextTheme = .lightning
+            } else {
+                nextSet = .mandelbrot
+                nextTheme = .main
+            }
+            
+            changePattern(for: nextSet, theme: nextTheme, in: view)
+        }
+        
+        
+        if set == .mandelbrot {
+            sceneUniform.translation = (shiftX - shift.x, shiftY - shift.y)
+        } else {
+            sceneUniform.translation = (shiftX, shiftY)
+        }
+    }
+    
     
     // MARK: - MTKViewDelegate
     
@@ -175,49 +217,18 @@ class Renderer: NSObject, MTKViewDelegate {
         guard (needsRedraw == true || forceAlwaysDraw == true) else { return }
         guard let renderPassDescriptor = view.currentRenderPassDescriptor else { return }
         guard let drawable = view.currentDrawable else { return }
-        
-        var shift: (x: Float, y: Float) = (0, 0)
-        
-        if animate {
-            oldZoom += zoomConstant * max(oldZoom/10, 1)            
-            sceneUniform.angle += angleConstant
-            if sceneUniform.angle == 360 {
-                sceneUniform.angle = 0
-            }
-            
-            shift = calculateShift(from: sceneUniform.angle)
-            
-            if time.timeIntervalSinceNow < -30 && isOnboarding {
-                if set == .mandelbrot {
-                    set = .julia
-                } else {
-                    set = .mandelbrot
-                }
                 
-                buildPipelineState(metalView: view)
-                configureSet()
-                time = Date()
-            }
-            
-        }
-        
-        switch set {
-        case .mandelbrot:
-            sceneUniform.translation = (shiftX - shift.x, shiftY - shift.y)
-        default:
-            sceneUniform.translation = (shiftX, shiftY)
-        }
-        sceneUniform.scale = 1 / oldZoom
+        animate(view)
         
         renderPassDescriptor.colorAttachments[0].loadAction = .clear
         renderPassDescriptor.colorAttachments[0].clearColor = MTLClearColor(red: 1.0, green: 0.4, blue: 0.6, alpha: 1.0)
         renderPassDescriptor.colorAttachments[0].storeAction = MTLStoreAction.store
         renderPassDescriptor.colorAttachments[0].texture = drawable.texture
         
-        guard let commandBuffer = commandQueue.makeCommandBuffer(),
-            let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor) else {
-                return
-        }
+        guard
+            let commandBuffer = commandQueue.makeCommandBuffer(),
+            let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor)
+            else { return }
         
         renderEncoder.setRenderPipelineState(pipelineState)
         renderEncoder.setDepthStencilState(depthStencilState)

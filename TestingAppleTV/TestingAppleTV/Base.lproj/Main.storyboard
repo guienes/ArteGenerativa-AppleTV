@@ -207,22 +207,23 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qwq-9m-U0q" customClass="DescriptionView" customModule="Generate" customModuleProvider="target">
-                                <rect key="frame" x="290" y="68" width="1340" height="222"/>
+                                <rect key="frame" x="336" y="750" width="1248" height="270"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Foto Salva" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZrX-hi-Xnh">
-                                <rect key="frame" x="1687" y="129" width="233" height="48"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Foto Salva" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZrX-hi-Xnh">
+                                <rect key="frame" x="1603" y="90" width="197" height="48"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="40"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="unD-SK-WLl" firstAttribute="top" secondItem="Qwq-9m-U0q" secondAttribute="bottom" constant="730" id="6mQ-C9-OaY"/>
-                            <constraint firstItem="Qwq-9m-U0q" firstAttribute="leading" secondItem="nwz-oD-SCT" secondAttribute="leading" constant="200" id="KDZ-vz-hCy"/>
-                            <constraint firstItem="nwz-oD-SCT" firstAttribute="trailing" secondItem="Qwq-9m-U0q" secondAttribute="trailing" constant="200" id="WAg-py-skW"/>
-                            <constraint firstItem="Qwq-9m-U0q" firstAttribute="top" secondItem="z2v-7I-nUI" secondAttribute="bottom" constant="8" id="sK7-jn-Um3"/>
+                            <constraint firstItem="unD-SK-WLl" firstAttribute="top" secondItem="Qwq-9m-U0q" secondAttribute="bottom" id="3Ua-91-wv9"/>
+                            <constraint firstItem="Qwq-9m-U0q" firstAttribute="width" secondItem="e0p-x1-EQE" secondAttribute="width" multiplier="0.65" id="7Ua-h8-SuY"/>
+                            <constraint firstItem="nwz-oD-SCT" firstAttribute="trailing" secondItem="ZrX-hi-Xnh" secondAttribute="trailing" constant="30" id="Cie-i1-RpM"/>
+                            <constraint firstItem="Qwq-9m-U0q" firstAttribute="centerX" secondItem="e0p-x1-EQE" secondAttribute="centerX" id="KCq-XJ-JT7"/>
+                            <constraint firstItem="Qwq-9m-U0q" firstAttribute="height" secondItem="e0p-x1-EQE" secondAttribute="height" multiplier="0.25" id="uer-oE-Bs2"/>
+                            <constraint firstItem="ZrX-hi-Xnh" firstAttribute="top" secondItem="nwz-oD-SCT" secondAttribute="top" constant="30" id="yB4-5J-SOX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="nwz-oD-SCT"/>
                     </view>

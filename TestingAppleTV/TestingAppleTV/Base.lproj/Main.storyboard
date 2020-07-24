@@ -228,27 +228,46 @@
                                     <constraint firstAttribute="trailing" secondItem="lto-gy-s7M" secondAttribute="trailing" id="l7K-Cr-cI0"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Foto Salva" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZrX-hi-Xnh">
-                                <rect key="frame" x="1603" y="90" width="197" height="48"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="40"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rtJ-Ad-883">
+                                <rect key="frame" x="1560" y="90" width="240" height="108"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="VXE-Qh-iKK">
+                                    <rect key="frame" x="0.0" y="0.0" width="240" height="108"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Foto Salva" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZrX-hi-Xnh">
+                                            <rect key="frame" x="21.5" y="30" width="197" height="48"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="40"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="ZrX-hi-Xnh" firstAttribute="centerX" secondItem="VXE-Qh-iKK" secondAttribute="centerX" id="WHO-kO-Zfy"/>
+                                        <constraint firstItem="ZrX-hi-Xnh" firstAttribute="centerY" secondItem="VXE-Qh-iKK" secondAttribute="centerY" id="b1m-nJ-JqY"/>
+                                        <constraint firstItem="ZrX-hi-Xnh" firstAttribute="width" secondItem="VXE-Qh-iKK" secondAttribute="width" multiplier="0.820833" id="hb4-sk-ThG"/>
+                                        <constraint firstItem="ZrX-hi-Xnh" firstAttribute="height" secondItem="VXE-Qh-iKK" secondAttribute="height" multiplier="0.444444" id="nHM-BO-r5T"/>
+                                    </constraints>
+                                </view>
+                                <blurEffect style="regular"/>
+                            </visualEffectView>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="nwz-oD-SCT" firstAttribute="trailing" secondItem="rtJ-Ad-883" secondAttribute="trailing" constant="30" id="0zz-gT-uzD"/>
                             <constraint firstItem="unD-SK-WLl" firstAttribute="top" secondItem="Qwq-9m-U0q" secondAttribute="bottom" id="3Ua-91-wv9"/>
+                            <constraint firstItem="rtJ-Ad-883" firstAttribute="top" secondItem="nwz-oD-SCT" secondAttribute="top" constant="30" id="6wa-Nl-Dol"/>
                             <constraint firstItem="Qwq-9m-U0q" firstAttribute="width" secondItem="e0p-x1-EQE" secondAttribute="width" multiplier="0.65" id="7Ua-h8-SuY"/>
-                            <constraint firstItem="nwz-oD-SCT" firstAttribute="trailing" secondItem="ZrX-hi-Xnh" secondAttribute="trailing" constant="30" id="Cie-i1-RpM"/>
                             <constraint firstItem="Qwq-9m-U0q" firstAttribute="centerX" secondItem="e0p-x1-EQE" secondAttribute="centerX" id="KCq-XJ-JT7"/>
+                            <constraint firstItem="rtJ-Ad-883" firstAttribute="height" secondItem="e0p-x1-EQE" secondAttribute="height" multiplier="0.1" id="dNq-co-hMw"/>
+                            <constraint firstItem="rtJ-Ad-883" firstAttribute="width" secondItem="e0p-x1-EQE" secondAttribute="width" multiplier="0.125" id="qOS-E9-sOv"/>
                             <constraint firstItem="Qwq-9m-U0q" firstAttribute="height" secondItem="e0p-x1-EQE" secondAttribute="height" multiplier="0.25" id="uer-oE-Bs2"/>
-                            <constraint firstItem="ZrX-hi-Xnh" firstAttribute="top" secondItem="nwz-oD-SCT" secondAttribute="top" constant="30" id="yB4-5J-SOX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="nwz-oD-SCT"/>
                     </view>
                     <navigationItem key="navigationItem" id="JUu-5l-e25"/>
                     <connections>
                         <outlet property="descriptionView" destination="Qwq-9m-U0q" id="39h-4K-5MY"/>
-                        <outlet property="photoSavedLBL" destination="ZrX-hi-Xnh" id="6bX-Sp-YKx"/>
+                        <outlet property="photoSavedLabel" destination="rtJ-Ad-883" id="tlx-4f-0Ia"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pY7-gH-epn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

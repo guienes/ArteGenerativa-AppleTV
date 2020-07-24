@@ -13,14 +13,13 @@ import CoreData
 import AVKit
 
 class GenerativeArtVC: UIViewController {
-    
-    @IBOutlet weak var photoSavedLBL: UILabel!
-    
+        
     var metalView: MTKView {
         return self.view as! MTKView
     }
     
     @IBOutlet weak var descriptionView: DescriptionView!
+    @IBOutlet weak var photoSavedLabel: UIVisualEffectView!
     
     var set: Sets = .some
     var setIndex: Int = 0
@@ -52,7 +51,7 @@ class GenerativeArtVC: UIViewController {
         descriptionView.descriptionText.text = introductionText
         
         descriptionAnimator = AnimationController(view: descriptionView, duration: 10)
-        labelAnimator = AnimationController(view: photoSavedLBL, duration: 3)
+        labelAnimator = AnimationController(view: photoSavedLabel, duration: 3)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -156,8 +155,6 @@ class GenerativeArtVC: UIViewController {
     }
     
     @objc func didTap(gesture: UITapGestureRecognizer) {
-        guard let view = gesture.view else { return }
-        
         if descriptionAnimator!.isVisible {
             descriptionAnimator?.animate(delay: 0.1, reverts: true, with:  {
                 (completion) in
@@ -169,8 +166,6 @@ class GenerativeArtVC: UIViewController {
         } else {
             descriptionAnimator?.animate(delay: 10, reverts: true, with: nil)
         }
-        
-        captureImage()
     }
     
     @objc func didSwipe(gesture: UISwipeGestureRecognizer) {
@@ -211,12 +206,10 @@ class GenerativeArtVC: UIViewController {
     }
     
     func photoSavedLBLedit() {
-        photoSavedLBL.layer.cornerRadius = photoSavedLBL.frame.size.height/4
-        photoSavedLBL.layer.masksToBounds = true
-        
-        photoSavedLBL.backgroundColor = UIColor.gray.withAlphaComponent(0.4)
-        
-        photoSavedLBL.alpha = 0
+        photoSavedLabel.layer.cornerRadius = photoSavedLabel.frame.size.height / 4
+        photoSavedLabel.layer.masksToBounds = true
+                
+        photoSavedLabel.alpha = 0
     }
     
 }

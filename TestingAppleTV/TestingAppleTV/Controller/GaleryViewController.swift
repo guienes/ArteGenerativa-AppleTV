@@ -34,6 +34,13 @@ class GaleryViewController: UIViewController, UICollectionViewDataSource {
             
             cell.galleryNameLBL.text = artData[indexPath.row].name
             
+            cell.galleryImg.layer.cornerRadius = cell.galleryImg.frame.height / 32
+    
+            cell.layer.shadowOpacity = 200
+            cell.layer.shadowRadius = 30
+            cell.layer.shadowColor = UIColor.black.cgColor
+            cell.layer.shadowOffset = CGSize(width: 10, height: 20)
+            
             return cell
             
         } else {

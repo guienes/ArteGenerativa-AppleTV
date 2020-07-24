@@ -8,16 +8,9 @@
 
 import UIKit
 
-enum Sets: String {
-    case mandelbrot = "Mandelbrot Set"
-    case julia = "Julia Set"
-    case some = "Some Set"
-}
-
 class GaleryViewController: UIViewController, UICollectionViewDataSource {
 
     @IBOutlet weak var collectionView: UICollectionView!
-    
     
     let defaultSize = CGSize(width: 458, height: 458)
     
@@ -30,8 +23,6 @@ class GaleryViewController: UIViewController, UICollectionViewDataSource {
         
         collectionView.delegate = self
         collectionView.dataSource = self
-       
-       
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -40,8 +31,16 @@ class GaleryViewController: UIViewController, UICollectionViewDataSource {
             
             let imageName = artData[indexPath.row].name
             cell.galleryImg.image = UIImage(named: imageName)
+            cell.galleryImg.adjustsImageWhenAncestorFocused = true
             
             cell.galleryNameLBL.text = artData[indexPath.row].name
+            
+            cell.galleryImg.layer.cornerRadius = cell.galleryImg.frame.height / 32
+    
+            cell.layer.shadowOpacity = 200
+            cell.layer.shadowRadius = 30
+            cell.layer.shadowColor = UIColor.black.cgColor
+            cell.layer.shadowOffset = CGSize(width: 10, height: 20)
             
             return cell
             
@@ -68,7 +67,9 @@ class GaleryViewController: UIViewController, UICollectionViewDataSource {
         
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         selectedSet = indexPath.row
+     
         performSegue(withIdentifier: "GenerativeArtVC", sender: self)
+    
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

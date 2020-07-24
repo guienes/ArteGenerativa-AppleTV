@@ -31,8 +31,7 @@ class DescriptionView: UIView {
     }
     
     private func setupView() {
-        backgroundColor = #colorLiteral(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393, alpha: 0.75)
-        layer.cornerRadius = 10
+        layer.cornerRadius = 20
         layer.masksToBounds = true;
         addSubview(descriptionText)
         setupLayout()

@@ -8,7 +8,7 @@
 
 import UIKit
 
-let artData: [Art] = load("ArtDescription.json")
+var artData: [Art] = load("ArtDescription.json")
 
 struct Art: Decodable {
     var name: String

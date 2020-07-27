@@ -46,11 +46,10 @@ class GenerativeArtVC: UIViewController {
         startBackgroundMusic()
         photoSavedLBLedit()
         
-        setupTagGesture()
         setupSwipeGesture()
         descriptionView.descriptionText.text = introductionText
         
-        descriptionAnimator = AnimationController(view: descriptionView, duration: 10)
+        descriptionAnimator = AnimationController(view: descriptionView, duration: 30)
         labelAnimator = AnimationController(view: photoSavedLabel, duration: 3)
     }
     
@@ -64,7 +63,7 @@ class GenerativeArtVC: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        descriptionAnimator?.animate(delay: 5, reverts: true, with: {
+        descriptionAnimator?.animate(delay: 15, reverts: true, with: {
             (completion) in
             if self.descriptionView.descriptionText.text == self.introductionText {
                 self.descriptionView.descriptionText.text = artData[self.setIndex].description
@@ -149,17 +148,10 @@ class GenerativeArtVC: UIViewController {
                     })
                     
                 } else {
-                    descriptionAnimator?.animate(delay: 10, reverts: true, with: nil)
+                    descriptionAnimator?.animate(delay: 20, reverts: true, with: nil)
                 }
             }
         }
-    }
-    
-    func setupTagGesture() {
-        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTap))
-        tapRecognizer.allowedPressTypes = [NSNumber(value: UIPress.PressType.select.rawValue)]
-        tapRecognizer.cancelsTouchesInView = false
-        self.view.addGestureRecognizer(tapRecognizer)
     }
     
     func setupSwipeGesture() {
@@ -169,10 +161,6 @@ class GenerativeArtVC: UIViewController {
         let swipeLeft = UISwipeGestureRecognizer(target: self, action:  #selector(didSwipe))
         swipeLeft.direction = .left
         self.view.addGestureRecognizer(swipeLeft)
-    }
-    
-    @objc func didTap(gesture: UITapGestureRecognizer) {
-//        captureImage()
     }
     
     @objc func didSwipe(gesture: UISwipeGestureRecognizer) {

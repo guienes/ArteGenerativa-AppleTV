@@ -20,7 +20,7 @@ class MemoryViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     var context: NSManagedObjectContext?
     var memories = [Memory]()
-    var saveMemory = Data()
+    var selectedIndex: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +57,6 @@ class MemoryViewController: UIViewController, UICollectionViewDelegate, UICollec
             guard let data = memories[indexPath.row].image else {
                 return MemoryCell()
             }
-            saveMemory = data
             cell.memoryImg.image = UIImage(data: data)
             cell.memoryImg.adjustsImageWhenAncestorFocused = true
             cell.memoryImg.layer.cornerRadius = cell.memoryImg.frame.height / 32
@@ -97,8 +96,7 @@ class MemoryViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let data = memories[indexPath.row].image else { return }
-        saveMemory = data
+        selectedIndex = indexPath.row
         
         if memories.count == 0 {
             noMemoriesLabel.isHidden = false
@@ -109,7 +107,8 @@ class MemoryViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let showImageVC = segue.destination as? MemoryPhotosShow else { return }
-        showImageVC.imageToPresent = UIImage(data: saveMemory) ?? UIImage()
+        showImageVC.memories = self.memories
+        showImageVC.currentIndex = self.selectedIndex
     }
     
     func presentPopUp(for indexPath: IndexPath) {

@@ -1,22 +1,22 @@
 {
   "images" : [
     {
-      "filename" : "GenerateTopShelf.png",
+      "filename" : "gen3.png",
       "idiom" : "tv",
       "scale" : "1x"
     },
     {
-      "filename" : "TopShelfImage2.png",
+      "filename" : "vai-1.png",
       "idiom" : "tv",
       "scale" : "2x"
     },
     {
-      "filename" : "GenerateTopShelf-1.png",
+      "filename" : "gen3-1.png",
       "idiom" : "tv-marketing",
       "scale" : "1x"
     },
     {
-      "filename" : "TopShelfImage2-1.png",
+      "filename" : "vai.png",
       "idiom" : "tv-marketing",
       "scale" : "2x"
     }
